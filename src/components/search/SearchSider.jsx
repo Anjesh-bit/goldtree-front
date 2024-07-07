@@ -18,7 +18,12 @@ const fakeArr = [
   { id: 6, name: "Intern" },
 ];
 
-const SearchSider = () => {
+const SearchSider = ({ setQuerySearchParams }) => {
+  const handleOnchange = (e, name) => {
+    setQuerySearchParams((prevParams) => {
+      return { ...prevParams, [name]: e };
+    });
+  };
   return (
     <div>
       <Selects
@@ -42,22 +47,34 @@ const SearchSider = () => {
 
         <div>
           <CollapseSearch header={"VACANCY TYPE"}>
-            <AntdCheckBoxGroup options={timeoptions} />
+            <AntdCheckBoxGroup
+              options={timeoptions}
+              onChange={(e) => handleOnchange(e, "ty")}
+            />
           </CollapseSearch>
         </div>
         <div>
           <CollapseSearch header={"CAREER LEVEL"}>
-            <AntdCheckBoxGroup options={levelOptions} />
+            <AntdCheckBoxGroup
+              options={levelOptions}
+              onChange={(e) => handleOnchange(e, "le")}
+            />
           </CollapseSearch>
         </div>
         <div>
           <CollapseSearch header={"GENDER"}>
-            <AntdCheckBoxGroup options={genderOptions} />
+            <AntdCheckBoxGroup
+              options={genderOptions}
+              onChange={(e) => handleOnchange(e, "ge")}
+            />
           </CollapseSearch>
         </div>
         <div>
           <CollapseSearch header={"QUALIFICATIONS"}>
-            <AntdCheckBoxGroup options={educationOptions} />
+            <AntdCheckBoxGroup
+              options={educationOptions}
+              onChange={(e) => handleOnchange(e, "qu")}
+            />
           </CollapseSearch>
         </div>
         <div className="text-[1.2rem] font-medium">Days Remaining</div>

@@ -1,7 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import HomeLayout from "../layouts/HomeLayout";
-import AuthLayout from "../layouts/AuthLayout";
-import EmployeeDashboardLayout from "../layouts/EmployeeDashboardLayout";
 import JobPortalHome from "../components/home";
 import DashBoard from "../components/dashboard/DashBoard";
 import JobSeekerRegistration from "../components/auth/register/jobSeeker";
@@ -15,7 +12,6 @@ import ShorlistCandidate from "../components/dashboard/employee/shortListCandida
 
 import ChangePassword from "../components/dashboard/ChangePassword";
 import DeactivateAccount from "../components/dashboard/DeactivateAccount";
-import JobSeekerDashboardLayout from "../layouts/JobSeekerDashboardLayout";
 import DetailJobView from "../components/detailsJob";
 import ProtectedRoute from "./ProtectedRoutes";
 import AppliedJobs from "../components/dashboard/jobseeker/appliedJobs";
@@ -25,19 +21,15 @@ import MyResume from "../components/dashboard/jobseeker/myResume";
 import ShortListedJobs from "../components/dashboard/jobseeker/shortListed";
 import SavedJobs from "../components/dashboard/jobseeker/savedJobs";
 import Search from "../components/search";
+import DashboardLayout from "../layouts/DashBoardLayout";
+import MainLayout from "../layouts/MainLayout";
 
-const EmployeeDashboardLayouts = ProtectedRoute(
-  EmployeeDashboardLayout,
-  "employee"
-);
-const JobSeekerDashboardLayouts = ProtectedRoute(
-  JobSeekerDashboardLayout,
-  "jobSeeker"
-);
+const EmployeeDashboardLayouts = ProtectedRoute(DashboardLayout, "employee");
+const JobSeekerDashboardLayouts = ProtectedRoute(DashboardLayout, "jobSeeker");
 
 const homeRoutes = {
   path: "/",
-  element: <HomeLayout />,
+  element: <MainLayout />,
   children: [
     {
       path: "",
@@ -53,7 +45,7 @@ const homeRoutes = {
 
 const authRoutes = {
   path: "auth",
-  element: <AuthLayout />,
+  element: <MainLayout />,
   children: [
     {
       path: "register/jobseeker",

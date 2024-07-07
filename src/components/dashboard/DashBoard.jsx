@@ -2,6 +2,7 @@ import React from "react";
 import { dashBoardData } from "../home/Data";
 import AntdCards from "../../common/AntdCards";
 import { useOutletContext } from "react-router-dom";
+
 const DashBoard = ({ dataKey }) => {
   const outletContext = useOutletContext();
   const postData = outletContext && outletContext.postData;

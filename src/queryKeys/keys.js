@@ -1,4 +1,4 @@
-export const EmployeeQueryKeys = {
+export const employeeQueryKeys = {
   setUp: {
     getPostsByUserId: "getPostsByUserId",
     getProfileInfo: "getProfileInfo",
@@ -7,12 +7,18 @@ export const EmployeeQueryKeys = {
   },
 };
 
-export const JobSeekerQueryKeys = {
+export const jobSeekerQueryKeys = {
   setUp: {
     getAllApplied: "getAllApplied",
     getProfileInfoJobSeeker: "getProfileInfoJobSeeker",
     jobSeekerAppliedJobs: "jobSeekerAppliedJobs",
     jobSeekerGetShortListed: "jobSeekerGetShortListed",
     jobSeekerSavedJobs: "jobSeekerSavedJobs",
+  },
+};
+
+export const searchQueryKeys = {
+  setUp: {
+    globalSearch: "globalSearch",
   },
 };

@@ -51,7 +51,7 @@ const DashBoardSider = ({
           onSelect={(selectedItem) => handleMenuSelect(selectedItem)}
           className="bg-[#242021] flex flex-col gap-4 text-md"
         >
-          {foundItems.routes.map((item) => (
+          {foundItems?.routes.map((item) => (
             <Menu.Item key={item.key} icon={item.icon}>
               <Link to={item.path}>{item.label}</Link>
             </Menu.Item>

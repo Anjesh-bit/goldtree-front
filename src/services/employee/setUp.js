@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { putUploader, uploader } from "../../axios/uploader";
 import { useState } from "react";
 import { fetcher } from "../../axios/fetcher";
-import { EmployeeQueryKeys } from "../../queryKeys/keys";
+import { employeeQueryKeys } from "../../queryKeys/keys";
 
 export const useProfileInfo = () => {
   const [localLoading, setLocalLoading] = useState(false);
@@ -54,7 +54,7 @@ export const usePostJobs = (id) => {
 
 export const useGetPostJobs = (id) => {
   return useQuery({
-    queryKey: [EmployeeQueryKeys.setUp.getPostsByUserId, id],
+    queryKey: [employeeQueryKeys.setUp.getPostsByUserId, id],
     queryFn: () => fetcher(`emp-posts-by-id/${id}`),
     enabled: !!id,
   });
@@ -62,7 +62,7 @@ export const useGetPostJobs = (id) => {
 
 export const useGetProfileInfo = (id) => {
   return useQuery({
-    queryKey: [EmployeeQueryKeys.setUp.getProfileInfo, id],
+    queryKey: [employeeQueryKeys.setUp.getProfileInfo, id],
     queryFn: () => fetcher(`emp-profile-info/${id}`),
     enabled: !!id,
   });
@@ -118,14 +118,14 @@ export const useUpdatePostJobs = (id) => {
 
 export const useGetAllPosts = () => {
   return useQuery({
-    queryKey: [EmployeeQueryKeys.setUp.getAllPosts],
+    queryKey: [employeeQueryKeys.setUp.getAllPosts],
     queryFn: () => fetcher("emp-post-job-info"),
   });
 };
 
 export const useGetSinglePost = (id) => {
   return useQuery({
-    queryKey: [EmployeeQueryKeys.setUp.getSinglePost, id],
+    queryKey: [employeeQueryKeys.setUp.getSinglePost, id],
     queryFn: () => fetcher(`get-emp-post-single/${id}`),
     enabled: !!id,
   });

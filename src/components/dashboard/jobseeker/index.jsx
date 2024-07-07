@@ -1,6 +1,5 @@
 import DashBoardSider from "..";
 
-
 const JobSeekerMainPage = () => {
   return (
     <div>

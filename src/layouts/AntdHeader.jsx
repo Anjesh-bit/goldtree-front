@@ -1,6 +1,6 @@
 import React from "react";
 import { Layout, Menu } from "antd";
-import AntdButton from "./AntdButtons";
+import AntdButton from "../common/AntdButtons";
 import PopOver from "../components/auth/PopOver";
 import DynamicTabs from "../components/auth";
 
