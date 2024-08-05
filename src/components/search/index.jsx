@@ -8,12 +8,12 @@ import debounce from "lodash/debounce";
 const Search = () => {
   const [querySearchParams, setQuerySearchParams] = useState({
     q: "",
-    ty: [],
-    le: [],
-    ge: [],
-    qu: [],
+    vacancyType: [],
+    careerLevel: [],
+    gender: [],
+    qualifications: [],
   });
-  console.log(querySearchParams);
+
   const { data, isLoading, isError } = useGlobalSearch(querySearchParams);
 
   const handleOnChange = (e) => {

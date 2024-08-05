@@ -4,8 +4,9 @@ import {
   educationOptions,
   genderOptions,
   levelOptions,
-  timeoptions,
+  timeOptions,
 } from "../../utils/checkGroup";
+
 import CollapseSearch from "./CollapsePanel";
 
 //use database fetch on future
@@ -24,6 +25,7 @@ const SearchSider = ({ setQuerySearchParams }) => {
       return { ...prevParams, [name]: e };
     });
   };
+
   return (
     <div>
       <Selects
@@ -48,8 +50,8 @@ const SearchSider = ({ setQuerySearchParams }) => {
         <div>
           <CollapseSearch header={"VACANCY TYPE"}>
             <AntdCheckBoxGroup
-              options={timeoptions}
-              onChange={(e) => handleOnchange(e, "ty")}
+              options={timeOptions}
+              onChange={(e) => handleOnchange(e, "vacancyType")}
             />
           </CollapseSearch>
         </div>
@@ -57,7 +59,7 @@ const SearchSider = ({ setQuerySearchParams }) => {
           <CollapseSearch header={"CAREER LEVEL"}>
             <AntdCheckBoxGroup
               options={levelOptions}
-              onChange={(e) => handleOnchange(e, "le")}
+              onChange={(e) => handleOnchange(e, "careerLevel")}
             />
           </CollapseSearch>
         </div>
@@ -65,7 +67,7 @@ const SearchSider = ({ setQuerySearchParams }) => {
           <CollapseSearch header={"GENDER"}>
             <AntdCheckBoxGroup
               options={genderOptions}
-              onChange={(e) => handleOnchange(e, "ge")}
+              onChange={(e) => handleOnchange(e, "gender")}
             />
           </CollapseSearch>
         </div>
@@ -73,11 +75,10 @@ const SearchSider = ({ setQuerySearchParams }) => {
           <CollapseSearch header={"QUALIFICATIONS"}>
             <AntdCheckBoxGroup
               options={educationOptions}
-              onChange={(e) => handleOnchange(e, "qu")}
+              onChange={(e) => handleOnchange(e, "qualifications")}
             />
           </CollapseSearch>
         </div>
-        <div className="text-[1.2rem] font-medium">Days Remaining</div>
       </div>
     </div>
   );

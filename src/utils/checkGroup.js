@@ -1,4 +1,4 @@
-export const timeoptions = [
+export const timeOptions = [
   { label: "Full Time", value: "full-time" },
   { label: "Contract", value: "contract" },
   { label: "Part Time", value: "part-time" },
@@ -18,9 +18,9 @@ export const levelOptions = [
 ];
 
 export const genderOptions = [
-  { label: "Both", value: "both" },
-  { label: "Female", value: "female" },
-  { label: "Male", value: "male" },
+  { label: "Both", value: "o" },
+  { label: "Female", value: "f" },
+  { label: "Male", value: "m" },
 ];
 
 export const educationOptions = [

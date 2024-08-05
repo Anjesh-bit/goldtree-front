@@ -5,7 +5,9 @@ import isEmpty from "lodash/isEmpty";
 
 export const useGlobalSearch = (params) => {
   const urlSearchParams = new URLSearchParams();
-  const { q, ty, le, ge, qu } = params;
+
+  const { q, vacancyType, careerLevel, gender, qualifications } = params;
+
   if (q) {
     urlSearchParams.append("q", q);
   }
@@ -16,21 +18,28 @@ export const useGlobalSearch = (params) => {
     }
   };
 
-  addArrayToParams("ty", ty);
-  addArrayToParams("le", le);
-  addArrayToParams("ge", ge);
-  addArrayToParams("qu", qu);
+  addArrayToParams("vacancyType", vacancyType);
+  addArrayToParams("careerLevel", careerLevel);
+  addArrayToParams("gender", gender);
+  addArrayToParams("qualifications", qualifications);
 
   return useQuery({
     queryFn: () => fetcher(`search?${urlSearchParams.toString()}`),
     queryKey: [
       searchQueryKeys.setUp.globalSearch,
-      params.q,
-      ty?.join(","),
-      le?.join(","),
-      ge?.join(","),
-      qu?.join(","),
+      q,
+      vacancyType,
+      careerLevel,
+      gender,
+      qualifications,
     ],
-    enabled: !!(q ?? ty ?? le ?? ge ?? qu),
+
+    enabled: !!(
+      q ||
+      !isEmpty(vacancyType) ||
+      !isEmpty(careerLevel) ||
+      !isEmpty(gender) ||
+      !isEmpty(qualifications)
+    ),
   });
 };

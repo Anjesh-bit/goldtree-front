@@ -111,7 +111,7 @@ const categoryType = [
   { id: 2, name: "Others" },
 ];
 
-const jobCatagory = [
+const jobCategory = [
   { id: 1, name: "Product Manager" },
   { id: 2, name: "Accounting" },
   { id: 3, name: "Android" },
@@ -147,20 +147,20 @@ const degreeName = [
 ];
 
 const jobLevel = [
-  { id: 1, name: "Intern Level" },
-  { id: 2, name: "Entry Level" },
-  { id: 3, name: "Mid Level" },
-  { id: 4, name: "Senior Level" },
-  { id: 5, name: "Top Level" },
+  { id: 1, name: "Intern Level", value: "intern-level" },
+  { id: 2, name: "Entry Level", value: "entry-level" },
+  { id: 3, name: "Mid Level", value: "mid-level" },
+  { id: 4, name: "Senior Level", value: "senior-level" },
+  { id: 5, name: "Top Level", value: "top-level" },
 ];
 
 const eduPreferences = [
-  { id: 1, name: "Under SLC" },
-  { id: 2, name: "SLC" },
-  { id: 3, name: "Intermediate" },
-  { id: 4, name: "Masters" },
-  { id: 5, name: "Bachelors" },
-  { id: 6, name: "Bachelors" },
+  { id: 1, name: "Under SLC", value: "under-slc" },
+  { id: 2, name: "SLC", value: "slc" },
+  { id: 3, name: "Intermediate", value: "intermediate" },
+  { id: 4, name: "Masters", value: "masters" },
+  { id: 5, name: "Bachelors", value: "bachelors" },
+  { id: 6, name: "PHD", value: "phd" },
 ];
 
 const skillsArr = [
@@ -170,6 +170,18 @@ const skillsArr = [
   { id: 4, name: "PHP" },
   { id: 5, name: "AGILE DEVELOPMENT" },
   { id: 6, name: "GIT" },
+];
+
+export const jobTypeOptions = [
+  { id: 1, label: "Full Time", value: "full-time" },
+  { id: 2, label: "Contract", value: "contract" },
+  { id: 3, label: "Part Time", value: "part-time" },
+  {
+    id: 4,
+    label: "Full Time/Part Time/Contract",
+    value: "full-time-part-time-contract",
+  },
+  { id: 5, label: "Full Time/Part Time", value: "full-time-part-time" },
 ];
 
 const PostJobs = () => {
@@ -202,7 +214,7 @@ const PostJobs = () => {
       values.education_qual_desc = value.eQD;
       values.job_desc = value.jD;
       values.job_spec = value.jS;
-      values.job_benifits = value.jB;
+      values.job_benifit = value.jB;
       values.userId = isAuthenticated?.id;
       !isMatchLocation
         ? await postUpdateMutate({ ...values })
@@ -244,7 +256,7 @@ const PostJobs = () => {
         <div className="lg:col-span-4">
           <Selects
             className="w-full"
-            Label="Catagory Type"
+            Label="Category Type"
             name="catagory_type"
             description="name"
             value="name"
@@ -258,7 +270,7 @@ const PostJobs = () => {
             value="name"
             description="name"
             name="job_catagory"
-            array={jobCatagory}
+            array={jobCategory}
           />
         </div>
         <div className="lg:col-span-4">
@@ -313,10 +325,20 @@ const PostJobs = () => {
         <div className="lg:col-span-4" Label="Service Type">
           <Selects
             className="w-full"
+            Label="Service Type"
+            name="service_type"
+            description="label"
+            value="value"
+            array={jobTypeOptions}
+          />
+        </div>
+        <div className="lg:col-span-4" Label="Service Type">
+          <Selects
+            className="w-full"
             Label="Job Level"
             name="job_level"
             description="name"
-            value="name"
+            value="value"
             array={jobLevel}
           />
         </div>

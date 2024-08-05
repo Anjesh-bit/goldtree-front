@@ -17,12 +17,12 @@ const AntdHeader = () => {
   const isAuthenticated = useAuthHook(null);
   const { mutateAsync, isError, isPending } = useLogout();
   const navigate = useNavigate();
+
   const handleLogOut = async (e) => {
     try {
-      e.preventDefault();
+      navigate("/");
       await mutateAsync();
       dispatch(logOut());
-      navigate("/");
     } catch (e) {
       console.error(`Error logout ${e}`);
     }

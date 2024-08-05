@@ -21,7 +21,7 @@ const DashBoardSider = ({
   ];
 
   const foundItems = items.find((items) => items.status);
-
+  console.log(employeeSiderRoutes);
   const [collapsed, setCollapsed] = useState(false);
   const [selectedKeys, setSelectedKeys] = useState("");
   const {
