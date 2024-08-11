@@ -19,10 +19,11 @@ const Education = ({ setInputValue, inputValue, dayjs }) => {
   const handleChange = (_, dateString) => {
     setInputValue((prevState) => ({ ...prevState, passedYear: dateString }));
   };
+
   return (
-    <div>
-      <div className="grid grid-cols-12 gap-x-2 items-center">
-        <div className="lg:col-span-4">
+    <div className="p-4 lg:p-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div>
           <Selects
             className="w-full"
             Label="Education Level"
@@ -39,7 +40,7 @@ const Education = ({ setInputValue, inputValue, dayjs }) => {
           />
         </div>
 
-        <div className="lg:col-span-4">
+        <div>
           <Selects
             className="w-full"
             Label="Degree Name"
@@ -62,38 +63,41 @@ const Education = ({ setInputValue, inputValue, dayjs }) => {
             ]}
           />
         </div>
-        <div className="lg:col-span-4">
+
+        <div>
           <Inputs className="w-full" Label="Education Board" name="board" />
         </div>
 
-        <div className="lg:col-span-4">
+        <div>
           <Inputs className="w-full" Label="Institution" name="institution" />
         </div>
-        <div className="lg:col-span-4">
+
+        <div>
           <Inputs
             className="w-full"
             Label="Specialization"
             name="specialization"
           />
         </div>
-        <div className="lg:col-span-4">
+
+        <div>
           <AntRadio
             options={runningOpts}
             Label="Currently Running"
             name="current_running"
           />
         </div>
-        <div className="lg:col-span-4">
+
+        <div>
           <Inputs className="w-full" Label="Percentage/Gpa" name="gpa" />
         </div>
-        <div className="lg:col-span-4">
+
+        <div>
           <DatePickers
             Label="Passed Year"
             name="passed_year"
             format="YYYY-MM-DD"
             value={dayjs(inputValue?.passedYear)}
-            // value={dayjs(data?.passed_year)}
-            // defaultDate={dayjs(data?.passed_year)}
             onHandleChange={(_, dateString) => handleChange(_, dateString)}
           />
         </div>

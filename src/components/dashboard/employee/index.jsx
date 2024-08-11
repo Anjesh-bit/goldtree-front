@@ -4,7 +4,7 @@ import { useGetPostJobs } from "../../../services/employee/setUp";
 import useAuthHook from "../../../hooks/useAuthHook";
 
 const EmployeeMainPage = () => {
-  const isAuthenticated = useAuthHook(null);
+  const isAuthenticated = useAuthHook(false);
   const location = useLocation();
   const matchPath =
     location.pathname === "/employee/dashboard" ||

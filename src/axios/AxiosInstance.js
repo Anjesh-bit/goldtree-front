@@ -15,6 +15,7 @@ axiosInstance.interceptors.request.use(
     const token = getCookies("token");
     config.headers["Authorization"] = `Bearer ${token}`;
     const authStatus = await isAuthenticated();
+
     if (authStatus) {
       config.headers["Auth-Type"] = authStatus.type;
     }

@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import login from "../../services/auth/login";
 import { Fragment, useEffect } from "react";
 import useMessage from "../../hooks/useMessage";
+
 const { useForm } = Form;
 
 const DynamicLogin = ({ isEmployee, modalData, setOpen }) => {
@@ -32,7 +33,7 @@ const DynamicLogin = ({ isEmployee, modalData, setOpen }) => {
       showMessage({
         type: "error",
         content: apiMessage,
-        className: "mt-[30vh] h-[40px]",
+        className: "mt-4 h-12",
       });
 
       const apiError = actionResult?.payload?.feilds;
@@ -72,35 +73,41 @@ const DynamicLogin = ({ isEmployee, modalData, setOpen }) => {
   return (
     <Fragment>
       {contextHolder}
-      <Form form={form} onFinish={handleOnFinish}>
-        <div className="flex flex-col">
-          <div className="w-full">
-            <Inputs Label="Enter Email :" name="email" type="email" />
-          </div>
-          <div className="w-full">
-            <Inputs Label="Enter Password :" name="password" />
-          </div>
+      <div className="flex flex-col max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg">
+        <Form form={form} onFinish={handleOnFinish}>
+          <div className="space-y-4">
+            <div className="w-full">
+              <Inputs Label="Enter Email" name="email" type="email" />
+            </div>
+            <div className="w-full">
+              <Inputs Label="Enter Password" name="password" type="password" />
+            </div>
 
-          <AntdButton
-            loading={data?.loading}
-            classNames={
-              "w-full bg-[#242021] !border-none text-white px-7 h-10 mt-4"
-            }
-            onClick={() => form.submit()}
-          >
-            Login
-          </AntdButton>
-          <div className="font-medium text-center">Don't have an account?</div>
-          <AntdButton
-            classNames={
-              "w-full bg-[#242021] !border-none text-white px-7 h-10 mt-4"
-            }
-            onClick={(e) => handleOnClick(e)}
-          >
-            Register
-          </AntdButton>
-        </div>
-      </Form>
+            <div className="mt-6">
+              <AntdButton
+                loading={data?.loading}
+                classNames="w-full bg-[#3d2462] text-white border-none rounded-lg px-6"
+                onClick={() => form.submit()}
+              >
+                Login
+              </AntdButton>
+            </div>
+
+            <div className="text-center text-sm text-gray-600 mt-4">
+              Don't have an account?
+            </div>
+
+            <div className="mt-4">
+              <AntdButton
+                classNames="w-full bg-[#3d2462] text-white border-none rounded-lg px-6"
+                onClick={(e) => handleOnClick(e)}
+              >
+                Register
+              </AntdButton>
+            </div>
+          </div>
+        </Form>
+      </div>
     </Fragment>
   );
 };

@@ -23,16 +23,17 @@ export const Selects = (props) => {
       theme={{
         components: {
           Select: {
-            optionHeight: 30,
-            colorBorder: "#242021",
-            optionPadding: "5px 12px",
+            colorPrimary: "#3d2462",
+            colorPrimaryHover: "#6c4ba1",
+            colorPrimaryActive: "#6c4ba1",
+            optionHeight: 40,
             paddingSM: 8,
             colorTextPlaceholder: "gray",
             optionFontSize: 14,
             fontSize: 12,
             colorTextQuaternary: "#6b7280cf",
-            zIndexPopup: props.zIndexPopup || 1050,
-            controlHeight: parseInt(props.controlHeight) || 30,
+            borderRadius: 1,
+            controlHeight: parseInt(props.controlHeight) || 35,
           },
         },
       }}

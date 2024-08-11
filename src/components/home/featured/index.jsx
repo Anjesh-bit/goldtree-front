@@ -2,8 +2,9 @@ import DynamicTitle from "../../../common/DynamicTitle";
 import AntdCards from "../../../common/AntdCards";
 import { useGetAllPosts } from "../../../services/employee/setUp";
 import { Collapse } from "antd";
-import CollapsePanel from "antd/es/collapse/CollapsePanel";
 import { useNavigate } from "react-router-dom";
+
+const { Panel } = Collapse;
 
 const FeaturedJobs = () => {
   const navigate = useNavigate();
@@ -14,59 +15,59 @@ const FeaturedJobs = () => {
   } = useGetAllPosts();
 
   const tempObj = {};
+
   const handleProductClick = (e, id, name) => {
     e.preventDefault();
     if (id) {
       navigate(`/jobs/${name}/${id}`);
     }
   };
+
   return (
-    <div className="grid grid-cols-12 items-center bg-[#d5d3e4] pr-[50px] py-[20px]">
-      <div className="flex flex-col gap-4 bg-[#FFFFFF] items-center lg:col-span-3 p-4">
-        <DynamicTitle classNames={"font-bold text-5xl font-extrabold"}>
+    <div className="bg-[#f5f5f5] px-4 md:px-8 lg:px-12 xl:px-16 py-6">
+      <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
+        <DynamicTitle classNames="text-2xl md:text-3xl lg:text-4xl font-extrabold text-[#3d2462]">
           Latest Featured Jobs
         </DynamicTitle>
-        <div className="text-md">
-          Search and found your dream job is easier then ever.Just search jobs
-          and found the job you need.
-        </div>
+        <p className="text-sm md:text-base lg:text-lg text-gray-700 mt-2">
+          Searching for your dream job is easier than ever. Explore featured
+          jobs and find the one that suits you best.
+        </p>
       </div>
-      <div className="grid grid-cols-12 lg:col-span-9 gap-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {allPostsData?.map((postsItems) => {
-          const companyName = postsItems.posts[0]?.company_name || null;
+          const companyName = postsItems.posts[0]?.company_name || "Unknown";
           tempObj[companyName] = postsItems?.posts;
 
           return Object.entries(tempObj).map(([companyName, posts]) => (
             <AntdCards
               key={companyName}
-              className={
-                "lg:col-span-4 md:col-span-12 col-span-12 p-4 bg-[#F5F5F5]"
-              }
+              className="bg-white rounded-lg shadow-md border-none"
             >
-              <div className="text-center">
-                <Collapse>
-                  <CollapsePanel
-                    header={
-                      <div className="text-2xl font-medium text-[#3d2462]">
-                        {companyName}
+              <Collapse className="bg-white">
+                <Panel
+                  header={
+                    <div className="text-xl font-semibold text-[#3d2462] bg-white">
+                      {companyName}
+                    </div>
+                  }
+                  key={companyName}
+                >
+                  {posts.map((post) => (
+                    <div
+                      key={post._id}
+                      className="py-2 cursor-pointer hover:bg-[#f0f0f0] hover:text-[#00b6b4] transition-colors"
+                      onClick={(e) =>
+                        handleProductClick(e, post._id, companyName)
+                      }
+                    >
+                      <div className="text-sm font-medium text-gray-800">
+                        {post.job_catagory}
                       </div>
-                    }
-                  >
-                    {posts.map((post) => (
-                      <div key={post._id}>
-                        <div
-                          className="text-sm font-medium cursor-pointer"
-                          onClick={(e) =>
-                            handleProductClick(e, post._id, companyName)
-                          }
-                        >
-                          {post.job_catagory}
-                        </div>
-                      </div>
-                    ))}
-                  </CollapsePanel>
-                </Collapse>
-              </div>
+                    </div>
+                  ))}
+                </Panel>
+              </Collapse>
             </AntdCards>
           ));
         })}

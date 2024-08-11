@@ -3,7 +3,7 @@ import { useGetProfileInfo } from "../../../../services/jobSeeker/setUp";
 import useAuthHook from "../../../../hooks/useAuthHook";
 
 const ViewPdf = () => {
-  const isAuthenticated = useAuthHook(null);
+  const isAuthenticated = useAuthHook(false);
 
   const { data: profileData, isError: profileErr } = useGetProfileInfo(
     isAuthenticated?.id

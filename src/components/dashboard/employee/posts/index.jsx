@@ -185,7 +185,7 @@ export const jobTypeOptions = [
 ];
 
 const PostJobs = () => {
-  const isAuthenticated = useAuthHook(null);
+  const isAuthenticated = useAuthHook(false);
   const [value, setValue] = useState({ eQD: "", jD: "", jS: "", jB: "" });
   const location = useLocation();
   const params = useParams();

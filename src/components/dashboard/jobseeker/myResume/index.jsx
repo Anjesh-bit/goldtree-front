@@ -30,11 +30,19 @@ const getTargetElement = () => document.getElementById("content-id");
 
 const MyResume = () => {
   return (
-    <div>
-      <AntdButton onClick={() => generatePDF(getTargetElement, options)}>
-        Generate PDF
-      </AntdButton>
-      <div id="content-id">
+    <div className="bg-[#f5f5f5] p-6 min-h-screen flex flex-col items-center">
+      <div className="mb-6">
+        <AntdButton
+          onClick={() => generatePDF(getTargetElement, options)}
+          className="bg-[#00b6b4] text-white hover:bg-[#009c9b] border-none rounded-lg px-6 py-2 font-medium transition-colors"
+        >
+          Generate PDF
+        </AntdButton>
+      </div>
+      <div
+        id="content-id"
+        className="w-full max-w-4xl bg-white p-6 rounded-lg shadow-md"
+      >
         <ViewPdf />
       </div>
     </div>

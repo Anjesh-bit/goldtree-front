@@ -3,7 +3,6 @@ import { Layout, Menu } from "antd";
 import AntdButton from "../common/AntdButtons";
 import PopOver from "../components/auth/PopOver";
 import DynamicTabs from "../components/auth";
-
 import { useDispatch } from "react-redux";
 import { logOut } from "../slice/authSlice";
 import { useNavigate } from "react-router-dom";
@@ -14,88 +13,91 @@ const { Header } = Layout;
 
 const AntdHeader = () => {
   const dispatch = useDispatch();
-  const isAuthenticated = useAuthHook(null);
+  const isAuthenticated = useAuthHook(false);
   const { mutateAsync, isError, isPending } = useLogout();
   const navigate = useNavigate();
 
-  const handleLogOut = async (e) => {
+  const handleLogOut = async () => {
     try {
-      navigate("/");
       await mutateAsync();
       dispatch(logOut());
+      navigate("/");
     } catch (e) {
-      console.error(`Error logout ${e}`);
+      console.error(`Error logging out: ${e}`);
     }
   };
 
   return (
     <Layout>
-      <Header className="bg-[#888] bg-opacity-70 grid grid-cols-12 items-center text-lg bg-gradient-to-r from-black via-black to-transparent bg-opacity-70 text-[#f5f5f5]">
-        <div className="lg:col-span-4">Logo</div>
-        <div className="lg:col-span-4">
+      <Header>
+        <div className="container mx-auto flex justify-between items-center h-full">
+          <div className="text-2xl font-bold text-white w-fit">Logo</div>
+
           <Menu
             mode="horizontal"
-            className="bg-yellow-400 bg-opacity-10 text-lg font-semibold flex justify-center"
+            className="flex-grow flex justify-center items-center text-lg font-semibold"
+            theme="dark"
           >
-            <Menu.Item key="1" className=" !text-[#f5f5f5]">
+            <Menu.Item key="1" className="!text-white hover:!text-gray-300">
               Find Jobs
             </Menu.Item>
-            <Menu.Item key="2" className="!text-[#f5f5f5]">
+            <Menu.Item key="2" className="!text-white hover:!text-gray-300">
               Companies
             </Menu.Item>
-            <Menu.Item key="3" className="!text-[#f5f5f5]">
-              Carrier Mentoring
+            <Menu.Item key="3" className="!text-white hover:!text-gray-300">
+              Career Mentoring
             </Menu.Item>
           </Menu>
-        </div>
-        {!isAuthenticated && (
-          <div className="flex gap-2 items-center lg:col-span-4 justify-end">
-            <PopOver content={<DynamicTabs dataKey={"login"} />}>
-              <div>
-                <AntdButton
-                  classNames={
-                    "bg-transparent !border-[#F5F5F5] text-[#F5F5F5] px-7 h-10"
-                  }
-                >
-                  Sign Up
-                </AntdButton>
-              </div>
-            </PopOver>
-            <PopOver content={<DynamicTabs dataKey={"registration"} />}>
-              <div>
-                <AntdButton
-                  classNames={"!border-[#F5F5F5] text-[#F5F5F5] px-7 h-10"}
-                >
-                  Register
-                </AntdButton>
-              </div>
-            </PopOver>
-          </div>
-        )}
-        {isAuthenticated && (
-          <div className="flex justify-end w-full lg:col-span-4">
-            <PopOver
-              content={
-                <div className="flex flex-col gap-2">
-                  <>Are you sure you want to logout?</>
-                  <AntdButton
-                    onClick={handleLogOut}
-                    classNames={"bg-[#000000] text-[#F5F5F5]  h-10"}
-                  >
-                    Ok
+
+          <div className="flex items-center gap-4">
+            {!isAuthenticated ? (
+              <>
+                <PopOver content={<DynamicTabs dataKey="login" />}>
+                  <AntdButton classNames="bg-transparent border border-white text-white px-6 hover:!bg-white hover:!text-black transition-colors font-semibold">
+                    Sign Up
                   </AntdButton>
-                </div>
-              }
-            >
-              <AntdButton
-                classNames={"!border-[#F5F5F5] text-[#F5F5F5] px-7 h-10"}
-                loading={isError ? false : isPending}
+                </PopOver>
+                <PopOver content={<DynamicTabs dataKey="registration" />}>
+                  <AntdButton classNames="border border-white text-white px-6  hover:!bg-white hover:!text-black transition-colors font-semibold">
+                    Register
+                  </AntdButton>
+                </PopOver>
+              </>
+            ) : (
+              <PopOver
+                content={
+                  <div className="flex flex-col gap-2 p-4 bg-white text-black">
+                    <p className="font-semibold">
+                      Are you sure you want to logout?
+                    </p>
+                    <div className="flex justify-between gap-2">
+                      <AntdButton
+                        onClick={handleLogOut}
+                        classNames="bg-black text-white hover:!bg-black hover:!text-white hover:!border-black"
+                        loading={isPending}
+                      >
+                        Ok
+                      </AntdButton>
+                      <AntdButton
+                        onClick={() => navigate("/")}
+                        classNames="bg-gray-300 text-black hover:!bg-gray-200 hover:!border-gray-400 hover:!text-black"
+                      >
+                        Cancel
+                      </AntdButton>
+                    </div>
+                  </div>
+                }
               >
-                Logout
-              </AntdButton>
-            </PopOver>
+                <AntdButton
+                  classNames="border border-white text-white px-6 hover:!bg-white hover:!text-black transition-colors font-semibold"
+                  loading={isPending}
+                >
+                  Logout
+                </AntdButton>
+              </PopOver>
+            )}
           </div>
-        )}
+        </div>
       </Header>
     </Layout>
   );

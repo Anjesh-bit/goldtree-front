@@ -5,11 +5,11 @@ import { AntRadio } from "../../../../../../common/form/AntdRadioGroup";
 const marriedOptions = [
   {
     option: "Married",
-    value: "fresher",
+    value: "married",
   },
   {
     option: "Unmarried",
-    value: "noexp",
+    value: "unmarried",
   },
 ];
 
@@ -34,12 +34,12 @@ const ProfileInformation = ({ setInputValue, inputValue, dayjs }) => {
   };
 
   return (
-    <div>
-      <div className="grid grid-cols-12 gap-x-2">
-        <div className="lg:col-span-4">
+    <div className="p-4 md:p-6 lg:p-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+        <div className="col-span-1">
           <Inputs className="w-full" Label="Full Name" name="full_name" />
         </div>
-        <div className="lg:col-span-4">
+        <div className="col-span-1">
           <DatePickers
             className="w-full"
             format="YYYY-MM-DD"
@@ -48,31 +48,31 @@ const ProfileInformation = ({ setInputValue, inputValue, dayjs }) => {
             onHandleChange={(_, dateString) => handleChange(_, dateString)}
           />
         </div>
-        <div className="lg:col-span-4">
+        <div className="col-span-1">
           <Inputs className="w-full" Label="Nationality" name="nationality" />
         </div>
-        <div className="lg:col-span-4">
+        <div className="col-span-1">
           <Inputs
             className="w-full"
             Label="Permanent Address"
             name="permanent_addr"
           />
         </div>
-        <div className="lg:col-span-4">
+        <div className="col-span-1">
           <Inputs
             className="w-full"
             Label="Current Address"
             name="current_addr"
           />
         </div>
-        <div className="lg:col-span-4">
+        <div className="col-span-1">
           <Inputs className="w-full" Label="Phone No." name="phone_no" />
         </div>
 
-        <div className="lg:col-span-6">
+        <div className="col-span-1 lg:col-span-2">
           <AntRadio options={genderOptions} Label="Gender" name="gender" />
         </div>
-        <div className="lg:col-span-6">
+        <div className="col-span-1 lg:col-span-2">
           <AntRadio
             options={marriedOptions}
             Label="Marital Status"

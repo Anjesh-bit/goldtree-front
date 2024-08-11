@@ -19,17 +19,13 @@ const { useForm } = Form;
 
 const MyProfile = () => {
   const [form] = useForm();
-  const isAuthenticated = useAuthHook(null);
-  const [inputValue, setInputValue] = useState({
-    editor: "",
-    dob: dayjs(),
-    from: dayjs(),
-    to: dayjs(),
-    passedYear: dayjs(),
-    toCourse: dayjs(),
-    fromCourse: dayjs(),
-  });
+  const isAuthenticated = useAuthHook(false);
   const { contextHolder, showMessage } = useMessage();
+
+  const { data: profileData, isError: profileErr } = useGetProfileInfo(
+    isAuthenticated?.id
+  );
+
   const {
     mutateAsync: jobSeekerMutate,
     isPending: profilePending,
@@ -42,10 +38,44 @@ const MyProfile = () => {
     isPending: jobSeLoadingUpdate,
   } = useUpdateProfileInfo(isAuthenticated?.id);
 
-  const { data: profileData, isError: profileErr } = useGetProfileInfo(
-    isAuthenticated?.id
-  );
-  const isEmpty = profileData?.length > 0;
+  const profile = useMemo(() => {
+    const [firstProfile = {}] = Array.isArray(profileData) ? profileData : [];
+    return firstProfile;
+  }, [profileData]);
+
+  const isEmpty = Object.keys(profile).length > 0;
+
+  const [inputValue, setInputValue] = useState({
+    editor: "",
+    dob: dayjs(),
+    from: dayjs(),
+    to: dayjs(),
+    passedYear: dayjs(),
+    toCourse: dayjs(),
+    fromCourse: dayjs(),
+  });
+
+  useEffect(() => {
+    if (profile) {
+      setInputValue({
+        editor: profile.experience?.description ?? "",
+        dob: profile.profile?.dob ? dayjs(profile.profile.dob) : dayjs(),
+        from: profile.experience?.from
+          ? dayjs(profile.experience.from)
+          : dayjs(),
+        to: profile.experience?.to ? dayjs(profile.experience.to) : dayjs(),
+        passedYear: profile.education?.passed_year
+          ? dayjs(profile.education.passed_year)
+          : dayjs(),
+        toCourse: profile.trainingCert?.to_course
+          ? dayjs(profile.trainingCert.to_course)
+          : dayjs(),
+        fromCourse: profile.trainingCert?.from_course
+          ? dayjs(profile.trainingCert.from_course)
+          : dayjs(),
+      });
+    }
+  }, [profile]);
 
   const handleDetails = async (values) => {
     try {
@@ -89,63 +119,46 @@ const MyProfile = () => {
           from_course: inputValue.fromCourse,
         },
       };
-      !isEmpty
-        ? await jobSeekerMutate({ ...profileFinalData })
-        : await jobSeekerMutateUpdate({ ...profileFinalData });
+
+      if (!isEmpty) {
+        await jobSeekerMutate(profileFinalData);
+      } else {
+        await jobSeekerMutateUpdate(profileFinalData);
+      }
+
+      if (profileSuccess) {
+        showMessage({
+          type: "success",
+          content: "Your profile has been successfully saved.",
+          className: "mt-4",
+        });
+      }
     } catch (e) {}
   };
 
-  useEffect(() => {
-    if (profileSuccess) {
-      showMessage({
-        type: "success",
-        content: "You profile have been succesfully saved .",
-        className: "mt-[30vh] h-[40px]",
-      });
-    }
-  }, [profileSuccess]);
-
-  useEffect(() => {
-    if (isEmpty) {
-      delete profileData[0]._id;
-      delete profileData[0].userId;
-      Object.keys(profileData[0]).map((items) => {
-        for (const pfData in profileData[0][items]) {
-          form.setFieldsValue({ [pfData]: profileData[0][items][pfData] });
-        }
-      });
-    }
-  }, [profileData]);
-
-  useMemo(() => {
-    if (isEmpty) {
-      const profileTemp = profileData?.[0];
-      const { from, to, description } = profileTemp?.experience;
-      const { passed_year } = profileTemp?.education;
-      const { to_course, from_course } = profileTemp?.trainingCert;
-      const { dob } = profileTemp?.profile;
-      setInputValue({
-        from,
-        to,
-        editor: description,
-        passedYear: passed_year,
-        toCourse: to_course,
-        fromCourse: from_course,
-        dob,
-      });
-    }
-  }, [profileData]);
+  if (!profileData) return <div>Loading...</div>;
 
   return (
     <>
       {contextHolder}
-      <Form form={form} onFinish={handleDetails}>
-        <div>
-          <div className="flex justify-between items-center">
-            <DynamicTitle classNames={"text-lg font-medium mb-3"}>
+      <Form
+        form={form}
+        initialValues={{
+          ...profile.profile,
+          ...profile.experience,
+          ...profile.education,
+          ...profile.trainingCert,
+        }}
+        onFinish={handleDetails}
+        layout="vertical"
+        className="p-4 md:p-6 lg:p-8 xl:p-10 space-y-6"
+      >
+        <div className="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+            <DynamicTitle classNames="text-xl md:text-2xl font-medium text-[#3d2462] mb-4 md:mb-0">
               Personal Information
             </DynamicTitle>
-            <Avatar src={profileData?.[0]?.profile_images} size={100} />
+            <Avatar src={profile?.profile_images} size={100} />
           </div>
 
           <Profile
@@ -154,8 +167,9 @@ const MyProfile = () => {
             dayjs={dayjs}
           />
         </div>
-        <div>
-          <DynamicTitle classNames={"text-lg font-medium mb-3"}>
+
+        <div className="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md">
+          <DynamicTitle classNames="text-xl md:text-2xl font-medium text-[#3d2462] mb-4">
             Experience
           </DynamicTitle>
           <Experience
@@ -164,8 +178,9 @@ const MyProfile = () => {
             dayjs={dayjs}
           />
         </div>
-        <div>
-          <DynamicTitle classNames={"text-lg font-medium mb-3"}>
+
+        <div className="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md">
+          <DynamicTitle classNames="text-xl md:text-2xl font-medium text-[#3d2462] mb-4">
             Education
           </DynamicTitle>
           <Education
@@ -174,8 +189,9 @@ const MyProfile = () => {
             dayjs={dayjs}
           />
         </div>
-        <div>
-          <DynamicTitle classNames={"text-lg font-medium mb-3"}>
+
+        <div className="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md">
+          <DynamicTitle classNames="text-xl md:text-2xl font-medium text-[#3d2462] mb-4">
             Training And Certifications
           </DynamicTitle>
           <TrainingCertification
@@ -184,10 +200,11 @@ const MyProfile = () => {
             dayjs={dayjs}
           />
         </div>
-        <div className="mt-6">
+
+        <div className="flex justify-end mt-6">
           <AntdButton
-            classNames={"bg-[#242021] !border-none text-white px-7 h-10"}
-            htmlType={"submit"}
+            classNames="bg-[#242021] !border-none text-white px-6 py-2 h-10"
+            htmlType="submit"
             loading={
               profileErr || jobSeErrorUpdate
                 ? false

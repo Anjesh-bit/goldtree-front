@@ -10,7 +10,7 @@ import useAuthHook from "../../hooks/useAuthHook";
 import TextAreas from "../../common/form/AntdTextArea";
 
 const ViewForm = ({ open, setOpen }) => {
-  const isAuthenticated = useAuthHook(null);
+  const isAuthenticated = useAuthHook(false);
   const [form] = useForm();
   const [files, setFiles] = useState(null);
   const easyApply = useUpdateEasyApply();

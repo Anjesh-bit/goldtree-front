@@ -130,3 +130,10 @@ export const useGetSinglePost = (id) => {
     enabled: !!id,
   });
 };
+
+export const useGetAllShortListedCandidates = () => {
+  return useQuery({
+    queryKey: [employeeQueryKeys.setUp.getAllShortListedCandidates],
+    queryFn: () => fetcher("short-listed-candidates"),
+  });
+};

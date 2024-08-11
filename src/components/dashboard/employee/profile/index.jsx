@@ -18,7 +18,7 @@ const { useForm } = Form;
 
 const Profile = () => {
   const [form] = useForm();
-  const isAuthenticated = useAuthHook(null);
+  const isAuthenticated = useAuthHook(false);
   const [ckValue, setCKValue] = useState("");
   const {
     isError: empError,
@@ -35,21 +35,23 @@ const Profile = () => {
   const { data: profileData, isError: profileErr } = useGetProfileInfo(
     isAuthenticated?.id
   );
+
   const isEmpty = profileData?.length > 0;
   const ckData = profileData?.[0]?.personalInfo?.description;
+
   useEffect(() => {
     if (isEmpty) {
       delete profileData[0]._id;
       delete profileData[0].userId;
-      Object.keys(profileData[0]).map((items) => {
-        for (const pfData in profileData[0][items]) {
-          form.setFieldsValue({ [pfData]: profileData[0][items][pfData] });
+      Object.keys(profileData[0]).forEach((key) => {
+        for (const subKey in profileData[0][key]) {
+          form.setFieldsValue({ [subKey]: profileData[0][key][subKey] });
         }
       });
     }
-  }, [profileData]);
+  }, [profileData, form, isEmpty]);
 
-  const hanldeOnFinish = async (values) => {
+  const handleOnFinish = async (values) => {
     try {
       const profileData = {
         userId: isAuthenticated?.id,
@@ -62,7 +64,7 @@ const Profile = () => {
           location: values.location,
           description: ckValue,
           head_person_name: values.head_person_name,
-          head_person_pos: values.head_person_name,
+          head_person_pos: values.head_person_pos,
         },
         socialLink: {
           fb_link: values.fb_link,
@@ -84,34 +86,46 @@ const Profile = () => {
         },
       };
 
-      !isEmpty
-        ? empMutate({ ...profileData })
-        : empMutateUpdate({ ...profileData });
-    } catch (e) {}
+      if (isEmpty) {
+        await empMutate(profileData);
+      } else {
+        await empMutateUpdate(profileData);
+      }
+    } catch (error) {
+      console.error("Error saving profile:", error);
+    }
   };
+
   return (
-    <Form onFinish={hanldeOnFinish} form={form}>
-      <div>
-        <AntdBreadCum array={["Employee", "Profile"]} />
-      </div>
-      <div>
+    <Form
+      onFinish={handleOnFinish}
+      form={form}
+      layout="vertical"
+      className="p-6 space-y-6"
+    >
+      <AntdBreadCum array={["Employee", "Profile"]} className="mb-6" />
+
+      <div className="bg-white p-6 rounded-lg shadow-md">
         <PrimaryContactInfo setCKValue={setCKValue} data={ckData} />
       </div>
-      <div>
+
+      <div className="bg-white p-6 rounded-lg shadow-md">
         <SocialNetworks />
       </div>
-      <div>
+
+      <div className="bg-white p-6 rounded-lg shadow-md">
         <ProfileInfo />
       </div>
-      <div className="w-[16.67%]">
+
+      <div className="flex justify-end">
         <AntdButton
           loading={
             empError || empErrorUpdate ? false : empLoadingUpdate || empLoading
           }
           htmlType="submit"
-          classNames={"bg-[#242021] !border-none text-white px-7 h-10 w-full"}
+          classNames="bg-[#3d2462] !border-none text-white px-7 h-10"
         >
-          {!isEmpty ? "Save" : "Update"}
+          {isEmpty ? "Update" : "Save"}
         </AntdButton>
       </div>
     </Form>

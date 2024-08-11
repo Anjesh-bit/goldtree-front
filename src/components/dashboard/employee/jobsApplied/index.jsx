@@ -2,28 +2,27 @@ import { Fragment, useState } from "react";
 import AntdCards from "../../../../common/AntdCards";
 import { useGetEasyApply } from "../../../../services/jobSeeker/setUp";
 import AntdButton from "../../../../common/AntdButtons";
-import { useShorList } from "../../../../services/commonService/setUp";
+import { useShortList } from "../../../../services/commonService/setUp";
 import useMessage from "../../../../hooks/useMessage";
 
 const JobApplied = () => {
   const { data, isLoading, isError } = useGetEasyApply();
-  // const isShorList = req.query.shortList === "shortlist";
-  // const userId = req.query.userId;
-  // const postId = req.query.postId;
-  // const type = req.query.type;7
+
   const [queryParams, setQueryParams] = useState({
     uploadId: "",
     type: "",
   });
 
   const {
-    data: shorListData,
+    data: shortListedData,
     isPending,
-    isError: errorShorList,
+    isError: errorShortListed,
     isSuccess,
     mutateAsync,
-  } = useShorList(queryParams);
+  } = useShortList(queryParams);
+
   const { contextHolder, showMessage } = useMessage();
+
   const handleOnClick = async (_, uploadId, type) => {
     setQueryParams({
       shortList: "shortlist",
@@ -35,12 +34,11 @@ const JobApplied = () => {
       await mutateAsync();
       showMessage({
         type: "info",
-        content: "Candidates have successfully shorlisted",
+        content: "Candidates have successfully shortlisted",
         className: "mt-[30vh] h-[40px]",
       });
     } catch (error) {
       const apiMessage = error?.response?.data?.message;
-      console.error(apiMessage);
       showMessage({
         type: "error",
         content: apiMessage,
@@ -54,60 +52,49 @@ const JobApplied = () => {
       {contextHolder}
       <div className="py-4">
         {data?.map((items) => {
-          let phoneNo, name;
           const jobTitle = items?.post?.job_title;
 
           return (
-            <div className="mb-2">
+            <div className="mb-2" key={items.email}>
               <div>
                 <span className="font-bold text-lg">JobTitle : </span>
                 <span className="font-semibold">{jobTitle}</span>
               </div>
-              <div className="grid grid-cols-12 w-full gap-2 ">
-                <AntdCards
-                  className={"col-span-12 p-4 bg-[#f5f5f5]"}
-                  key={items.email}
-                >
-                  <div className="font-semibold">Candidates Applied : </div>
+              <div className="grid grid-cols-12 w-full gap-2">
+                <AntdCards className="col-span-12 p-4 bg-[#f5f5f5]">
+                  <div className="font-semibold">Candidates Applied :</div>
                   <div className="grid grid-cols-12 w-full gap-2">
-                    {items?.candidates?.map((candidates) => {
-                      const url = candidates?.upload_cv?.substring(
-                        candidates?.upload_cv?.lastIndexOf("/") + 1
+                    {items?.candidates?.map((candidate) => {
+                      const url = candidate?.upload_cv?.substring(
+                        candidate?.upload_cv?.lastIndexOf("/") + 1
                       );
-                      const directAppltArr = candidates?.jobSeekerProfile;
-                      const hasArrayIsEmpty =
-                        candidates?.hasOwnProperty("jobSeekerProfile") &&
-                        directAppltArr?.length > 0;
-                      if (hasArrayIsEmpty) {
-                        name = directAppltArr?.[0]?.profile?.full_name;
-                        phoneNo = directAppltArr?.[0]?.profile?.phone_no;
-                      }
+                      const { jobSeekerProfile = [] } = candidate;
+                      const hasProfile = jobSeekerProfile.length > 0;
+
+                      const { profile } = hasProfile ? jobSeekerProfile[0] : {};
+                      const name = profile?.full_name || candidate.name;
+                      const phoneNo = profile?.phone_no || candidate.email;
 
                       return (
-                        <AntdCards className="col-span-4 p-4">
+                        <AntdCards
+                          className="col-span-4 p-4"
+                          key={candidate._id}
+                        >
                           <AntdButton
-                            classNames={
-                              "bg-[#f5f5f5] !border-none  px-7 h-8 rounded-r-full text-[#f09b1e] font-medium"
-                            }
+                            classNames="bg-[#f5f5f5] !border-none px-7 h-8 rounded-r-full text-[#f09b1e] font-medium"
                             onClick={(e) =>
-                              handleOnClick(
-                                e,
-                                candidates?._id,
-                                candidates?.type
-                              )
+                              handleOnClick(e, candidate._id, candidate.type)
                             }
                           >
                             ShortList
                           </AntdButton>
-                          <div>Name : {name || candidates.name}</div>
-                          <div>Cover Letter : {candidates.cover_letter}</div>
+                          <div>Name: {name}</div>
+                          <div>Cover Letter: {candidate.cover_letter}</div>
+                          <div>Email / Phone: {phoneNo}</div>
                           <div>
-                            Email / Phone : {phoneNo || candidates.email}
-                          </div>
-                          <div>
-                            Resume :{" "}
+                            Resume:{" "}
                             <a
-                              href={candidates.upload_cv}
+                              href={candidate.upload_cv}
                               download={url}
                               target="_blank"
                             >

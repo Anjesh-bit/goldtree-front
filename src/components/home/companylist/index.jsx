@@ -2,46 +2,39 @@ import AntdButton from "../../../common/AntdButtons";
 import AntdCards from "../../../common/AntdCards";
 import { dummyDataCompanyList } from "../Data";
 import DynamicTitle from "../../../common/DynamicTitle";
-// #00b6b4
+
 const CompanyList = () => {
   return (
-    <div className="bg-[#d5d3e4] grid items-center grid-cols-12 pr-[50px] py-[20px]">
-      <div className="lg:col-span-3 bg-[#F5F5F5]">
-        <div className="flex flex-col gap-6 p-4">
-          <DynamicTitle classNames={"font-bold text-5xl font-extrabold"}>
-            Choose Your Dream Companies
-          </DynamicTitle>
-          <div className="text-md font-normal">
-            Start your journey towards the job search by exploring the top
-            companies around nepal and also opportunities to meet the top notch
-            mentors.
-          </div>
-        </div>
-        <div className="ml-auto"></div>
+    <div className="bg-[#f5f5f5] px-4 md:px-8 lg:px-12 xl:px-16 py-6">
+      <div className="bg-white p-6 rounded-lg shadow-md mb-6">
+        <DynamicTitle classNames="text-2xl md:text-3xl lg:text-4xl font-extrabold text-[#3d2462]">
+          Choose Your Dream Companies
+        </DynamicTitle>
+        <p className="text-sm md:text-base lg:text-lg text-gray-700 mt-2">
+          Start your journey towards the job search by exploring the top
+          companies around Nepal and also opportunities to meet top-notch
+          mentors.
+        </p>
       </div>
-      <div className="grid grid-cols-12 lg:col-span-9 gap-2">
-        {dummyDataCompanyList?.map((items, index) => (
+      <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+        {dummyDataCompanyList?.map((item, index) => (
           <AntdCards
-            className={
-              "lg:col-span-4 md:col-span-12 col-span-12 p-4 bg-[#f5f5f5]"
-            }
+            className="p-4 bg-white rounded-lg shadow-md border"
             key={index}
           >
-            <div className="flex flex-col gap-8">
-              <div className="text-xl font-medium ">{items.company}</div>
-              <div className="text-sm font-normal">{items.description}</div>
-              <div className="flex gap-2">
+            <div className="flex flex-col gap-4">
+              <div className="text-lg md:text-xl font-semibold text-gray-800">
+                {item.company}
+              </div>
+              <div className="text-sm text-gray-600">{item.description}</div>
+              <div className="flex flex-wrap gap-2">
                 <AntdButton
-                  classNames={
-                    "bg-[#f5f5f5] !border-none  px-7 h-8 rounded-r-full text-[#f09b1e] font-medium"
-                  }
+                  className={`!border-none px-4 py-2 rounded-full font-medium transition duration-300 ease-in-out`}
                 >
                   Full Time
                 </AntdButton>
                 <AntdButton
-                  classNames={
-                    "bg-[#f5f5f5] !border-none  px-7 h-8 rounded-r-full text-[#f09b1e] font-medium"
-                  }
+                  className={`!border-none px-4 py-2 rounded-full font-medium transition duration-300 ease-in-out`}
                 >
                   Remote
                 </AntdButton>

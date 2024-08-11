@@ -1,17 +1,6 @@
 import Inputs from "../../../../../../common/form/AntdInputs";
 import DatePickers from "../../../../../../common/AntdDatePickers";
 
-const currentlyWorkOpts = [
-  {
-    option: "Yes",
-    value: "y",
-  },
-  {
-    option: "No",
-    value: "n",
-  },
-];
-
 const TrainingCertification = ({ setInputValue, inputValue, dayjs }) => {
   const handleChange = (_, value, filter) => {
     setInputValue((prevState) => ({
@@ -19,17 +8,18 @@ const TrainingCertification = ({ setInputValue, inputValue, dayjs }) => {
       [filter === "to" ? "toCourse" : "fromCourse"]: value,
     }));
   };
+
   return (
-    <div>
-      <div className="grid grid-cols-12 gap-x-2">
-        <div className="lg:col-span-4">
+    <div className="p-4 md:p-6 lg:p-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="col-span-1">
           <Inputs className="w-full" Label="Course Name" name="course_name" />
         </div>
 
-        <div className="lg:col-span-4">
+        <div className="col-span-1">
           <Inputs className="w-full" Label="Institute" name="institute" />
         </div>
-        <div className="lg:col-span-4">
+        <div className="col-span-1">
           <DatePickers
             className="w-full"
             format="YYYY-MM-DD"
@@ -40,7 +30,7 @@ const TrainingCertification = ({ setInputValue, inputValue, dayjs }) => {
             value={dayjs(inputValue?.fromCourse)}
           />
         </div>
-        <div className="lg:col-span-4">
+        <div className="col-span-1">
           <DatePickers
             className="w-full"
             format="YYYY-MM-DD"

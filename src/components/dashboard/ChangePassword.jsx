@@ -4,26 +4,33 @@ import Inputs from "../../common/form/AntdInputs";
 
 const ChangePassword = () => {
   return (
-    <div>
-      <div>
+    <div className="min-h-screen bg-gray-100 p-4 sm:p-6 lg:p-8">
+      <div className="mb-6">
         <AntdBreadCum array={["Employee", "Change Password"]} />
       </div>
-      <div className="grid grid-cols-12 gap-2 items-center">
-        <div className="lg:col-span-4 md:col-span-6 col-span-12">
-          <Inputs className="w-full" Label="Old Password" />
-        </div>
-        <div className="lg:col-span-4 md:col-span-6 col-span-12">
-          <Inputs className="w-full" Label="New Password" />
-        </div>
-        <div className="lg:col-span-4 md:col-span-6 col-span-12">
-          <Inputs className="w-full" Label="Confirm Password" />
-        </div>
-        <div className="col-span-2">
-          <AntdButton
-            classNames={"bg-[#242021] !border-none text-white px-7 h-10 w-full"}
-          >
-            Update
-          </AntdButton>
+      <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
+        <h2 className="text-2xl font-semibold text-[#3d2462] mb-6">
+          Change Password
+        </h2>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="col-span-1">
+            <Inputs className="w-full" Label="Old Password" type="password" />
+          </div>
+          <div className="col-span-1">
+            <Inputs className="w-full" Label="New Password" type="password" />
+          </div>
+          <div className="col-span-1">
+            <Inputs
+              className="w-full"
+              Label="Confirm Password"
+              type="password"
+            />
+          </div>
+          <div className="col-span-1 md:col-span-2 lg:col-span-3">
+            <AntdButton classNames="bg-[#000000] text-white hover:!bg-[#242021] border-none rounded-lg px-6  w-fit h-10 font-semibold">
+              Update
+            </AntdButton>
+          </div>
         </div>
       </div>
     </div>

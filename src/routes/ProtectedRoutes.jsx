@@ -5,13 +5,15 @@ import useAuthHook from "../hooks/useAuthHook";
 
 const ProtectedRoute = (WrappedComponent, allowedUserType) => {
   const AuthWrapper = (props) => {
-    const isAuthenticated = useAuthHook(null);
+    const isAuthenticated = useAuthHook(false);
 
     const userType = isAuthenticated?.type;
     const isAuthenticatedUser = !!isAuthenticated;
-    if (isAuthenticated === null) {
+
+    if (isAuthenticated === false) {
       return null;
     }
+
     if (isAuthenticatedUser) {
       if (userType === allowedUserType) {
         return <WrappedComponent {...props} />;

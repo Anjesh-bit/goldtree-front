@@ -87,6 +87,7 @@ export const useGetProfileInfo = (id) => {
   return useQuery({
     queryFn: () => fetcher(`jobseeker-profile-info/${id}`),
     queryKey: [jobSeekerQueryKeys.setUp.getProfileInfoJobSeeker, id],
+    enabled: !!id,
   });
 };
 

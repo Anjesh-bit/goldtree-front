@@ -29,7 +29,7 @@ export const useUpdateProfile = (type, id) => {
   };
 };
 
-export const useShorList = (data) => {
+export const useShortList = (data) => {
   const [localLoading, setLocalLoading] = useState(false);
   const params = new URLSearchParams(data);
   const query = useMutation({

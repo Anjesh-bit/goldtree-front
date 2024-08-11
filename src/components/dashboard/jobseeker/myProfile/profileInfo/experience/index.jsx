@@ -28,12 +28,12 @@ const Experience = ({ setInputValue, inputValue, dayjs }) => {
   };
 
   return (
-    <div>
-      <div className="grid grid-cols-12 gap-x-2">
-        <div className="lg:col-span-4">
+    <div className="p-4 md:p-6 lg:p-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+        <div className="col-span-1">
           <Inputs className="w-full" Label="Designation" name="designation" />
         </div>
-        <div className="lg:col-span-4">
+        <div className="col-span-1">
           <DatePickers
             className="w-full"
             Label="From"
@@ -45,7 +45,7 @@ const Experience = ({ setInputValue, inputValue, dayjs }) => {
             }
           />
         </div>
-        <div className="lg:col-span-4">
+        <div className="col-span-1">
           <DatePickers
             className="w-full"
             Label="To"
@@ -57,20 +57,20 @@ const Experience = ({ setInputValue, inputValue, dayjs }) => {
             }
           />
         </div>
-        <div className="lg:col-span-4">
+        <div className="col-span-1">
           <Inputs className="w-full" Label="Company" name="company" />
         </div>
-        <div className="lg:col-span-4">
+        <div className="col-span-1">
           <Inputs className="w-full" Label="Address" name="addr" />
         </div>
-        <div className="lg:col-span-4" name="job_level">
+        <div className="col-span-1">
           <Selects Label="Job Level" />
         </div>
-        <div className="lg:col-span-4">
+        <div className="col-span-1">
           <Inputs className="w-full" Label="Phone No." name="mob_no" />
         </div>
 
-        <div className="lg:col-span-12">
+        <div className="col-span-1 lg:col-span-3">
           <CkEditors
             Label="Descriptions"
             name="description"
@@ -78,7 +78,7 @@ const Experience = ({ setInputValue, inputValue, dayjs }) => {
             onChange={(event, editor) => handleChange(event, editor, "editor")}
           />
         </div>
-        <div className="lg:col-span-12">
+        <div className="col-span-1 lg:col-span-3">
           <AntRadio
             options={currentlyWorkOpts}
             Label="Currently Working"

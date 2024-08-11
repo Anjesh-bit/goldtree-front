@@ -4,10 +4,13 @@ import { useGlobalSearch } from "../../services/search/setUp";
 import MatchView from "./MatchView";
 import SearchSider from "./SearchSider";
 import debounce from "lodash/debounce";
+import { useLocation } from "react-router-dom";
 
 const Search = () => {
+  const { state } = useLocation();
+
   const [querySearchParams, setQuerySearchParams] = useState({
-    q: "",
+    q: state,
     vacancyType: [],
     careerLevel: [],
     gender: [],

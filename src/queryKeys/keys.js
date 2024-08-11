@@ -4,6 +4,7 @@ export const employeeQueryKeys = {
     getProfileInfo: "getProfileInfo",
     getAllPosts: "getAllPosts",
     getSinglePost: "getSinglePost",
+    getAllShortListedCandidates: "getAllShortListedCandidates",
   },
 };
 

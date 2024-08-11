@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { Layout, Menu, theme } from "antd";
 import { employeeSiderRoutes, JobSeekeerSiderRoutes } from "../../utils/sider";
+
 const { Content, Sider } = Layout;
 
 const DashBoardSider = ({
@@ -20,46 +21,48 @@ const DashBoardSider = ({
     },
   ];
 
-  const foundItems = items.find((items) => items.status);
-  console.log(employeeSiderRoutes);
+  const foundItems = items.find((item) => item.status);
+
   const [collapsed, setCollapsed] = useState(false);
-  const [selectedKeys, setSelectedKeys] = useState("");
+  const [selectedKeys, setSelectedKeys] = useState([]);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
 
   const handleMenuSelect = (selected) => {
-    setSelectedKeys(selected?.key);
+    setSelectedKeys([selected.key]);
   };
 
   return (
-    <Layout
-      style={{
-        minHeight: "100vh",
-      }}
-    >
+    <Layout style={{ minHeight: "100vh" }}>
       <Sider
         collapsible
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
-        className="!bg-[#242021]"
+        theme="dark"
+        className="bg-dark-900" // Custom class for dark background
       >
+        <div className="logo text-center text-white text-xl font-semibold py-4">
+          Dashboard
+        </div>
         <Menu
           theme="dark"
-          defaultSelectedKeys={["1"]}
-          mode="vertical"
-          onSelect={(selectedItem) => handleMenuSelect(selectedItem)}
-          className="bg-[#242021] flex flex-col gap-4 text-md"
+          selectedKeys={selectedKeys}
+          mode="inline"
+          onSelect={handleMenuSelect}
+          className="bg-dark-900 text-white"
         >
           {foundItems?.routes.map((item) => (
             <Menu.Item key={item.key} icon={item.icon}>
-              <Link to={item.path}>{item.label}</Link>
+              <Link to={item.path} className="text-base hover:text-primary">
+                {item.label}
+              </Link>
             </Menu.Item>
           ))}
         </Menu>
       </Sider>
       <Layout>
-        <Content className="px-[50px] py-4">
+        <Content className="bg-light-100 p-6">
           <Outlet context={data} />
         </Content>
       </Layout>

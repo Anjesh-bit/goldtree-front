@@ -1,3 +1,4 @@
+import React from "react";
 import { Input, ConfigProvider } from "antd";
 import FormItem from "./FormItems";
 
@@ -16,7 +17,6 @@ const Inputs = (props) => {
 
   const validatePhone = (_, value) => {
     const phoneRegex = /^\d{10}$/;
-    console.log(value);
     if (!phoneRegex.test(value) && value !== null) {
       return Promise.reject("Please enter a valid phone number");
     } else if (value >= 0) {
@@ -41,7 +41,6 @@ const Inputs = (props) => {
     validator: validatePhone,
   };
 
-  //pattern
   let pattern = [];
   const typeToPattern = {
     email: [emailPattern],
@@ -64,10 +63,11 @@ const Inputs = (props) => {
   const localrules =
     props.rules instanceof Array ? [...tempRule, ...props.rules] : tempRule;
 
-  const handelClick = (e) => {
+  const handleClick = (e) => {
     props.onClick instanceof Function && props.onClick(e);
   };
-  const handelOnPressEnter = (e) => {
+
+  const handleOnPressEnter = (e) => {
     props.onPressEnter instanceof Function && props.onPressEnter(e);
   };
 
@@ -75,24 +75,26 @@ const Inputs = (props) => {
     <ConfigProvider
       theme={{
         token: {
-          colorBgContainer: "#ffffff",
+          colorBgContainer: "#f5f5f5",
         },
         components: {
           Input: {
-            addonBg: "#e8e8f96e",
-            fontSize: 11,
+            addonBg: "#3d2462",
+            fontSize: 13,
             paddingInline: 6,
-            controlPaddingHorizontalSM: "8 !important",
-            colorBorder: "#242021",
-            controlHeight: 30,
+            controlPaddingHorizontalSM: "10px",
+            colorPrimary: "#3d2462",
+            colorPrimaryHover: "#6c4ba1",
+            colorPrimaryActive: "#6c4ba1",
+            controlHeight: 35,
+            borderRadius: 1,
           },
         },
       }}
     >
       {props.Label && (
         <div
-          className={`whitespace-nowrap text-sm font-medium 
-          } ${
+          className={`whitespace-nowrap text-sm font-medium ${
             props.required
               ? "after:text-[#dc4446] after:content-['*'] after:font-[400] after:ml-1 after:text-[16px]"
               : ""
@@ -106,7 +108,7 @@ const Inputs = (props) => {
         <Input
           defaultValue={props.defaultValue}
           min={props.minlength}
-          hidden={props.hidden || false}  
+          hidden={props.hidden || false}
           type={props.type}
           onBlur={props.onBlur}
           focus={props.focus}
@@ -114,9 +116,9 @@ const Inputs = (props) => {
           style={{
             ...props.style,
           }}
-          onPressEnter={handelOnPressEnter}
+          onPressEnter={handleOnPressEnter}
           readOnly={props.readOnly}
-          onClick={handelClick}
+          onClick={handleClick}
           maxLength={props.maxlength}
           value={props.value}
           disabled={props.disabled}

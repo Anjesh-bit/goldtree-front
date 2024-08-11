@@ -6,7 +6,7 @@ import { isAuthenticated } from "../utils/auth";
 import useAuthHook from "../hooks/useAuthHook";
 
 const DashboardLayout = () => {
-  const isAuth = useAuthHook();
+  const isAuth = useAuthHook(false);
   return (
     <div>
       <AntdHeader />

@@ -110,12 +110,6 @@ export const JobSeekeerSiderRoutes = [
     "/jobseeker/dashboard/saved-jobs"
   ),
   getItem(
-    "CVs and Cover Letter",
-    "coverCv",
-    <FileOutlined />,
-    "/jobseeker/dashboard/cvs-cover-letter"
-  ),
-  getItem(
     "Changed Password",
     "changePass",
     <FileOutlined />,

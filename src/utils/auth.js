@@ -3,7 +3,6 @@ import { getCookies, setCookies } from "./cookies";
 import { getLocalStorage, setLocalStorage } from "./localStorage";
 import { getNewAccessToken } from "../services/auth/login";
 
-
 const auth = (token, user, exp) => {
   setCookies("token", token, exp);
   setLocalStorage("loginData", user);
@@ -12,8 +11,6 @@ const url = "http://localhost:5000/goldtree/";
 const axiosInstance = axios.create({ baseURL: url, withCredentials: true });
 
 const isAuthenticated = async () => {
-  // Mark the function as async
-
   const loginData = getLocalStorage("loginData");
   const accessToken = getCookies("token");
 

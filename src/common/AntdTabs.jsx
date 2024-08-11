@@ -1,5 +1,5 @@
 import { Tabs } from "antd";
-
+import '../styles/antd.css'
 const AntdTabs = (props) => {
   return (
     <Tabs
@@ -10,16 +10,18 @@ const AntdTabs = (props) => {
         ...props.tabBarStyle,
         backgroundColor: props.backgroundColor,
         width: "100%",
-        fontWeight: 400,
+        fontWeight: 600,
         overflowX: "hidden",
         paddingLeft: 20,
         paddingRight: 20,
         margin: 0,
         fontSize: "16px",
+        color: "#3d2462",
       }}
       centered={props.centered}
       activeKey={props.value}
       onTabClick={props.onTabClick}
+      className="custom-tabs"
     >
       {props.children}
     </Tabs>

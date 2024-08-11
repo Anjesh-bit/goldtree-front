@@ -1,0 +1,8 @@
+.custom-popover-content {
+  width: 400px;
+}
+
+.custom-tabs .ant-tabs-nav .ant-tabs-tab:hover {
+  color: #3d2462;
+  font-weight: bold;
+}
