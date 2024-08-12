@@ -7,6 +7,7 @@ import {
 } from "../../../../services/jobSeeker/setUp";
 
 import useAuthHook from "../../../../hooks/useAuthHook";
+import Loading from "../../../../assets/svg/loading.svg";
 
 const AppliedJobs = ({ isShorList, isSavedJobs }) => {
   const navigate = useNavigate();
@@ -42,6 +43,13 @@ const AppliedJobs = ({ isShorList, isSavedJobs }) => {
     ? savedJobs?.[0]
     : appliedJobs?.[0];
 
+  if (!mappedData) {
+    return (
+      <div className="flex items-center justify-center h-[80vh]">
+        <img src={Loading} />
+      </div>
+    );
+  }
   return (
     <div className="bg-[#f5f5f5] px-6 py-4 min-h-screen">
       <div className="grid grid-cols-12 gap-4">

@@ -34,7 +34,7 @@ const MyResume = () => {
       <div className="mb-6">
         <AntdButton
           onClick={() => generatePDF(getTargetElement, options)}
-          className="bg-[#00b6b4] text-white hover:bg-[#009c9b] border-none rounded-lg px-6 py-2 font-medium transition-colors"
+          classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors"
         >
           Generate PDF
         </AntdButton>

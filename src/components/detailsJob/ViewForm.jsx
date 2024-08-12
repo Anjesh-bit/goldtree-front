@@ -4,7 +4,6 @@ import { AntModal } from "../../common/AntdModal";
 import Inputs from "../../common/form/AntdInputs";
 import { useUpdateEasyApply } from "../../services/jobSeeker/setUp";
 import { useEffect, useState } from "react";
-
 import DynamicLogin from "../auth/DynamicLogin";
 import useAuthHook from "../../hooks/useAuthHook";
 import TextAreas from "../../common/form/AntdTextArea";
@@ -30,7 +29,6 @@ const ViewForm = ({ open, setOpen }) => {
       }
       formData.append("type", `${!applyNow ? "easyApply" : "directApply"}`);
       formData.append("userId", isAuthenticated?.id);
-
       formData.append("postId", !applyNow ? open?.data : open?.data?.[0]);
       await easyApply.mutateAsync(formData);
       setFiles(null);
@@ -46,39 +44,47 @@ const ViewForm = ({ open, setOpen }) => {
   };
 
   return (
-    <AntModal open={open} setOpen={setOpen} title="Email Apply">
-      <Form form={form} onFinish={handleFinish}>
+    <AntModal
+      open={open}
+      setOpen={setOpen}
+      title="Apply for Job"
+      className="p-6"
+    >
+      <Form form={form} onFinish={handleFinish} layout="vertical">
         {!applyNow && (
           <>
-            <div>
-              <Inputs Label={"Name"} name="name" />
-            </div>
-            <div>
-              <Inputs Label={"Email"} name="email" />
-            </div>
-            <div>
-              <TextAreas rows="6" Label={"Cover Letter"} name="cover_letter" />
-            </div>
+            <Form.Item label="Name" name="name" className="mb-4">
+              <Inputs />
+            </Form.Item>
+            <Form.Item label="Email" name="email" className="mb-4">
+              <Inputs />
+            </Form.Item>
+            <Form.Item
+              label="Cover Letter"
+              name="cover_letter"
+              className="mb-4"
+            >
+              <TextAreas rows="6" />
+            </Form.Item>
           </>
         )}
         {(!applyNow || type === "jobSeeker") && !open?.isSaveJobs && (
-          <Inputs
-            Label="Upload CV"
-            type="file"
-            name="cv_upload"
-            onChange={handleFileChange}
-          />
+          <Form.Item label="Upload CV" name="cv_upload" className="mb-4">
+            <Inputs type="file" onChange={handleFileChange} />
+          </Form.Item>
         )}
         {applyNow && !isAuthenticated ? (
           <DynamicLogin modalData={open?.data} setOpen={setOpen} />
         ) : (
-          <AntdButton
-            classNames={"bg-[#242021] !border-none text-white px-7 h-10 mt-4"}
-            htmlType={"submit"}
-            loading={easyApply?.isError ? false : easyApply?.isPending}
-          >
-            Easy Apply
-          </AntdButton>
+          <Form.Item className="mb-0">
+            <AntdButton
+              classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors h-8"
+              htmlType="submit"
+              loading={easyApply?.isError ? false : easyApply?.isPending}
+            >
+              {applyNow ? "Apply Now" : "Easy Apply"}
+            </AntdButton>
+          </Form.Item>
         )}
       </Form>
     </AntModal>

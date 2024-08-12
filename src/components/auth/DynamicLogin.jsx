@@ -86,7 +86,7 @@ const DynamicLogin = ({ isEmployee, modalData, setOpen }) => {
             <div className="mt-6">
               <AntdButton
                 loading={data?.loading}
-                classNames="w-full bg-[#3d2462] text-white border-none rounded-lg px-6"
+                classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors w-full h-[40px]"
                 onClick={() => form.submit()}
               >
                 Login
@@ -99,7 +99,7 @@ const DynamicLogin = ({ isEmployee, modalData, setOpen }) => {
 
             <div className="mt-4">
               <AntdButton
-                classNames="w-full bg-[#3d2462] text-white border-none rounded-lg px-6"
+                classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors w-full h-[40px]"
                 onClick={(e) => handleOnClick(e)}
               >
                 Register

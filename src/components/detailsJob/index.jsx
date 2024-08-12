@@ -5,7 +5,6 @@ import { Tag, Skeleton } from "antd";
 import AntdButton from "../../common/AntdButtons";
 import { useState } from "react";
 import ViewForm from "./ViewForm";
-
 import { useSavedJobs } from "../../services/jobSeeker/setUp";
 import useMessage from "../../hooks/useMessage";
 import useAuthHook from "../../hooks/useAuthHook";
@@ -71,7 +70,7 @@ const DetailJobView = () => {
 
   if (singlePostLoading && !singlePostError) {
     return (
-      <div className="px-[50px] py-[20px]">
+      <div className="px-6 py-4">
         <Skeleton active />
         <Skeleton active />
         <Skeleton active />
@@ -85,44 +84,44 @@ const DetailJobView = () => {
   return (
     <>
       {contextHolder}
-      <div className="px-[50px] py-[20px] space-y-6">
-        <AntdCards className="p-6 bg-white shadow-md rounded-lg">
-          <h1 className="text-2xl font-bold text-gray-900">
+      <div className="px-6 py-4 space-y-6">
+        <AntdCards className="p-6 bg-white shadow-lg rounded-lg border border-gray-200">
+          <h1 className="text-3xl font-bold text-[#08142c]">
             {singlePostData?.company_name}
           </h1>
-          <p className="text-lg text-gray-700">
+          <p className="text-lg text-gray-800">
             {singlePostData?.job_location}
           </p>
-          <p className="text-lg text-gray-700">
+          <p className="text-lg text-gray-800">
             {singlePostData?.industry_type}
           </p>
           <div
-            className="mt-4 text-gray-600"
+            className="mt-4 text-gray-700"
             dangerouslySetInnerHTML={{
               __html: singlePostData?.company_description,
             }}
           />
           <AntdButton
-            classNames="bg-[#242021] !border-none text-white px-7 h-10 mt-4 transition-colors duration-300 ease-in-out hover:!bg-[#333] hover:!shadow-lg hover:!text-white"
+            classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors mt-4"
             onClick={(e) => handleClick(e, "saveJobs", singlePostData?._id)}
           >
             Save Job
           </AntdButton>
         </AntdCards>
 
-        <AntdCards className="p-6 bg-white shadow-md rounded-lg">
-          <div className="flex justify-between items-center">
-            <h2 className="text-xl font-semibold text-gray-900">
+        <AntdCards className="p-6 bg-white shadow-lg rounded-lg border border-gray-200">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-2xl font-semibold text-[#08142c]">
               {singlePostData?.job_title}
             </h2>
-            <span className="text-sm text-gray-500">
+            <span className="text-sm text-gray-600">
               Apply Before: {singlePostData?.apply_before} days
             </span>
           </div>
 
-          <div className="mt-4 text-gray-600">
-            <h3 className="font-semibold text-lg">Job Summary:</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-2">
+          <div className="text-gray-700">
+            <h3 className="text-xl font-semibold mb-2">Job Summary:</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <div>No. of Vacancy: {singlePostData?.no_of_vacancy}</div>
               <div>Job Type: {singlePostData?.job_type}</div>
               <div>Offered Salary: {singlePostData?.salary}</div>
@@ -154,40 +153,42 @@ const DetailJobView = () => {
           </div>
         </AntdCards>
 
-        <AntdCards className="p-6 bg-white shadow-md rounded-lg">
-          <h3 className="text-xl font-semibold text-gray-900">
+        <AntdCards className="p-6 bg-white shadow-lg rounded-lg border border-gray-200">
+          <h3 className="text-xl font-semibold text-[#08142c] mb-2">
             Job Description:
           </h3>
           <div
-            className="mt-2 text-gray-600"
+            className="text-gray-700"
             dangerouslySetInnerHTML={{ __html: singlePostData?.job_desc }}
           />
         </AntdCards>
 
-        <AntdCards className="p-6 bg-white shadow-md rounded-lg">
-          <h3 className="text-xl font-semibold text-gray-900">Job Benefits:</h3>
+        <AntdCards className="p-6 bg-white shadow-lg rounded-lg border border-gray-200">
+          <h3 className="text-xl font-semibold text-[#08142c] mb-2">
+            Job Benefits:
+          </h3>
           <div
-            className="mt-2 text-gray-600"
+            className="text-gray-700"
             dangerouslySetInnerHTML={{ __html: singlePostData?.job_benefits }}
           />
         </AntdCards>
 
-        <AntdCards className="p-6 bg-white shadow-md rounded-lg">
-          <h3 className="text-xl font-semibold text-gray-900">
+        <AntdCards className="p-6 bg-white shadow-lg rounded-lg border border-gray-200">
+          <h3 className="text-xl font-semibold text-[#08142c] mb-2">
             Required Knowledge, Skills, and Abilities:
           </h3>
           <div
-            className="mt-2 text-gray-600"
+            className="text-gray-700"
             dangerouslySetInnerHTML={{ __html: singlePostData?.job_spec }}
           />
         </AntdCards>
 
-        <AntdCards className="p-6 bg-white shadow-md rounded-lg">
-          <h3 className="text-xl font-semibold text-gray-900">
+        <AntdCards className="p-6 bg-white shadow-lg rounded-lg border border-gray-200">
+          <h3 className="text-xl font-semibold text-[#08142c] mb-2">
             Education + Experience:
           </h3>
           <div
-            className="mt-2 text-gray-600"
+            className="text-gray-700"
             dangerouslySetInnerHTML={{
               __html: singlePostData?.education_qual_desc,
             }}
@@ -195,21 +196,21 @@ const DetailJobView = () => {
         </AntdCards>
 
         {singlePostData?.is_apply_instruction === "m" && (
-          <AntdCards className="p-6 bg-white shadow-md rounded-lg">
-            <p className="text-gray-700">
+          <AntdCards className="p-6 bg-white shadow-lg rounded-lg border border-gray-200">
+            <p className="text-gray-800">
               Interested candidates fulfilling the mentioned criteria are
-              encouraged to Apply using the Easy Apply Button below. Registered
-              candidates may also apply using Apply Now Button.
+              encouraged to apply using the Easy Apply Button below. Registered
+              candidates may also apply using the Apply Now Button.
             </p>
             <div className="flex gap-4 mt-4">
               <AntdButton
-                classNames="bg-[#242021] !border-none text-white px-7 h-10 transition-colors duration-300 ease-in-out hover:!bg-[#333] hover:!shadow-lg hover:!text-white"
+                classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors"
                 onClick={(e) => handleClick(e, "easy")}
               >
                 Easy Apply
               </AntdButton>
               <AntdButton
-                classNames="bg-[#242021] !border-none text-white px-7 h-10 transition-colors duration-300 ease-in-out hover:!bg-[#333] hover:!shadow-lg hover:!text-white"
+                classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors"
                 onClick={(e) => handleClick(e, "now")}
               >
                 Apply Now

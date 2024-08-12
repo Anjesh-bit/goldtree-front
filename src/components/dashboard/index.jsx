@@ -40,7 +40,7 @@ const DashBoardSider = ({
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
         theme="dark"
-        className="bg-dark-900" // Custom class for dark background
+        className="bg-dark-900"
       >
         <div className="logo text-center text-white text-xl font-semibold py-4">
           Dashboard

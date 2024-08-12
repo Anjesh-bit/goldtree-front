@@ -27,7 +27,7 @@ const ChangePassword = () => {
             />
           </div>
           <div className="col-span-1 md:col-span-2 lg:col-span-3">
-            <AntdButton classNames="bg-[#000000] text-white hover:!bg-[#242021] border-none rounded-lg px-6  w-fit h-10 font-semibold">
+            <AntdButton classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors">
               Update
             </AntdButton>
           </div>

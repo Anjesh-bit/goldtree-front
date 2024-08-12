@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { useGetProfileInfo } from "../../../../services/jobSeeker/setUp";
 import useAuthHook from "../../../../hooks/useAuthHook";
+import Loading from "../../../../assets/svg/loading.svg";
 
 const ViewPdf = () => {
   const isAuthenticated = useAuthHook(false);
@@ -9,7 +10,13 @@ const ViewPdf = () => {
     isAuthenticated?.id
   );
 
-  if (!profileData) return null;
+  if (!profileData)
+    return (
+      <div className="flex items-center justify-center h-[60vh]">
+        <img src={Loading} />
+      </div>
+    );
+
   const patient = profileData[0];
 
   return (

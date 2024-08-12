@@ -128,7 +128,7 @@ const DynamicRegistration = ({
                 <AntdButton
                   htmlType="submit"
                   loading={registerPending}
-                  classNames="w-full bg-[#3d2462] text-white border-none rounded-lg px-6"
+                  classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors w-full h-[40px]"
                 >
                   {isEmployee
                     ? "Create Employer Account"
@@ -144,12 +144,12 @@ const DynamicRegistration = ({
                 Create a free account to post vacancies
               </div>
               <AntdButton
-                classNames="w-full bg-[#3d2462] text-white border-none rounded-lg px-6"
+                classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors h-[40px]"
                 onClick={handleOnClick}
               >
                 {isEmployeeTabItems
                   ? "Create an Employee Account"
-                  : "Create a Job Seeker Account"}
+                  : "Create an Job Seeker Account"}
               </AntdButton>
             </div>
           )}

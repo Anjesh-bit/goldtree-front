@@ -14,6 +14,7 @@ import {
 import useMessage from "../../../../hooks/useMessage";
 import dayjs from "dayjs";
 import useAuthHook from "../../../../hooks/useAuthHook";
+import Loading from "../../../../assets/svg/loading.svg";
 
 const { useForm } = Form;
 
@@ -136,7 +137,12 @@ const MyProfile = () => {
     } catch (e) {}
   };
 
-  if (!profileData) return <div>Loading...</div>;
+  if (!profileData)
+    return (
+      <div className="flex items-center justify-center h-[100%]">
+        <img src={Loading} />
+      </div>
+    );
 
   return (
     <>

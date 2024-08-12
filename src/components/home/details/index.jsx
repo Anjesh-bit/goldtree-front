@@ -11,12 +11,12 @@ const DetailedComponent = () => {
 
   return (
     <div className="relative">
-      <div className="relative bg-gradient-to-r from-[#3d2462] to-[#3d2462] py-4 min-h-[100vh] flex items-center text-white pl-4 md:pl-8 lg:pl-12 xl:pl-[48px] z-10">
+      <div className="relative bg-[#08142c] py-4 min-h-[100vh] flex items-center text-white pl-4 md:pl-8 lg:pl-12 xl:pl-[48px] z-10">
         <div className="flex flex-col gap-8 w-full md:w-3/4 lg:w-2/3 xl:w-1/2">
           <DynamicTitle classNames="font-bold text-4xl md:text-5xl lg:text-6xl text-white font-extrabold">
             Find Your Dream Job with Exciting Opportunities
           </DynamicTitle>
-          <p className="text-base md:text-lg lg:text-xl">
+          <p className="text-base md:text-lg lg:text-xl text-white">
             Embark on a journey towards your dream career with our ultimate
             job-finding companion. Our platform connects talented individuals
             with exciting opportunities.
@@ -39,7 +39,7 @@ const DetailedComponent = () => {
         <img
           src="https://cdn-empmerch.newjobs.com/wp-content/uploads/2022/09/homepage-desktop.jpg"
           alt="Background"
-          className="object-cover h-full w-full"
+          className="object-cover h-full w-full brightness-75"
         />
       </div>
     </div>
