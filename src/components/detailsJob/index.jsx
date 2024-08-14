@@ -84,7 +84,7 @@ const DetailJobView = () => {
   return (
     <>
       {contextHolder}
-      <div className="px-6 py-4 space-y-6">
+      <div className="p-4 md:p-8 lg:p-12 xl:p-[48px] space-y-6">
         <AntdCards className="p-6 bg-white shadow-lg rounded-lg border border-gray-200">
           <h1 className="text-3xl font-bold text-[#08142c]">
             {singlePostData?.company_name}

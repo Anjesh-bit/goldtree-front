@@ -62,7 +62,7 @@ const DashBoardSider = ({
         </Menu>
       </Sider>
       <Layout>
-        <Content className="bg-light-100 p-6">
+        <Content className="bg-light-100 p-4 md:p-8 lg:p-12 xl:p-[48px]">
           <Outlet context={data} />
         </Content>
       </Layout>

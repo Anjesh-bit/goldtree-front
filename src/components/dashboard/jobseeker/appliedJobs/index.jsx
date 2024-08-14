@@ -51,7 +51,7 @@ const AppliedJobs = ({ isShorList, isSavedJobs }) => {
     );
   }
   return (
-    <div className="bg-[#f5f5f5] px-6 py-4 min-h-screen">
+    <div className="bg-[#f5f5f5] min-h-screen">
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-12 mb-6">
           <h2 className="text-xl md:text-2xl font-medium text-[#3d2462] mb-4 md:mb-0">

@@ -24,7 +24,7 @@ const FeaturedJobs = () => {
   };
 
   return (
-    <div className="bg-[#f0f4f8] px-4 md:px-8 lg:px-12 xl:px-16 py-6">
+    <div className="bg-[#f0f4f8] p-4 md:p-8 lg:p-12 xl:p-[48px] py-6">
       <div className="bg-white p-6 rounded-lg shadow-lg mb-6">
         <DynamicTitle classNames="text-2xl md:text-3xl lg:text-4xl font-extrabold text-[#08142c]">
           Latest Featured Jobs

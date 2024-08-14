@@ -157,7 +157,7 @@ const MyProfile = () => {
         }}
         onFinish={handleDetails}
         layout="vertical"
-        className="p-4 md:p-6 lg:p-8 xl:p-10 space-y-6"
+        className="space-y-6"
       >
         <div className="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">

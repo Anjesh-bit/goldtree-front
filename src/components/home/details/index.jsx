@@ -10,13 +10,14 @@ const DetailedComponent = () => {
   };
 
   return (
-    <div className="relative">
-      <div className="relative bg-[#08142c] py-4 min-h-[100vh] flex items-center text-white pl-4 md:pl-8 lg:pl-12 xl:pl-[48px] z-10">
-        <div className="flex flex-col gap-8 w-full md:w-3/4 lg:w-2/3 xl:w-1/2">
-          <DynamicTitle classNames="font-bold text-4xl md:text-5xl lg:text-6xl text-white font-extrabold">
+    <div className="flex flex-col lg:flex-row bg-[#08142c]">
+      <div className="flex-1 py-4 min-h-[100vh] flex items-center text-white p-4 md:p-8 lg:p-12 xl:p-[48px] z-10">
+        <div className="flex flex-col gap-8 w-full md:w-3/4 lg:w-2/3 xl:w-[55%]">
+          <DynamicTitle classNames="font-bold text-4xl md:text-5xl lg:text-6xl text-gray-300 font-extrabold">
             Find Your Dream Job with Exciting Opportunities
           </DynamicTitle>
-          <p className="text-base md:text-lg lg:text-xl text-white">
+
+          <p className="text-base md:text-lg lg:text-xl text-gray-300">
             Embark on a journey towards your dream career with our ultimate
             job-finding companion. Our platform connects talented individuals
             with exciting opportunities.
@@ -35,11 +36,12 @@ const DetailedComponent = () => {
           </div>
         </div>
       </div>
-      <div className="absolute inset-0 z-0">
+      <div className="flex-1">
         <img
           src="https://cdn-empmerch.newjobs.com/wp-content/uploads/2022/09/homepage-desktop.jpg"
           alt="Background"
-          className="object-cover h-full w-full brightness-75"
+          className="object-cover  h-[300px] md:h-[400px] lg:h-[100vh] w-full brightness-75"
+          style={{ objectPosition: "80% center" }}
         />
       </div>
     </div>

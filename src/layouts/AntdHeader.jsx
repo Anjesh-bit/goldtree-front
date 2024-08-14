@@ -42,7 +42,7 @@ const AntdHeader = () => {
   return (
     <Layout>
       <Header className="flex justify-between items-center h-full px-4 sm:px-6 md:px-8 lg:px-12 ant-header">
-        <div className="text-2xl font-bold text-white">Logo</div>
+        <div className="text-2xl font-bold text-gray-300">Logo</div>
 
         <Button
           type="primary"
@@ -56,13 +56,13 @@ const AntdHeader = () => {
           className="hidden lg:flex flex-grow justify-center items-center text-lg font-semibold"
           theme="dark"
         >
-          <Menu.Item key="1" className="!text-white hover:!text-gray-300">
+          <Menu.Item key="1" className="text-gray-300">
             Find Jobs
           </Menu.Item>
-          <Menu.Item key="2" className="!text-white hover:!text-gray-300">
+          <Menu.Item key="2" className="text-gray-300">
             Companies
           </Menu.Item>
-          <Menu.Item key="3" className="!text-white hover:!text-gray-300">
+          <Menu.Item key="3" className="text-gray-300">
             Career Mentoring
           </Menu.Item>
         </Menu>
