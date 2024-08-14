@@ -6,18 +6,20 @@ import Loading from "../../../../assets/svg/loading.svg";
 const ViewPdf = () => {
   const isAuthenticated = useAuthHook(false);
 
-  const { data: profileData, isError: profileErr } = useGetProfileInfo(
-    isAuthenticated?.id
-  );
+  const {
+    data: profileData,
+    isError: profileErr,
+    isLoading,
+  } = useGetProfileInfo(isAuthenticated?.id);
 
-  if (!profileData)
+  if (isLoading)
     return (
       <div className="flex items-center justify-center h-[60vh]">
         <img src={Loading} />
       </div>
     );
 
-  const patient = profileData[0];
+  const patient = profileData?.[0];
 
   return (
     <div>

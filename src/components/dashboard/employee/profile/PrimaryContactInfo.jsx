@@ -18,11 +18,8 @@ const PrimaryContactInfo = ({ setCKValue, data }) => {
     setCKValue(editor.getData());
   };
   return (
-    <div>
-      <DynamicTitle classNames={"text-lg font-medium mb-3"}>
-        Profile Information
-      </DynamicTitle>
-      <div className="grid grid-cols-12 gap-2">
+    <div className="p-4 md:p-6 lg:p-8">
+      <div className="grid grid-cols-12 gap-4">
         <div className="lg:col-span-4 md:col-span-6 col-span-12">
           <Inputs className="w-full" Label="Company Name" name="company_name" />
         </div>

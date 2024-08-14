@@ -13,6 +13,7 @@ import {
 
 import { useEffect, useState } from "react";
 import useAuthHook from "../../../../hooks/useAuthHook";
+import DynamicTitle from "../../../../common/DynamicTitle"; // Import DynamicTitle for consistent title styling
 
 const { useForm } = Form;
 
@@ -101,29 +102,38 @@ const Profile = () => {
       onFinish={handleOnFinish}
       form={form}
       layout="vertical"
-      className="p-6 space-y-6"
+      className="space-y-6"
     >
       <AntdBreadCum array={["Employee", "Profile"]} className="mb-6" />
 
-      <div className="bg-white p-6 rounded-lg shadow-md">
+      <div className="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md">
+        <DynamicTitle classNames="text-xl md:text-2xl font-medium text-[#3d2462] mb-4">
+          Primary Contact Information
+        </DynamicTitle>
         <PrimaryContactInfo setCKValue={setCKValue} data={ckData} />
       </div>
 
-      <div className="bg-white p-6 rounded-lg shadow-md">
+      <div className="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md">
+        <DynamicTitle classNames="text-xl md:text-2xl font-medium text-[#3d2462] mb-4">
+          Social Networks
+        </DynamicTitle>
         <SocialNetworks />
       </div>
 
-      <div className="bg-white p-6 rounded-lg shadow-md">
+      <div className="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md">
+        <DynamicTitle classNames="text-xl md:text-2xl font-medium text-[#3d2462] mb-4">
+          Profile Information
+        </DynamicTitle>
         <ProfileInfo />
       </div>
 
-      <div className="flex justify-end">
+      <div className="flex justify-end mt-6">
         <AntdButton
           loading={
             empError || empErrorUpdate ? false : empLoadingUpdate || empLoading
           }
           htmlType="submit"
-          classNames="bg-[#3d2462] !border-none text-white px-7 h-10"
+          classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors"
         >
           {isEmpty ? "Update" : "Save"}
         </AntdButton>

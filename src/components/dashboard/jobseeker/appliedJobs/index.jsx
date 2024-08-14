@@ -65,7 +65,7 @@ const AppliedJobs = ({ isShorList, isSavedJobs }) => {
         {mappedData?.data?.map((items) => (
           <AntdCards
             key={items.postId}
-            className="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 p-4 bg-white rounded-lg shadow-md cursor-pointer hover:bg-[#e0e0e0] transition-colors"
+            className="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 p-4 bg-white rounded-lg shadow-md cursor-pointer hover:bg-gray-300 transition-colors"
             onClick={(e) =>
               handleCardClick(e, items.postId, items.postInfo.company_name)
             }

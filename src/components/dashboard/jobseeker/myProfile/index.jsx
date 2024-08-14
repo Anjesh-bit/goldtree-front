@@ -23,9 +23,11 @@ const MyProfile = () => {
   const isAuthenticated = useAuthHook(false);
   const { contextHolder, showMessage } = useMessage();
 
-  const { data: profileData, isError: profileErr } = useGetProfileInfo(
-    isAuthenticated?.id
-  );
+  const {
+    data: profileData,
+    isError: profileErr,
+    isLoading,
+  } = useGetProfileInfo(isAuthenticated?.id);
 
   const {
     mutateAsync: jobSeekerMutate,
@@ -137,7 +139,7 @@ const MyProfile = () => {
     } catch (e) {}
   };
 
-  if (!profileData)
+  if (isLoading)
     return (
       <div className="flex items-center justify-center h-[100%]">
         <img src={Loading} />
@@ -209,7 +211,7 @@ const MyProfile = () => {
 
         <div className="flex justify-end mt-6">
           <AntdButton
-            classNames="bg-[#242021] !border-none text-white px-6 py-2 h-10"
+            classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors"
             htmlType="submit"
             loading={
               profileErr || jobSeErrorUpdate

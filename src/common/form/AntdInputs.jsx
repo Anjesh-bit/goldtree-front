@@ -74,9 +74,6 @@ const Inputs = (props) => {
   return (
     <ConfigProvider
       theme={{
-        token: {
-          colorBgContainer: "#f5f5f5",
-        },
         components: {
           Input: {
             addonBg: "#3d2462",

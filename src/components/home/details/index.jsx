@@ -36,7 +36,7 @@ const DetailedComponent = () => {
           </div>
         </div>
       </div>
-      <div className="flex-1">
+      <div className="flex-1 border border-4 border-gray-400">
         <img
           src="https://cdn-empmerch.newjobs.com/wp-content/uploads/2022/09/homepage-desktop.jpg"
           alt="Background"

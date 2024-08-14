@@ -9,7 +9,7 @@ import {
   usePostJobs,
   useUpdatePostJobs,
 } from "../../../../services/employee/setUp";
-
+import DynamicTitle from "../../../../common/DynamicTitle";
 import { useLocation, useParams } from "react-router-dom";
 import useAuthHook from "../../../../hooks/useAuthHook";
 import { Selects } from "../../../../common/form/AntdSelects";
@@ -252,212 +252,233 @@ const PostJobs = () => {
   return (
     <Form onFinish={handleFinish} form={form}>
       <AntdBreadCum array={["Employee", "Post Jobs"]} />
-      <div className="grid grid-cols-12 gap-2">
-        <div className="lg:col-span-4">
-          <Selects
-            className="w-full"
-            Label="Category Type"
-            name="catagory_type"
-            description="name"
-            value="name"
-            array={categoryType}
-          />
-        </div>
-        <div className="lg:col-span-4">
-          <Selects
-            className="w-full"
-            Label="Job Catagory"
-            value="name"
-            description="name"
-            name="job_catagory"
-            array={jobCategory}
-          />
-        </div>
-        <div className="lg:col-span-4">
-          <Selects
-            className="w-full"
-            Label="Industry Type"
-            name="industry_type"
-            description="name"
-            value="name"
-            array={industryType}
-          />
-        </div>
-        <div className="lg:col-span-4">
-          <Selects
-            className="w-full"
-            Label="Job Industry"
-            name="job_industry"
-            description="name"
-            value="name"
-            array={jobIndustry}
-          />
-        </div>
+      <div className="rounded-lg shadow-md bg-[#fff] p-4 md:p-6 lg:p-8">
+        <DynamicTitle classNames="text-xl md:text-2xl font-medium text-[#3d2462]">
+          Post A New Job
+        </DynamicTitle>
+        <div className="grid grid-cols-12 gap-4 p-4 md:p-6 lg:p-8">
+          <div className="lg:col-span-4">
+            <Selects
+              className="w-full"
+              Label="Category Type"
+              name="catagory_type"
+              description="name"
+              value="name"
+              array={categoryType}
+            />
+          </div>
+          <div className="lg:col-span-4">
+            <Selects
+              className="w-full"
+              Label="Job Catagory"
+              value="name"
+              description="name"
+              name="job_catagory"
+              array={jobCategory}
+            />
+          </div>
+          <div className="lg:col-span-4">
+            <Selects
+              className="w-full"
+              Label="Industry Type"
+              name="industry_type"
+              description="name"
+              value="name"
+              array={industryType}
+            />
+          </div>
+          <div className="lg:col-span-4">
+            <Selects
+              className="w-full"
+              Label="Job Industry"
+              name="job_industry"
+              description="name"
+              value="name"
+              array={jobIndustry}
+            />
+          </div>
 
-        <div className="lg:col-span-4">
-          <Inputs
-            className="w-full"
-            Label="Apply Before(in days)"
-            name="apply_before"
-          />
-        </div>
-        <div className="lg:col-span-4">
-          <Inputs className="w-full" Label="Job Title" name="job_title" />
-        </div>
-        <div className="lg:col-span-4">
-          <Inputs
-            className="w-full"
-            Label="No.of Vacancy"
-            name="no_of_vacancy"
-          />
-        </div>
+          <div className="lg:col-span-4">
+            <Inputs
+              className="w-full"
+              Label="Apply Before(in days)"
+              name="apply_before"
+            />
+          </div>
+          <div className="lg:col-span-4">
+            <Inputs className="w-full" Label="Job Title" name="job_title" />
+          </div>
+          <div className="lg:col-span-4">
+            <Inputs
+              className="w-full"
+              Label="No.of Vacancy"
+              name="no_of_vacancy"
+            />
+          </div>
 
-        <div className="lg:col-span-4" Label="Service Type">
-          <Selects
-            className="w-full"
-            Label="Job Type"
-            name="job_type"
-            description="name"
-            value="name"
-            array={serviceType}
-          />
-        </div>
-        <div className="lg:col-span-4" Label="Service Type">
-          <Selects
-            className="w-full"
-            Label="Service Type"
-            name="service_type"
-            description="label"
-            value="value"
-            array={jobTypeOptions}
-          />
-        </div>
-        <div className="lg:col-span-4" Label="Service Type">
-          <Selects
-            className="w-full"
-            Label="Job Level"
-            name="job_level"
-            description="name"
-            value="value"
-            array={jobLevel}
-          />
-        </div>
-        <div className="lg:col-span-4">
-          <Inputs className="w-full" Label="Job Location" name="job_location" />
-        </div>
-        <div className="lg:col-span-4">
-          <Selects
-            className="w-full"
-            Label="Skills"
-            name="skills"
-            value="name"
-            description="name"
-            array={skillsArr}
-            mode="multiple"
-          />
-        </div>
-        <div className="lg:col-span-12">
-          <TextAreas rows="6" Label={"Job Purpose"} name="job_purpose" />
-        </div>
-        <div className="lg:col-span-12">
-          <AntRadio options={salaryOptions} Label="Salary" name="salary" />
-        </div>
-        <div className="lg:col-span-12">
-          <AntRadio
-            options={expOptions}
-            Label="Experience Required"
-            name="exp_required"
-          />
-        </div>
-        <div className="lg:col-span-12">
-          <AntRadio
-            options={licenseOptions}
-            Label="Driving License"
-            name="is_driving_license"
-          />
-        </div>
-        <div className="lg:col-span-4">
-          <Selects
-            className="w-full"
-            Label="Educational Preferences"
-            name="edu_preferences"
-            description="name"
-            value="name"
-            array={eduPreferences}
-          />
-        </div>
-        <div className="lg:col-span-4">
-          <Selects
-            className="w-full"
-            Label="Degree Name"
-            name="degree_name"
-            description="name"
-            value="name"
-            array={degreeName}
-          />
-        </div>
-        <div className="lg:col-span-12">
-          <AntRadio options={genderOptions} Label="Gender" name="gender" />
-        </div>
-        <div className="lg:col-span-12">
-          <CkEditors
-            Label={"Educational Qualification Description:"}
-            onChange={(event, editor) => handleCkEditor(event, editor, "key0")}
-            data={!isMatchLocation ? postEditItems["education_qual_desc"] : " "}
-          />
-        </div>
+          <div className="lg:col-span-4" Label="Service Type">
+            <Selects
+              className="w-full"
+              Label="Job Type"
+              name="job_type"
+              description="name"
+              value="name"
+              array={serviceType}
+            />
+          </div>
+          <div className="lg:col-span-4" Label="Service Type">
+            <Selects
+              className="w-full"
+              Label="Service Type"
+              name="service_type"
+              description="label"
+              value="value"
+              array={jobTypeOptions}
+            />
+          </div>
+          <div className="lg:col-span-4" Label="Service Type">
+            <Selects
+              className="w-full"
+              Label="Job Level"
+              name="job_level"
+              description="name"
+              value="value"
+              array={jobLevel}
+            />
+          </div>
+          <div className="lg:col-span-4">
+            <Inputs
+              className="w-full"
+              Label="Job Location"
+              name="job_location"
+            />
+          </div>
+          <div className="lg:col-span-4">
+            <Selects
+              className="w-full"
+              Label="Skills"
+              name="skills"
+              value="name"
+              description="name"
+              array={skillsArr}
+              mode="multiple"
+            />
+          </div>
+          <div className="lg:col-span-12">
+            <TextAreas rows="6" Label={"Job Purpose"} name="job_purpose" />
+          </div>
+          <div className="lg:col-span-12">
+            <AntRadio options={salaryOptions} Label="Salary" name="salary" />
+          </div>
+          <div className="lg:col-span-12">
+            <AntRadio
+              options={expOptions}
+              Label="Experience Required"
+              name="exp_required"
+            />
+          </div>
+          <div className="lg:col-span-12">
+            <AntRadio
+              options={licenseOptions}
+              Label="Driving License"
+              name="is_driving_license"
+            />
+          </div>
+          <div className="lg:col-span-4">
+            <Selects
+              className="w-full"
+              Label="Educational Preferences"
+              name="edu_preferences"
+              description="name"
+              value="name"
+              array={eduPreferences}
+            />
+          </div>
+          <div className="lg:col-span-4">
+            <Selects
+              className="w-full"
+              Label="Degree Name"
+              name="degree_name"
+              description="name"
+              value="name"
+              array={degreeName}
+            />
+          </div>
+          <div className="lg:col-span-12">
+            <AntRadio options={genderOptions} Label="Gender" name="gender" />
+          </div>
+          <div className="lg:col-span-12">
+            <CkEditors
+              Label={"Educational Qualification Description:"}
+              onChange={(event, editor) =>
+                handleCkEditor(event, editor, "key0")
+              }
+              data={
+                !isMatchLocation ? postEditItems["education_qual_desc"] : " "
+              }
+            />
+          </div>
 
-        <div className="lg:col-span-12">
-          <CkEditors
-            Label={"Job Description:"}
-            onChange={(event, editor) => handleCkEditor(event, editor, "key1")}
-            data={!isMatchLocation ? postEditItems["job_desc"] : " "}
-          />
-        </div>
-        <div className="lg:col-span-12">
-          <CkEditors
-            Label={"Job Specification:"}
-            onChange={(event, editor) => handleCkEditor(event, editor, "key2")}
-            data={!isMatchLocation ? postEditItems["job_spec"] : " "}
-          />
-        </div>
-        <div className="lg:col-span-12">
-          <CkEditors
-            Label={"Job Benefits:"}
-            onChange={(event, editor) => handleCkEditor(event, editor, "key3")}
-            data={!isMatchLocation ? postEditItems["job_benifits"] : " "}
-          />
-        </div>
-        <div className="lg:col-span-6">
-          <AntRadio
-            options={applyOnlineOptions}
-            Label="Apply Online"
-            name="is_online"
-          />
-        </div>
-        <div className="lg:col-span-6">
-          <AntRadio
-            options={applyDirectOptions}
-            Label="Apply Direct"
-            name="is_direct"
-          />
-        </div>
-        <div className="lg:col-span-12">
-          <AntRadio
-            options={applyInstruction}
-            Label="Apply Instruction"
-            name="is_apply_instruction"
-          />
-        </div>
+          <div className="lg:col-span-12">
+            <CkEditors
+              Label={"Job Description:"}
+              onChange={(event, editor) =>
+                handleCkEditor(event, editor, "key1")
+              }
+              data={!isMatchLocation ? postEditItems["job_desc"] : " "}
+            />
+          </div>
+          <div className="lg:col-span-12">
+            <CkEditors
+              Label={"Job Specification:"}
+              onChange={(event, editor) =>
+                handleCkEditor(event, editor, "key2")
+              }
+              data={!isMatchLocation ? postEditItems["job_spec"] : " "}
+            />
+          </div>
+          <div className="lg:col-span-12">
+            <CkEditors
+              Label={"Job Benefits:"}
+              onChange={(event, editor) =>
+                handleCkEditor(event, editor, "key3")
+              }
+              data={!isMatchLocation ? postEditItems["job_benifits"] : " "}
+            />
+          </div>
+          <div className="lg:col-span-6">
+            <AntRadio
+              options={applyOnlineOptions}
+              Label="Apply Online"
+              name="is_online"
+            />
+          </div>
+          <div className="lg:col-span-6">
+            <AntRadio
+              options={applyDirectOptions}
+              Label="Apply Direct"
+              name="is_direct"
+            />
+          </div>
+          <div className="lg:col-span-12">
+            <AntRadio
+              options={applyInstruction}
+              Label="Apply Instruction"
+              name="is_apply_instruction"
+            />
+          </div>
 
-        <div className="col-span-2">
-          <AntdButton
-            loading={postJobError ? false : postJobPending}
-            htmlType={"submit"}
-            classNames={"bg-[#242021] !border-none text-white px-7 h-10 w-full"}
-          >
-            {!isMatchLocation ? "Update" : "Save"}
-          </AntdButton>
+          <div className="col-span-2">
+            <AntdButton
+              loading={postJobError ? false : postJobPending}
+              htmlType={"submit"}
+              classNames={
+                "bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors"
+              }
+            >
+              {!isMatchLocation ? "Update" : "Save"}
+            </AntdButton>
+          </div>
         </div>
       </div>
     </Form>

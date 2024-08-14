@@ -64,7 +64,7 @@ const UploadProfile = ({ type }) => {
       </Form.Item>
       <Form.Item>
         <AntdButton
-          classNames="bg-[#242021] !border-none text-white px-7 h-10 w-full"
+          classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors"
           htmlType="submit"
           loading={updateError ? false : updatePending}
         >
