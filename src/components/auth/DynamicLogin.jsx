@@ -64,7 +64,7 @@ const DynamicLogin = ({ isEmployee, modalData, setOpen }) => {
       } else {
         const dashboardRoute = isEmployee
           ? "/employee/dashboard"
-          : "/jobseeker/dashboard";
+          : "/jobSeeker/dashboard";
         navigate(dashboardRoute);
       }
     }

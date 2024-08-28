@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { Layout, Menu, theme } from "antd";
-import { employeeSiderRoutes, JobSeekeerSiderRoutes } from "../../utils/sider";
+import { employeeSiderRoutes, JobSeekerSiderRoutes } from "../../utils/sider";
 
 const { Content, Sider } = Layout;
 
@@ -17,7 +17,7 @@ const DashBoardSider = ({
     },
     {
       status: isJobSeekerDashboard,
-      routes: JobSeekeerSiderRoutes,
+      routes: JobSeekerSiderRoutes,
     },
   ];
 

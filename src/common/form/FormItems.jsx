@@ -11,7 +11,7 @@ const FormItem = (props) => {
 
   return (
     <Form.Item
-      className={props.handlemargin ? "oscillation" : ""}
+      className={props.handleMargin ? "oscillation" : ""}
       {...props}
       name={props.name}
       valuePropName={props.valuePropName}
@@ -37,7 +37,7 @@ const FormItem = (props) => {
         justifyItems: "center",
       }}
       {...props.formItemProps}
-      rules={props.localrules}
+      rules={props.localRules}
       colon={props.colon || false}
     >
       {props.children}

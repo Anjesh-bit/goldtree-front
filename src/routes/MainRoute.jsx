@@ -106,7 +106,7 @@ const employeeRoutes = {
 };
 
 const jobSeekerRoutes = {
-  path: "jobseeker/dashboard",
+  path: "jobSeeker/dashboard",
   element: <JobSeekerDashboardLayouts />,
   children: [
     {

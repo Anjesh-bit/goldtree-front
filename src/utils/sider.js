@@ -65,60 +65,60 @@ export const employeeSiderRoutes = [
   ),
 ];
 
-export const JobSeekeerSiderRoutes = [
+export const JobSeekerSiderRoutes = [
   getItem("Dashboard", "dashboard", <PieChartOutlined />, ""),
   getItem(
     "My Profile",
     "profile",
     <DesktopOutlined />,
-    "/jobseeker/dashboard/profile"
+    "/jobSeeker/dashboard/profile"
   ),
   getItem(
     "Upload Photo",
     "photo",
     <FileOutlined />,
-    "/jobseeker/dashboard/upload-photo"
+    "/jobSeeker/dashboard/upload-photo"
   ),
   getItem(
     "My Resume",
     "resume",
     <FileOutlined />,
-    "/jobseeker/dashboard/resume"
+    "/jobSeeker/dashboard/resume"
   ),
   getItem(
     "Applied Jobs",
     "jobsApplied",
     <FileOutlined />,
-    "/jobseeker/dashboard/jobs-applied"
+    "/jobSeeker/dashboard/jobs-applied"
   ),
   getItem(
     "Short Listed Jobs",
     "shortList",
     <FileOutlined />,
-    "/jobseeker/dashboard/short-listed-jobs"
+    "/jobSeeker/dashboard/short-listed-jobs"
   ),
   getItem(
     "Job Alerts",
     "jobAlerts",
     <FileOutlined />,
-    "/jobseeker/dashboard/job-alerts"
+    "/jobSeeker/dashboard/job-alerts"
   ),
   getItem(
     "Saved Jobs",
     "savedJobs",
     <FileOutlined />,
-    "/jobseeker/dashboard/saved-jobs"
+    "/jobSeeker/dashboard/saved-jobs"
   ),
   getItem(
     "Changed Password",
     "changePass",
     <FileOutlined />,
-    "/jobseeker/dashboard/change-password"
+    "/jobSeeker/dashboard/change-password"
   ),
   getItem(
     "Deactivate Account",
     "deactivateAcc",
     <FileOutlined />,
-    "/jobseeker/dashboard/deactivate-account"
+    "/jobSeeker/dashboard/deactivate-account"
   ),
 ];

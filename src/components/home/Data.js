@@ -83,7 +83,7 @@ const dashBoardData = [
       },
       {
         header: "CVs Reviewed",
-        subHeader: [
+        cvsData: [
           {
             cvsList: "CVs Reviewed",
             key: "cvsR",
@@ -98,11 +98,12 @@ const dashBoardData = [
       {
         header: "Total Applications",
         subHeader: "Total Application",
+        link: "jobs-applied",
         key: "totalApplication",
       },
       {
         header: "Job Status",
-        subHeader: [
+        cvsData: [
           {
             status: "Live",
             key: "live",
@@ -121,6 +122,7 @@ const dashBoardData = [
       {
         header: "ShortListed",
         subHeader: "Short Listed Interview",
+        link: "short-list-candidates",
         key: "shortListed",
       },
       {
@@ -141,46 +143,46 @@ const dashBoardData = [
       {
         header: "Application Statistics",
         subHeader: "Applied for jobs",
-        key: "appStats",
+        link: "jobs-applied",
       },
       {
         header: "Resume Circulation Statistics",
         subHeader: "0 Views by different companies",
-        key: "resCircu",
+        link: "",
       },
       ,
-      { header: "My Resume", subHeader: "View My Resume", key: "liveJobs" },
+      { header: "My Resume", subHeader: "View My Resume", link: "resume" },
       {
         header: "Appropriate For Me",
         subHeader: "0 Hot Jobs",
-        key: "liveJobs",
+        link: "",
       },
       {
         header: "Waiting Count",
         subHeader: "Waiting For Interview",
-        key: "liveJobs",
+        link: "",
       },
       {
         header: "My Profile",
         subHeader: "My Profile",
-        key: "liveJobs",
+        link: "profile",
       },
       {
         header: "Short listed",
         subHeader: "Short listed for Interviews",
-        key: "liveJobs",
+        link: "short-listed-jobs",
       },
       {
         header: "Pending Count",
         subHeader: "Applications pending for companies",
-        key: "liveJobs",
+        link: "",
       },
       {
         header: "Rejected Count",
         subHeader: "Applications rejected by companies",
-        key: "liveJobs",
+        link: "",
       },
-      { header: "Live Jobs", subHeader: "Live Jobs", key: "liveJobs" },
+      { header: "Live Jobs", subHeader: "Live Job", link: "" },
     ],
   },
 ];

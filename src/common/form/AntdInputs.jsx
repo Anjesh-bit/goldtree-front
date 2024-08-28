@@ -37,14 +37,15 @@ const Inputs = (props) => {
     validator: positiveNumberValidation,
   };
 
-  const phonenumber = {
+  const phoneNumber = {
     validator: validatePhone,
   };
 
   let pattern = [];
+
   const typeToPattern = {
     email: [emailPattern],
-    pNumber: [phonenumber],
+    pNumber: [phoneNumber],
     number: [positive],
   };
 
@@ -60,7 +61,7 @@ const Inputs = (props) => {
     ...pattern,
   ];
 
-  const localrules =
+  const localRules =
     props.rules instanceof Array ? [...tempRule, ...props.rules] : tempRule;
 
   const handleClick = (e) => {
@@ -101,7 +102,7 @@ const Inputs = (props) => {
         </div>
       )}
 
-      <FormItem {...props} localrules={localrules}>
+      <FormItem {...props} localRules={localRules}>
         <Input
           defaultValue={props.defaultValue}
           min={props.minlength}
