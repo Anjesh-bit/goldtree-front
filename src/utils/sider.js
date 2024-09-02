@@ -2,7 +2,7 @@ import {
   DesktopOutlined,
   FileOutlined,
   PieChartOutlined,
-} from "@ant-design/icons";
+} from '@ant-design/icons';
 
 const getItem = (label, key, icon, path) => {
   return {
@@ -14,111 +14,111 @@ const getItem = (label, key, icon, path) => {
 };
 
 export const employeeSiderRoutes = [
-  getItem("Dashboard", "dashboard", <PieChartOutlined />, ""),
+  getItem('Dashboard', 'dashboard', <PieChartOutlined />, ''),
   getItem(
-    "My Profile",
-    "profile",
+    'My Profile',
+    'profile',
     <DesktopOutlined />,
-    "/employee/dashboard/profile"
+    '/employee/dashboard/profile'
   ),
   getItem(
-    "Post A New Job",
-    "newJob",
+    'Post A New Job',
+    'newJob',
     <FileOutlined />,
-    "/employee/dashboard/new-job"
+    '/employee/dashboard/new-job'
   ),
   getItem(
-    "Manage Jobs",
-    "manageJobs",
+    'Manage Jobs',
+    'manageJobs',
     <FileOutlined />,
-    "/employee/dashboard/manage-jobs"
+    '/employee/dashboard/manage-jobs'
   ),
   getItem(
-    "Jobs Applied Candidate",
-    "jobsApplied",
+    'Jobs Applied Candidate',
+    'jobsApplied',
     <FileOutlined />,
-    "/employee/dashboard/jobs-applied"
+    '/employee/dashboard/jobs-applied'
   ),
   getItem(
-    "Upload A Photo",
-    "uploadPhoto",
+    'Upload A Photo',
+    'uploadPhoto',
     <FileOutlined />,
-    "/employee/dashboard/upload-photo"
+    '/employee/dashboard/upload-photo'
   ),
   getItem(
-    "Short Listed Candidates",
-    "shortList",
+    'Short Listed Candidates',
+    'shortList',
     <FileOutlined />,
-    "/employee/dashboard/short-list-candidates"
+    '/employee/dashboard/short-list-candidates'
   ),
   getItem(
-    "Changed Password",
-    "changePass",
+    'Changed Password',
+    'changePass',
     <FileOutlined />,
-    "/employee/dashboard/change-password"
+    '/employee/dashboard/change-password'
   ),
   getItem(
-    "Deactivate Account",
-    "deactivateAcc",
+    'Deactivate Account',
+    'deactivateAcc',
     <FileOutlined />,
-    "/employee/dashboard/deactivate-account"
+    '/employee/dashboard/deactivate-account'
   ),
 ];
 
 export const JobSeekerSiderRoutes = [
-  getItem("Dashboard", "dashboard", <PieChartOutlined />, ""),
+  getItem('Dashboard', 'dashboard', <PieChartOutlined />, ''),
   getItem(
-    "My Profile",
-    "profile",
+    'My Profile',
+    'profile',
     <DesktopOutlined />,
-    "/jobSeeker/dashboard/profile"
+    '/jobSeeker/dashboard/profile'
   ),
   getItem(
-    "Upload Photo",
-    "photo",
+    'Upload Photo',
+    'photo',
     <FileOutlined />,
-    "/jobSeeker/dashboard/upload-photo"
+    '/jobSeeker/dashboard/upload-photo'
   ),
   getItem(
-    "My Resume",
-    "resume",
+    'My Resume',
+    'resume',
     <FileOutlined />,
-    "/jobSeeker/dashboard/resume"
+    '/jobSeeker/dashboard/resume'
   ),
   getItem(
-    "Applied Jobs",
-    "jobsApplied",
+    'Applied Jobs',
+    'jobsApplied',
     <FileOutlined />,
-    "/jobSeeker/dashboard/jobs-applied"
+    '/jobSeeker/dashboard/jobs-applied'
   ),
   getItem(
-    "Short Listed Jobs",
-    "shortList",
+    'Short Listed Jobs',
+    'shortList',
     <FileOutlined />,
-    "/jobSeeker/dashboard/short-listed-jobs"
+    '/jobSeeker/dashboard/short-listed-jobs'
   ),
   getItem(
-    "Job Alerts",
-    "jobAlerts",
+    'Job Alerts',
+    'jobAlerts',
     <FileOutlined />,
-    "/jobSeeker/dashboard/job-alerts"
+    '/jobSeeker/dashboard/job-alerts'
   ),
   getItem(
-    "Saved Jobs",
-    "savedJobs",
+    'Saved Jobs',
+    'savedJobs',
     <FileOutlined />,
-    "/jobSeeker/dashboard/saved-jobs"
+    '/jobSeeker/dashboard/saved-jobs'
   ),
   getItem(
-    "Changed Password",
-    "changePass",
+    'Changed Password',
+    'changePass',
     <FileOutlined />,
-    "/jobSeeker/dashboard/change-password"
+    '/jobSeeker/dashboard/change-password'
   ),
   getItem(
-    "Deactivate Account",
-    "deactivateAcc",
+    'Deactivate Account',
+    'deactivateAcc',
     <FileOutlined />,
-    "/jobSeeker/dashboard/deactivate-account"
+    '/jobSeeker/dashboard/deactivate-account'
   ),
 ];

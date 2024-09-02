@@ -1,4 +1,4 @@
-import { Input } from "antd";
+import { Input } from 'antd';
 const { TextArea } = Input;
 
 const TextAreas = ({
@@ -17,7 +17,7 @@ const TextAreas = ({
           } ${
             required
               ? "after:text-[#dc4446] after:content-['*'] after:font-[400] after:ml-1 after:text-[16px]"
-              : ""
+              : ''
           }`}
         >
           {Label}

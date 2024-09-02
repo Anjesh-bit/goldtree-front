@@ -1,36 +1,36 @@
-import AntdTabs from "../../common/AntdTabs";
-import DynamicRegistration from "./DynamicRegistration";
-import EmployeeLogin from "./signIn/employer";
-import JobSeekerLogin from "./signIn/jobSeeker";
+import AntdTabs from '../../common/AntdTabs';
+import DynamicRegistration from './DynamicRegistration';
+import EmployeeLogin from './signIn/employer';
+import JobSeekerLogin from './signIn/jobSeeker';
 
 const tabItems = [
   {
-    key: "login",
+    key: 'login',
     tabItems: [
       {
-        label: "Job Seeker",
+        label: 'Job Seeker',
         children: <JobSeekerLogin />,
-        key: "job_seeker",
+        key: 'job_seeker',
       },
       {
-        label: "Employer",
+        label: 'Employer',
         children: <EmployeeLogin />,
-        key: "employee",
+        key: 'employee',
       },
     ],
   },
   {
-    key: "registration",
+    key: 'registration',
     tabItems: [
       {
-        label: "Job Seeker",
+        label: 'Job Seeker',
         children: <DynamicRegistration visibleTabs />,
-        key: "job_seeker",
+        key: 'job_seeker',
       },
       {
-        label: "Employer",
+        label: 'Employer',
         children: <DynamicRegistration visibleTabs isEmployeeTabItems />,
-        key: "employee",
+        key: 'employee',
       },
     ],
   },

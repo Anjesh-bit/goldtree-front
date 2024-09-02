@@ -1,31 +1,25 @@
-import { Fragment, useState } from "react";
-import AntdCards from "../../../../common/AntdCards";
-import { useGetEasyApply } from "../../../../services/jobSeeker/setUp";
-import AntdButton from "../../../../common/AntdButtons";
-import { useShortList } from "../../../../services/commonService/setUp";
-import useMessage from "../../../../hooks/useMessage";
-import Loading from "../../../../assets/svg/loading.svg";
+import { Fragment, useState } from 'react';
+import AntdCards from '../../../../common/AntdCards';
+import { useGetEasyApply } from '../../../../services/jobSeeker/setUp';
+import AntdButton from '../../../../common/AntdButtons';
+import { useShortList } from '../../../../services/commonService/setUp';
+import useMessage from '../../../../hooks/useMessage';
+import Loading from '../../../../assets/svg/loading.svg';
 
 const JobApplied = () => {
-  const { data, isLoading, isError } = useGetEasyApply();
+  const { data, isLoading } = useGetEasyApply();
   const [queryParams, setQueryParams] = useState({
-    uploadId: "",
-    type: "",
+    uploadId: '',
+    type: '',
   });
 
-  const {
-    data: shortListedData,
-    isPending,
-    isError: errorShortListed,
-    isSuccess,
-    mutateAsync,
-  } = useShortList(queryParams);
+  const { mutateAsync } = useShortList(queryParams);
 
   const { contextHolder, showMessage } = useMessage();
 
   const handleOnClick = async (_, uploadId, type) => {
     setQueryParams({
-      shortList: "shortlist",
+      shortList: 'shortlist',
       uploadId: uploadId,
       type,
     });
@@ -33,20 +27,20 @@ const JobApplied = () => {
     try {
       await mutateAsync();
       showMessage({
-        type: "info",
-        content: "Candidates have successfully shortlisted",
-        className: "mt-[30vh] h-[40px]",
+        type: 'info',
+        content: 'Candidates have successfully shortlisted',
+        className: 'mt-[30vh] h-[40px]',
       });
     } catch (error) {
       const apiMessage = error?.response?.data?.message;
       showMessage({
-        type: "error",
+        type: 'error',
         content: apiMessage,
-        className: "mt-[30vh] h-[40px]",
+        className: 'mt-[30vh] h-[40px]',
       });
     }
   };
-  console.log(isLoading);
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-[80vh]">
@@ -80,7 +74,7 @@ const JobApplied = () => {
                   <div className="grid grid-cols-12 gap-4">
                     {items?.candidates?.map((candidate) => {
                       const url = candidate?.upload_cv?.substring(
-                        candidate?.upload_cv?.lastIndexOf("/") + 1
+                        candidate?.upload_cv?.lastIndexOf('/') + 1
                       );
                       const { jobSeekerProfile = [] } = candidate;
                       const hasProfile = jobSeekerProfile.length > 0;
@@ -112,7 +106,7 @@ const JobApplied = () => {
                             Email / Phone: {phoneNo}
                           </div>
                           <div className="text-md font-medium text-gray-800 mt-1">
-                            Resume:{" "}
+                            Resume:{' '}
                             <a
                               href={candidate.upload_cv}
                               download={url}

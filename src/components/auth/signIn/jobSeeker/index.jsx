@@ -1,4 +1,4 @@
-import DynamicLogin from "../../DynamicLogin";
+import DynamicLogin from '../../DynamicLogin';
 
 const JobSeekerLogin = () => {
   return (

@@ -1,4 +1,5 @@
-import axiosInstance from "./AxiosInstance";
+/* eslint-disable no-useless-catch */
+import axiosInstance from './AxiosInstance';
 export const fetcher = async (url) => {
   try {
     const { data } = await axiosInstance.get(url);

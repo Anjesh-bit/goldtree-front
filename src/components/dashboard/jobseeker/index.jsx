@@ -1,4 +1,4 @@
-import DashBoardSider from "..";
+import DashBoardSider from '..';
 
 const JobSeekerMainPage = () => {
   return (

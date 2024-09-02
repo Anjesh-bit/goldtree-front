@@ -1,5 +1,5 @@
-import React from "react";
-import { DatePicker, ConfigProvider } from "antd";
+import React from 'react';
+import { DatePicker, ConfigProvider } from 'antd';
 
 const DatePickers = ({
   onHandleChange,
@@ -20,7 +20,7 @@ const DatePickers = ({
           className={`whitespace-nowrap text-sm font-medium ${
             required
               ? "after:text-[#dc4446] after:content-['*'] after:font-[400] after:ml-1 after:text-[16px]"
-              : ""
+              : ''
           }`}
         >
           {Label}
@@ -29,13 +29,13 @@ const DatePickers = ({
       <ConfigProvider
         theme={{
           token: {
-            colorPrimary: "#3d2462",
-            colorPrimaryHover: "#6c4ba1",
-            colorPrimaryActive: "#6c4ba1",
+            colorPrimary: '#3d2462',
+            colorPrimaryHover: '#6c4ba1',
+            colorPrimaryActive: '#6c4ba1',
             borderRadius: 1,
             controlHeight: 35,
-            colorBgContainer: "#f5f5f5",
-            colorText: "#3d2462",
+            colorBgContainer: '#f5f5f5',
+            colorText: '#3d2462',
           },
         }}
       >

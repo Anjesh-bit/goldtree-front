@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { isAuthenticated } from "../utils/auth";
+import { useEffect, useState } from 'react';
+import { isAuthenticated } from '../utils/auth';
 
 const useAuthHook = (init) => {
   const [isAuth, setIsAuth] = useState(init);
@@ -10,7 +10,6 @@ const useAuthHook = (init) => {
         const authStatus = await isAuthenticated();
         setIsAuth(authStatus);
       } catch (error) {
-        console.error("Error checking authentication status:", error);
         setIsAuth(false);
       }
     };

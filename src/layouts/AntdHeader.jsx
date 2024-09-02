@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import { Layout, Menu, Drawer, Button } from "antd";
-import { MenuOutlined } from "@ant-design/icons";
-import AntdButton from "../common/AntdButtons";
-import PopOver from "../components/auth/PopOver";
-import DynamicTabs from "../components/auth";
-import { useDispatch } from "react-redux";
-import { logOut } from "../slice/authSlice";
-import { useNavigate } from "react-router-dom";
-import useAuthHook from "../hooks/useAuthHook";
-import { useLogout } from "../services/auth/login";
-import "../styles/main.css";
+import React, { useState } from 'react';
+import { Layout, Menu, Drawer, Button } from 'antd';
+import { MenuOutlined } from '@ant-design/icons';
+import AntdButton from '../common/AntdButtons';
+import PopOver from '../components/auth/PopOver';
+import DynamicTabs from '../components/auth';
+import { useDispatch } from 'react-redux';
+import { logOut } from '../slice/authSlice';
+import { useNavigate } from 'react-router-dom';
+import useAuthHook from '../hooks/useAuthHook';
+import { useLogout } from '../services/auth/login';
+import '../styles/main.css';
 
 const { Header } = Layout;
 
 const AntdHeader = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useAuthHook(false);
-  const { mutateAsync, isError, isPending } = useLogout();
+  const { mutateAsync, isPending } = useLogout();
   const navigate = useNavigate();
 
   const [drawerVisible, setDrawerVisible] = useState(false);
@@ -25,10 +25,8 @@ const AntdHeader = () => {
     try {
       await mutateAsync();
       dispatch(logOut());
-      navigate("/");
-    } catch (e) {
-      console.error(`Error logging out: ${e}`);
-    }
+      navigate('/');
+    } catch (e) {}
   };
 
   const showDrawer = () => {
@@ -97,7 +95,7 @@ const AntdHeader = () => {
                       Ok
                     </AntdButton>
                     <AntdButton
-                      onClick={() => navigate("/")}
+                      onClick={() => navigate('/')}
                       classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors"
                     >
                       Cancel

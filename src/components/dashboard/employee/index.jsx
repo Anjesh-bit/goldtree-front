@@ -1,14 +1,14 @@
-import { useLocation } from "react-router-dom";
-import DashBoardSider from "..";
-import { useGetPostJobs } from "../../../services/employee/setUp";
-import useAuthHook from "../../../hooks/useAuthHook";
+import { useLocation } from 'react-router-dom';
+import DashBoardSider from '..';
+import { useGetPostJobs } from '../../../services/employee/setUp';
+import useAuthHook from '../../../hooks/useAuthHook';
 
 const EmployeeMainPage = () => {
   const isAuthenticated = useAuthHook(false);
   const location = useLocation();
   const matchPath =
-    location.pathname === "/employee/dashboard" ||
-    location.pathname === "/employee/dashboard/manage-jobs";
+    location.pathname === '/employee/dashboard' ||
+    location.pathname === '/employee/dashboard/manage-jobs';
 
   const {
     data: postData,

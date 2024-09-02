@@ -1,11 +1,11 @@
-import Inputs from "../../common/form/AntdInputs";
-import AntdButton from "../../common/AntdButtons";
-import { useNavigate } from "react-router-dom";
-import Form from "antd/es/form";
-import { useDispatch, useSelector } from "react-redux";
-import login from "../../services/auth/login";
-import { Fragment, useEffect } from "react";
-import useMessage from "../../hooks/useMessage";
+import Inputs from '../../common/form/AntdInputs';
+import AntdButton from '../../common/AntdButtons';
+import { useNavigate } from 'react-router-dom';
+import Form from 'antd/es/form';
+import { useDispatch, useSelector } from 'react-redux';
+import login from '../../services/auth/login';
+import { Fragment, useEffect } from 'react';
+import useMessage from '../../hooks/useMessage';
 
 const { useForm } = Form;
 
@@ -20,20 +20,20 @@ const DynamicLogin = ({ isEmployee, modalData, setOpen }) => {
   const handleOnClick = (e) => {
     e.preventDefault();
     if (isEmployee) {
-      navigate("/auth/register/employee");
+      navigate('/auth/register/employee');
     } else {
-      navigate("/auth/register/jobseeker");
+      navigate('/auth/register/jobseeker');
     }
   };
 
   const handleOnFinish = async (values) => {
-    const userType = isEmployee ? "employee" : "jobSeeker";
+    const userType = isEmployee ? 'employee' : 'jobSeeker';
     dispatch(login({ ...values, type: userType })).then((actionResult) => {
       const apiMessage = actionResult?.payload?.message;
       showMessage({
-        type: "error",
+        type: 'error',
         content: apiMessage,
-        className: "mt-4 h-12",
+        className: 'mt-4 h-12',
       });
 
       const apiError = actionResult?.payload?.feilds;
@@ -63,12 +63,12 @@ const DynamicLogin = ({ isEmployee, modalData, setOpen }) => {
         setOpen({ open: false, data: null });
       } else {
         const dashboardRoute = isEmployee
-          ? "/employee/dashboard"
-          : "/jobSeeker/dashboard";
+          ? '/employee/dashboard'
+          : '/jobSeeker/dashboard';
         navigate(dashboardRoute);
       }
     }
-  }, [navigate, data]);
+  }, [navigate, data, modalData, isEmployee, setOpen]);
 
   return (
     <Fragment>

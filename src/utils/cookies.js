@@ -1,4 +1,4 @@
-import Cookies from "js-cookie";
+import Cookies from 'js-cookie';
 
 const getCookies = (key) => {
   return Cookies.get(key);

@@ -1,4 +1,4 @@
-import isEmpty from "lodash/isEmpty";
+import isEmpty from 'lodash/isEmpty';
 
 const MatchView = ({ matchedData, isLoading }) => {
   if (isEmpty(matchedData))
@@ -9,7 +9,6 @@ const MatchView = ({ matchedData, isLoading }) => {
     );
 
   if (isLoading) return <div>Loading ...</div>;
-  
   else
     return (
       <div className="grid grid-cols-12 gap-">

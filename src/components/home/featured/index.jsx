@@ -1,18 +1,14 @@
-import DynamicTitle from "../../../common/DynamicTitle";
-import AntdCards from "../../../common/AntdCards";
-import { useGetAllPosts } from "../../../services/employee/setUp";
-import { Collapse } from "antd";
-import { useNavigate } from "react-router-dom";
+import DynamicTitle from '../../../common/DynamicTitle';
+import AntdCards from '../../../common/AntdCards';
+import { useGetAllPosts } from '../../../services/employee/setUp';
+import { Collapse } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 const { Panel } = Collapse;
 
 const FeaturedJobs = () => {
   const navigate = useNavigate();
-  const {
-    data: allPostsData,
-    isLoading: allPostPending,
-    isError: allPostsError,
-  } = useGetAllPosts();
+  const { data: allPostsData } = useGetAllPosts();
 
   const tempObj = {};
 
@@ -36,7 +32,7 @@ const FeaturedJobs = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {allPostsData?.map((postsItems) => {
-          const companyName = postsItems.posts[0]?.company_name || "Unknown";
+          const companyName = postsItems.posts[0]?.company_name || 'Unknown';
           tempObj[companyName] = postsItems?.posts;
 
           return Object.entries(tempObj).map(([companyName, posts]) => (

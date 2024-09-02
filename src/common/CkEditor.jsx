@@ -1,5 +1,5 @@
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 const CkEditors = ({
   data,
@@ -34,7 +34,7 @@ const CkEditors = ({
           } ${
             required
               ? "after:text-[#dc4446] after:content-['*'] after:font-[400] after:ml-1 after:text-[16px]"
-              : ""
+              : ''
           }`}
         >
           {Label}

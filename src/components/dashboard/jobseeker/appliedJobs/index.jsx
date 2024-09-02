@@ -1,32 +1,28 @@
-import { useNavigate } from "react-router-dom";
-import AntdCards from "../../../../common/AntdCards";
+import { useNavigate } from 'react-router-dom';
+import AntdCards from '../../../../common/AntdCards';
 import {
   useGetJobsApplied,
   useGetSavedJobs,
   useGetShortListed,
-} from "../../../../services/jobSeeker/setUp";
+} from '../../../../services/jobSeeker/setUp';
 
-import useAuthHook from "../../../../hooks/useAuthHook";
-import Loading from "../../../../assets/svg/loading.svg";
+import useAuthHook from '../../../../hooks/useAuthHook';
+import Loading from '../../../../assets/svg/loading.svg';
 
 const AppliedJobs = ({ isShorList, isSavedJobs }) => {
   const navigate = useNavigate();
   const isAuthenticated = useAuthHook(false);
-  const {
-    data: appliedJobs,
-    isLoading: appliedIsLoading,
-    isError: appliedIsError,
-  } = useGetJobsApplied(isAuthenticated?.id, isShorList, isSavedJobs);
-
-  const {
-    data: savedJobs,
-    isPending,
-    isError: savedError,
-  } = useGetSavedJobs(isAuthenticated?.id, isSavedJobs);
-
-  const { data, isLoading, isError } = useGetShortListed(
+  const { data: appliedJobs } = useGetJobsApplied(
     isAuthenticated?.id,
-    "directApply",
+    isShorList,
+    isSavedJobs
+  );
+
+  const { data: savedJobs } = useGetSavedJobs(isAuthenticated?.id, isSavedJobs);
+
+  const { data } = useGetShortListed(
+    isAuthenticated?.id,
+    'directApply',
     isShorList
   );
 
@@ -40,8 +36,8 @@ const AppliedJobs = ({ isShorList, isSavedJobs }) => {
   const mappedData = isShorList
     ? data?.[0]
     : isSavedJobs
-    ? savedJobs?.[0]
-    : appliedJobs?.[0];
+      ? savedJobs?.[0]
+      : appliedJobs?.[0];
 
   if (!mappedData) {
     return (
@@ -56,10 +52,10 @@ const AppliedJobs = ({ isShorList, isSavedJobs }) => {
         <div className="col-span-12 mb-6">
           <h2 className="text-xl md:text-2xl font-medium text-[#3d2462] mb-4 md:mb-0">
             {isShorList
-              ? "Shortlisted Jobs"
+              ? 'Shortlisted Jobs'
               : isSavedJobs
-              ? "Saved Jobs"
-              : "Applied Jobs"}
+                ? 'Saved Jobs'
+                : 'Applied Jobs'}
           </h2>
         </div>
         {mappedData?.data?.map((items) => (
@@ -74,15 +70,15 @@ const AppliedJobs = ({ isShorList, isSavedJobs }) => {
               {items.postInfo.company_name}
             </div>
             <div className="text-md font-medium text-gray-800 mb-1">
-              Job Title:{" "}
+              Job Title:{' '}
               <span className="font-normal">{items.postInfo.job_title}</span>
             </div>
             <div className="text-md font-medium text-gray-800 mb-1">
-              Job Location:{" "}
+              Job Location:{' '}
               <span className="font-normal">{items.postInfo.job_location}</span>
             </div>
             <div className="text-md font-medium text-gray-800">
-              Job Level:{" "}
+              Job Level:{' '}
               <span className="font-normal">{items.postInfo.job_level}</span>
             </div>
           </AntdCards>

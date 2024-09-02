@@ -1,6 +1,6 @@
-import React from "react";
-import { Input, ConfigProvider } from "antd";
-import FormItem from "./FormItems";
+import React from 'react';
+import { Input, ConfigProvider } from 'antd';
+import FormItem from './FormItems';
 
 const Inputs = (props) => {
   const positiveNumberValidation = (_, value) => {
@@ -18,7 +18,7 @@ const Inputs = (props) => {
   const validatePhone = (_, value) => {
     const phoneRegex = /^\d{10}$/;
     if (!phoneRegex.test(value) && value !== null) {
-      return Promise.reject("Please enter a valid phone number");
+      return Promise.reject('Please enter a valid phone number');
     } else if (value >= 0) {
       return Promise.resolve();
     } else if (value <= 0) {
@@ -29,8 +29,8 @@ const Inputs = (props) => {
   };
 
   const emailPattern = {
-    pattern: new RegExp("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$"),
-    message: "Please enter in example@email.com format",
+    pattern: new RegExp('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$'),
+    message: 'Please enter in example@email.com format',
   };
 
   const positive = {
@@ -77,13 +77,13 @@ const Inputs = (props) => {
       theme={{
         components: {
           Input: {
-            addonBg: "#3d2462",
+            addonBg: '#3d2462',
             fontSize: 13,
             paddingInline: 6,
-            controlPaddingHorizontalSM: "10px",
-            colorPrimary: "#3d2462",
-            colorPrimaryHover: "#6c4ba1",
-            colorPrimaryActive: "#6c4ba1",
+            controlPaddingHorizontalSM: '10px',
+            colorPrimary: '#3d2462',
+            colorPrimaryHover: '#6c4ba1',
+            colorPrimaryActive: '#6c4ba1',
             controlHeight: 35,
             borderRadius: 1,
           },
@@ -95,7 +95,7 @@ const Inputs = (props) => {
           className={`whitespace-nowrap text-sm font-medium ${
             props.required
               ? "after:text-[#dc4446] after:content-['*'] after:font-[400] after:ml-1 after:text-[16px]"
-              : ""
+              : ''
           }`}
         >
           {props.Label}
@@ -127,7 +127,7 @@ const Inputs = (props) => {
           prefix={
             <div
               className={`flex items-center ${
-                props.customprefix ? "pl-0" : "pl-2"
+                props.customprefix ? 'pl-0' : 'pl-2'
               }`}
             >
               {props.prefix}

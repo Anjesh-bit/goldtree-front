@@ -1,6 +1,6 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { uploader } from "../../axios/uploader";
-import { useState } from "react";
+import { useMutation } from '@tanstack/react-query';
+import { uploader } from '../../axios/uploader';
+import { useState } from 'react';
 
 export const useRegister = () => {
   const [localLoading, setLocalLoading] = useState(false);
@@ -8,13 +8,13 @@ export const useRegister = () => {
     mutationFn: async (payload) => {
       setLocalLoading(true);
       try {
-        const data = await uploader("register", payload);
+        const data = await uploader('register', payload);
         return data;
       } finally {
         setLocalLoading(false);
       }
     },
-    onSuccess: (res) => {},
+    onSuccess: () => {},
   });
   return {
     mutateAsync: query.mutateAsync,

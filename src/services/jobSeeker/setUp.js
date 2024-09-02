@@ -1,8 +1,8 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { putUploader, uploader } from "../../axios/uploader";
-import { useState } from "react";
-import { fetcher } from "../../axios/fetcher";
-import { jobSeekerQueryKeys } from "../../queryKeys/keys";
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { putUploader, uploader } from '../../axios/uploader';
+import { useState } from 'react';
+import { fetcher } from '../../axios/fetcher';
+import { jobSeekerQueryKeys } from '../../queryKeys/keys';
 
 export const useProfileInfo = () => {
   const [localLoading, setLocalLoading] = useState(false);
@@ -10,13 +10,13 @@ export const useProfileInfo = () => {
     mutationFn: async (payload) => {
       setLocalLoading(true);
       try {
-        const data = await uploader("jobseeker-profile-info", payload);
+        const data = await uploader('jobseeker-profile-info', payload);
         return data;
       } finally {
         setLocalLoading(false);
       }
     },
-    onSuccess: (res) => {},
+    onSuccess: () => {},
   });
   return {
     mutateAsync: query.mutateAsync,
@@ -34,13 +34,13 @@ export const useUpdateEasyApply = () => {
     mutationFn: async (payload) => {
       setLocalLoading(true);
       try {
-        const data = await uploader(`upload?name=${"cv_upload"}`, payload);
+        const data = await uploader(`upload?name=${'cv_upload'}`, payload);
         return data;
       } finally {
         setLocalLoading(false);
       }
     },
-    onSuccess: (res) => {},
+    onSuccess: () => {},
   });
   return {
     mutateAsync: query.mutateAsync,
@@ -54,7 +54,7 @@ export const useUpdateEasyApply = () => {
 
 export const useGetEasyApply = () => {
   return useQuery({
-    queryFn: () => fetcher("upload"),
+    queryFn: () => fetcher('upload'),
     queryKey: [jobSeekerQueryKeys.setUp.getAllApplied],
   });
 };
@@ -71,7 +71,7 @@ export const useUpdateProfileInfo = (id) => {
         setLocalLoading(false);
       }
     },
-    onSuccess: (res) => {},
+    onSuccess: () => {},
   });
   return {
     mutateAsync: query.mutateAsync,
@@ -128,7 +128,7 @@ export const useSavedJobs = (id, userId) => {
         setLocalLoading(false);
       }
     },
-    onSuccess: (res) => {},
+    onSuccess: () => {},
   });
   return {
     mutateAsync: query.mutateAsync,

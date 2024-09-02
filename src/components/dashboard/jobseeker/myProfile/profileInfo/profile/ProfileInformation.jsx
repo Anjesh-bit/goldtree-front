@@ -1,30 +1,30 @@
-import Inputs from "../../../../../../common/form/AntdInputs";
-import DatePickers from "../../../../../../common/AntdDatePickers";
-import { AntRadio } from "../../../../../../common/form/AntdRadioGroup";
+import Inputs from '../../../../../../common/form/AntdInputs';
+import DatePickers from '../../../../../../common/AntdDatePickers';
+import { AntRadio } from '../../../../../../common/form/AntdRadioGroup';
 
 const marriedOptions = [
   {
-    option: "Married",
-    value: "married",
+    option: 'Married',
+    value: 'married',
   },
   {
-    option: "Unmarried",
-    value: "unmarried",
+    option: 'Unmarried',
+    value: 'unmarried',
   },
 ];
 
 const genderOptions = [
   {
-    option: "Male",
-    value: "m",
+    option: 'Male',
+    value: 'm',
   },
   {
-    option: "Female",
-    value: "f",
+    option: 'Female',
+    value: 'f',
   },
   {
-    option: "Other",
-    value: "o",
+    option: 'Other',
+    value: 'o',
   },
 ];
 

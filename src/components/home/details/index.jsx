@@ -1,12 +1,12 @@
-import { useNavigate } from "react-router-dom";
-import AntdSearch from "../../../common/AntdSearch";
-import DynamicTitle from "../../../common/DynamicTitle";
+import { useNavigate } from 'react-router-dom';
+import AntdSearch from '../../../common/AntdSearch';
+import DynamicTitle from '../../../common/DynamicTitle';
 
 const DetailedComponent = () => {
   const navigate = useNavigate();
 
   const handleSearch = (value) => {
-    navigate("/search", { state: value });
+    navigate('/search', { state: value });
   };
 
   return (
@@ -41,7 +41,7 @@ const DetailedComponent = () => {
           src="https://cdn-empmerch.newjobs.com/wp-content/uploads/2022/09/homepage-desktop.jpg"
           alt="Background"
           className="object-cover  h-[300px] md:h-[400px] lg:h-[100vh] w-full brightness-75"
-          style={{ objectPosition: "80% center" }}
+          style={{ objectPosition: '80% center' }}
         />
       </div>
     </div>

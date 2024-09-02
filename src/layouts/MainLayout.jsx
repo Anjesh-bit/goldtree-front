@@ -1,7 +1,7 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
-import AntdHeader from "./AntdHeader";
-import AntdFooter from "./AntdFooter";
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import AntdHeader from './AntdHeader';
+import AntdFooter from './AntdFooter';
 
 const MainLayout = () => {
   return (

@@ -1,23 +1,24 @@
-import axios from "axios";
-import { getCookies, setCookies } from "../utils/cookies";
-import { isAuthenticated } from "../utils/auth";
-import { jwtDecode } from "jwt-decode";
-import { getLocalStorage } from "../utils/localStorage";
-import { getNewAccessToken } from "../services/auth/login";
+import axios from 'axios';
+import { getCookies, setCookies } from '../utils/cookies';
+import { isAuthenticated } from '../utils/auth';
+import { jwtDecode } from 'jwt-decode';
+import { getLocalStorage } from '../utils/localStorage';
+import { getNewAccessToken } from '../services/auth/login';
 
 let isRefreshing = false;
 let refreshSubscribers = [];
-const url = "http://localhost:5000/goldtree/";
+const url = 'http://localhost:5000/goldtree/';
 const axiosInstance = axios.create({ baseURL: url, withCredentials: true });
 
+/* eslint-disable no-useless-catch */
 axiosInstance.interceptors.request.use(
   async (config) => {
-    const token = getCookies("token");
-    config.headers["Authorization"] = `Bearer ${token}`;
+    const token = getCookies('token');
+    config.headers['Authorization'] = `Bearer ${token}`;
     const authStatus = await isAuthenticated();
 
     if (authStatus) {
-      config.headers["Auth-Type"] = authStatus.type;
+      config.headers['Auth-Type'] = authStatus.type;
     }
 
     return config;
@@ -27,6 +28,7 @@ axiosInstance.interceptors.request.use(
   }
 );
 
+/* eslint-disable no-useless-catch */
 axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -36,7 +38,7 @@ axiosInstance.interceptors.response.use(
       error.response &&
       error.response.status === 401 &&
       !originalRequest._retry &&
-      getLocalStorage("loginData")
+      getLocalStorage('loginData')
     ) {
       originalRequest._retry = true; // Mark the request as retried
 
@@ -59,7 +61,7 @@ axiosInstance.interceptors.response.use(
 
         const decoded = jwtDecode(newAccessToken);
 
-        setCookies("token", newAccessToken, decoded.exp);
+        setCookies('token', newAccessToken, decoded.exp);
         // Retry the original request with the new token
         originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
         const response = await axiosInstance(originalRequest);
@@ -70,7 +72,6 @@ axiosInstance.interceptors.response.use(
 
         return response;
       } catch (refreshError) {
-        console.error("Token refresh failed:", refreshError);
         throw refreshError;
       } finally {
         isRefreshing = false;

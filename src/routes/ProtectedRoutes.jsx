@@ -1,7 +1,5 @@
-import { Navigate } from "react-router-dom";
-import { isAuthenticated } from "../utils/auth";
-import { getCookies } from "../utils/cookies";
-import useAuthHook from "../hooks/useAuthHook";
+import { Navigate } from 'react-router-dom';
+import useAuthHook from '../hooks/useAuthHook';
 
 const ProtectedRoute = (WrappedComponent, allowedUserType) => {
   const AuthWrapper = (props) => {

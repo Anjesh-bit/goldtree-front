@@ -1,16 +1,14 @@
-import { Fragment } from "react";
-import { useGetProfileInfo } from "../../../../services/jobSeeker/setUp";
-import useAuthHook from "../../../../hooks/useAuthHook";
-import Loading from "../../../../assets/svg/loading.svg";
+import { Fragment } from 'react';
+import { useGetProfileInfo } from '../../../../services/jobSeeker/setUp';
+import useAuthHook from '../../../../hooks/useAuthHook';
+import Loading from '../../../../assets/svg/loading.svg';
 
 const ViewPdf = () => {
   const isAuthenticated = useAuthHook(false);
 
-  const {
-    data: profileData,
-    isError: profileErr,
-    isLoading,
-  } = useGetProfileInfo(isAuthenticated?.id);
+  const { data: profileData, isLoading } = useGetProfileInfo(
+    isAuthenticated?.id
+  );
 
   if (isLoading)
     return (
@@ -52,8 +50,8 @@ const ViewPdf = () => {
                     <div>
                       Meet [Your Name], the epitome of versatility and wit. With
                       a penchant for creativity and a knack for problem-solving,
-                      [he/she] navigates through life's challenges with grace
-                      and charm. Armed with a curious mind and a contagious
+                      [he/she] navigates through life challenges with grace and
+                      charm. Armed with a curious mind and a contagious
                       enthusiasm, [he/she] effortlessly leaves an indelible mark
                       wherever [he/she] goes.
                     </div>

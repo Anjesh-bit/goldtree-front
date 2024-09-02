@@ -1,17 +1,17 @@
-import generatePDF, { Resolution, Margin } from "react-to-pdf";
-import ViewPdf from "./ViewPdf";
-import AntdButton from "../../../../common/AntdButtons";
+import generatePDF, { Resolution, Margin } from 'react-to-pdf';
+import ViewPdf from './ViewPdf';
+import AntdButton from '../../../../common/AntdButtons';
 
 const options = {
-  filename: "resume.pdf",
-  method: "open",
+  filename: 'resume.pdf',
+  method: 'open',
   resolution: Resolution.NORMAL,
   page: {
     margin: Margin.SMALL,
-    orientation: "vertical",
+    orientation: 'vertical',
   },
   canvas: {
-    mimeType: "image/jpeg",
+    mimeType: 'image/jpeg',
     qualityRatio: 1,
   },
 
@@ -26,7 +26,7 @@ const options = {
   },
 };
 
-const getTargetElement = () => document.getElementById("content-id");
+const getTargetElement = () => document.getElementById('content-id');
 
 const MyResume = () => {
   return (

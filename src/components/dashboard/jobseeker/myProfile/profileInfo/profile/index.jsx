@@ -1,4 +1,4 @@
-import ProfileInformation from "./ProfileInformation";
+import ProfileInformation from './ProfileInformation';
 
 const Profile = ({ setInputValue, inputValue, dayjs }) => {
   return (

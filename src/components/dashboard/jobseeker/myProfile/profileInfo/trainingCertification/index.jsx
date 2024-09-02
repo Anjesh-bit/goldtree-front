@@ -1,11 +1,11 @@
-import Inputs from "../../../../../../common/form/AntdInputs";
-import DatePickers from "../../../../../../common/AntdDatePickers";
+import Inputs from '../../../../../../common/form/AntdInputs';
+import DatePickers from '../../../../../../common/AntdDatePickers';
 
 const TrainingCertification = ({ setInputValue, inputValue, dayjs }) => {
   const handleChange = (_, value, filter) => {
     setInputValue((prevState) => ({
       ...prevState,
-      [filter === "to" ? "toCourse" : "fromCourse"]: value,
+      [filter === 'to' ? 'toCourse' : 'fromCourse']: value,
     }));
   };
 
@@ -25,7 +25,7 @@ const TrainingCertification = ({ setInputValue, inputValue, dayjs }) => {
             format="YYYY-MM-DD"
             Label="From"
             onHandleChange={(_, dateString) =>
-              handleChange(_, dateString, "from")
+              handleChange(_, dateString, 'from')
             }
             value={dayjs(inputValue?.fromCourse)}
           />
@@ -36,7 +36,7 @@ const TrainingCertification = ({ setInputValue, inputValue, dayjs }) => {
             format="YYYY-MM-DD"
             Label="To"
             onHandleChange={(_, dateString) =>
-              handleChange(_, dateString, "to")
+              handleChange(_, dateString, 'to')
             }
             value={dayjs(inputValue?.toCourse)}
           />

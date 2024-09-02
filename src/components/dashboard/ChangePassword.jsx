@@ -1,13 +1,14 @@
-import { Form } from "antd";
-import AntdBreadCum from "../../common/AntdBreadCum";
-import AntdButton from "../../common/AntdButtons";
-import Inputs from "../../common/form/AntdInputs";
-import useAuthHook from "../../hooks/useAuthHook";
-import { useChangePassword } from "../../services/auth/changePassword";
-import { useForm } from "antd/es/form/Form";
-import { removeLocalStorage } from "../../utils/localStorage";
-import { useLogout } from "../../services/auth/login";
-import { useNavigate } from "react-router-dom";
+import { Form } from 'antd';
+import AntdBreadCum from '../../common/AntdBreadCum';
+import AntdButton from '../../common/AntdButtons';
+import Inputs from '../../common/form/AntdInputs';
+import useAuthHook from '../../hooks/useAuthHook';
+import { useChangePassword } from '../../services/auth/changePassword';
+import { useForm } from 'antd/es/form/Form';
+import { removeLocalStorage } from '../../utils/localStorage';
+import { useLogout } from '../../services/auth/login';
+import { useNavigate } from 'react-router-dom';
+
 const ChangePassword = () => {
   const isAuth = useAuthHook(false);
   const [form] = useForm();
@@ -19,9 +20,9 @@ const ChangePassword = () => {
   const handleChangePassword = async (values) => {
     try {
       await mutateAsync({ ...values });
-      removeLocalStorage("loginData");
+      removeLocalStorage('loginData');
       await mutateAsyncLogout();
-      navigate("/");
+      navigate('/');
     } catch (e) {}
   };
 
@@ -29,7 +30,7 @@ const ChangePassword = () => {
     <Form form={form} onFinish={handleChangePassword}>
       <div className="min-h-screen bg-gray-100 p-4 sm:p-6 lg:p-8">
         <div className="mb-6">
-          <AntdBreadCum array={["Employee", "Change Password"]} />
+          <AntdBreadCum array={['Employee', 'Change Password']} />
         </div>
         <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-2xl font-semibold text-[#3d2462] mb-6">

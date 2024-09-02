@@ -1,7 +1,7 @@
-import React from "react";
-import { dashBoardData } from "../home/Data";
-import AntdCards from "../../common/AntdCards";
-import { Link, useOutletContext } from "react-router-dom";
+import React from 'react';
+import { dashBoardData } from '../home/Data';
+import AntdCards from '../../common/AntdCards';
+import { Link, useOutletContext } from 'react-router-dom';
 
 const DashBoard = ({ dataKey }) => {
   const outletContext = useOutletContext();
@@ -13,7 +13,7 @@ const DashBoard = ({ dataKey }) => {
       {foundItems?.data?.map((item) => (
         <Link
           to={`/${
-            dataKey === "jobSeeker" ? "jobSeeker" : "employee"
+            dataKey === 'jobSeeker' ? 'jobSeeker' : 'employee'
           }/dashboard/${item.link}`}
         >
           <AntdCards
@@ -23,7 +23,7 @@ const DashBoard = ({ dataKey }) => {
             <div className="text-lg sm:text-xl font-semibold mb-2 sm:mb-4 text-[#3d2462]">
               {item.header}
             </div>
-            {item.key === "cvs" && (
+            {item.key === 'cvs' && (
               <div className="space-y-1 sm:space-y-2 text-[#3d2462]">
                 {item.cvsData.map((subItem) => (
                   <div key={subItem.key} className="text-sm sm:text-base">
@@ -32,7 +32,7 @@ const DashBoard = ({ dataKey }) => {
                 ))}
               </div>
             )}
-            {item.key === "jobStatus" && (
+            {item.key === 'jobStatus' && (
               <div className="space-y-1 sm:space-y-2 text-[#3d2462]">
                 {item.cvsData.map((subItem) => (
                   <div key={subItem.key} className="text-sm sm:text-base">
@@ -45,7 +45,7 @@ const DashBoard = ({ dataKey }) => {
               {item.subHeader}
             </div>
 
-            {item.key === "postedJobs" && (
+            {item.key === 'postedJobs' && (
               <div className="mt-2 sm:mt-4 text-lg font-bold text-[#3d2462]">
                 {`(${postData?.length || 0})`}
               </div>

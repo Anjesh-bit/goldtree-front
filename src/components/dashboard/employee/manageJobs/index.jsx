@@ -1,7 +1,7 @@
-import React from "react";
-import { useNavigate, useOutletContext } from "react-router-dom";
-import AntdBreadCum from "../../../../common/AntdBreadCum";
-import AntdCards from "../../../../common/AntdCards";
+import React from 'react';
+import { useNavigate, useOutletContext } from 'react-router-dom';
+import AntdBreadCum from '../../../../common/AntdBreadCum';
+import AntdCards from '../../../../common/AntdCards';
 
 const ManageJobs = () => {
   const { postData } = useOutletContext();
@@ -16,7 +16,7 @@ const ManageJobs = () => {
 
   return (
     <div>
-      <AntdBreadCum array={["Employee", "Manage Jobs"]} />
+      <AntdBreadCum array={['Employee', 'Manage Jobs']} />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 py-4">
         {postData?.map((postItems) => (
           <AntdCards

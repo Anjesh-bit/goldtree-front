@@ -1,17 +1,16 @@
-import AntdButton from "../../../../../../common/AntdButtons";
-import { Selects } from "../../../../../../common/form/AntdSelects";
-import Inputs from "../../../../../../common/form/AntdInputs";
-import DatePickers from "../../../../../../common/AntdDatePickers";
-import dayjs from "dayjs";
-import "dayjs/locale/en";
-import { AntRadio } from "../../../../../../common/form/AntdRadioGroup";
+import { Selects } from '../../../../../../common/form/AntdSelects';
+import Inputs from '../../../../../../common/form/AntdInputs';
+import DatePickers from '../../../../../../common/AntdDatePickers';
+import dayjs from 'dayjs';
+import 'dayjs/locale/en';
+import { AntRadio } from '../../../../../../common/form/AntdRadioGroup';
 
-dayjs.locale("en");
+dayjs.locale('en');
 
 const runningOpts = [
   {
-    option: "",
-    value: "y",
+    option: '',
+    value: 'y',
   },
 ];
 
@@ -31,11 +30,11 @@ const Education = ({ setInputValue, inputValue, dayjs }) => {
             value="name"
             description="name"
             array={[
-              { id: 1, name: "High School Diploma" },
+              { id: 1, name: 'High School Diploma' },
               { id: 2, name: "Associate's Degree" },
               { id: 3, name: "Bachelor's Degree" },
               { id: 4, name: "Master's Degree" },
-              { id: 5, name: "Doctorate Degree" },
+              { id: 5, name: 'Doctorate Degree' },
             ]}
           />
         </div>
@@ -48,18 +47,18 @@ const Education = ({ setInputValue, inputValue, dayjs }) => {
             description="name"
             value="name"
             array={[
-              { id: 1, name: "Accounting" },
-              { id: 2, name: "Business Administration" },
-              { id: 3, name: "Computer Science" },
-              { id: 4, name: "Education" },
-              { id: 5, name: "Engineering" },
-              { id: 6, name: "Finance" },
-              { id: 7, name: "Graphic Design" },
-              { id: 8, name: "Healthcare Administration" },
-              { id: 9, name: "Information Technology" },
-              { id: 10, name: "Marketing" },
-              { id: 11, name: "Nursing" },
-              { id: 12, name: "Psychology" },
+              { id: 1, name: 'Accounting' },
+              { id: 2, name: 'Business Administration' },
+              { id: 3, name: 'Computer Science' },
+              { id: 4, name: 'Education' },
+              { id: 5, name: 'Engineering' },
+              { id: 6, name: 'Finance' },
+              { id: 7, name: 'Graphic Design' },
+              { id: 8, name: 'Healthcare Administration' },
+              { id: 9, name: 'Information Technology' },
+              { id: 10, name: 'Marketing' },
+              { id: 11, name: 'Nursing' },
+              { id: 12, name: 'Psychology' },
             ]}
           />
         </div>

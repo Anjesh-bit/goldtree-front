@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { putUploader } from "../../axios/uploader";
-import { useMutation } from "@tanstack/react-query";
+import { useState } from 'react';
+import { putUploader } from '../../axios/uploader';
+import { useMutation } from '@tanstack/react-query';
 
 export const useUpdateProfile = (type, id) => {
   const [localLoading, setLocalLoading] = useState(false);
@@ -9,7 +9,7 @@ export const useUpdateProfile = (type, id) => {
       setLocalLoading(true);
       try {
         const data = await putUploader(
-          `profile-update?name=${"profile_image"}&type=${type}&id=${id}`,
+          `profile-update?name=${'profile_image'}&type=${type}&id=${id}`,
           payload
         );
         return data;
@@ -17,7 +17,7 @@ export const useUpdateProfile = (type, id) => {
         setLocalLoading(false);
       }
     },
-    onSuccess: (res) => {},
+    onSuccess: () => {},
   });
   return {
     mutateAsync: query.mutateAsync,
@@ -45,7 +45,7 @@ export const useShortList = (data) => {
         setLocalLoading(false);
       }
     },
-    onSuccess: (res) => {},
+    onSuccess: () => {},
   });
   return {
     mutateAsync: query.mutateAsync,

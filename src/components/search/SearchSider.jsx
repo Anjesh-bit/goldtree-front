@@ -1,22 +1,22 @@
-import AntdCheckBoxGroup from "../../common/form/AntdCheckBoxGroup";
-import { Selects } from "../../common/form/AntdSelects";
+import AntdCheckBoxGroup from '../../common/form/AntdCheckBoxGroup';
+import { Selects } from '../../common/form/AntdSelects';
 import {
   educationOptions,
   genderOptions,
   levelOptions,
   timeOptions,
-} from "../../utils/checkGroup";
+} from '../../utils/checkGroup';
 
-import CollapseSearch from "./CollapsePanel";
+import CollapseSearch from './CollapsePanel';
 
 //use database fetch on future
 const fakeArr = [
-  { id: 1, name: "Top Jobs" },
-  { id: 2, name: "Hot Jobs" },
-  { id: 3, name: "Featured Jobs" },
-  { id: 4, name: "General Jobs" },
-  { id: 5, name: "Freelancing Jobs" },
-  { id: 6, name: "Intern" },
+  { id: 1, name: 'Top Jobs' },
+  { id: 2, name: 'Hot Jobs' },
+  { id: 3, name: 'Featured Jobs' },
+  { id: 4, name: 'General Jobs' },
+  { id: 5, name: 'Freelancing Jobs' },
+  { id: 6, name: 'Intern' },
 ];
 
 const SearchSider = ({ setQuerySearchParams }) => {
@@ -48,34 +48,34 @@ const SearchSider = ({ setQuerySearchParams }) => {
         <div className="text-[1.2rem] font-medium">Catagories :</div>
 
         <div>
-          <CollapseSearch header={"VACANCY TYPE"}>
+          <CollapseSearch header={'VACANCY TYPE'}>
             <AntdCheckBoxGroup
               options={timeOptions}
-              onChange={(e) => handleOnchange(e, "vacancyType")}
+              onChange={(e) => handleOnchange(e, 'vacancyType')}
             />
           </CollapseSearch>
         </div>
         <div>
-          <CollapseSearch header={"CAREER LEVEL"}>
+          <CollapseSearch header={'CAREER LEVEL'}>
             <AntdCheckBoxGroup
               options={levelOptions}
-              onChange={(e) => handleOnchange(e, "careerLevel")}
+              onChange={(e) => handleOnchange(e, 'careerLevel')}
             />
           </CollapseSearch>
         </div>
         <div>
-          <CollapseSearch header={"GENDER"}>
+          <CollapseSearch header={'GENDER'}>
             <AntdCheckBoxGroup
               options={genderOptions}
-              onChange={(e) => handleOnchange(e, "gender")}
+              onChange={(e) => handleOnchange(e, 'gender')}
             />
           </CollapseSearch>
         </div>
         <div>
-          <CollapseSearch header={"QUALIFICATIONS"}>
+          <CollapseSearch header={'QUALIFICATIONS'}>
             <AntdCheckBoxGroup
               options={educationOptions}
-              onChange={(e) => handleOnchange(e, "qualifications")}
+              onChange={(e) => handleOnchange(e, 'qualifications')}
             />
           </CollapseSearch>
         </div>

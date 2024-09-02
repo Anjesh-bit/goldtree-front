@@ -1,6 +1,6 @@
-import { useMutation } from "@tanstack/react-query";
-import { uploader } from "../../axios/uploader";
-import { useState } from "react";
+import { useMutation } from '@tanstack/react-query';
+import { uploader } from '../../axios/uploader';
+import { useState } from 'react';
 
 export const useDeactivateAccount = (userId, type) => {
   const [localLoading, setLocalLoading] = useState(false);
@@ -19,7 +19,7 @@ export const useDeactivateAccount = (userId, type) => {
         setLocalLoading(false);
       }
     },
-    onSuccess: (res) => {},
+    onSuccess: () => {},
   });
   return {
     mutateAsync: query.mutateAsync,

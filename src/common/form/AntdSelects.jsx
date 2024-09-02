@@ -1,13 +1,13 @@
-import { Select, ConfigProvider, theme } from "antd";
-import FormItem from "./FormItems";
-import DownOutlined from "@ant-design/icons/DownOutlined";
+import { Select, ConfigProvider } from 'antd';
+import FormItem from './FormItems';
+import DownOutlined from '@ant-design/icons/DownOutlined';
 
 export const Selects = (props) => {
   const tempRule = [
     {
       required: props.required,
       message: (
-        <div className={`${props.prefixname ? "!mt-5" : "!mt-1"}`}>
+        <div className={`${props.prefixname ? '!mt-5' : '!mt-1'}`}>
           {props.valmessage?.charAt(0)?.toUpperCase() +
             props.valmessage?.slice(1)?.toLowerCase()}
         </div>
@@ -23,15 +23,15 @@ export const Selects = (props) => {
       theme={{
         components: {
           Select: {
-            colorPrimary: "#3d2462",
-            colorPrimaryHover: "#6c4ba1",
-            colorPrimaryActive: "#6c4ba1",
+            colorPrimary: '#3d2462',
+            colorPrimaryHover: '#6c4ba1',
+            colorPrimaryActive: '#6c4ba1',
             optionHeight: 40,
             paddingSM: 8,
-            colorTextPlaceholder: "gray",
+            colorTextPlaceholder: 'gray',
             optionFontSize: 14,
             fontSize: 12,
-            colorTextQuaternary: "#6b7280cf",
+            colorTextQuaternary: '#6b7280cf',
             borderRadius: 1,
             controlHeight: parseInt(props.controlHeight) || 35,
           },
@@ -44,7 +44,7 @@ export const Selects = (props) => {
           } ${
             props.required
               ? "after:text-[#dc4446] after:content-['*'] after:font-[400] after:ml-1 after:text-[16px]"
-              : ""
+              : ''
           }`}
         >
           {props.Label}
@@ -60,8 +60,8 @@ export const Selects = (props) => {
                 <DownOutlined
                   className={` text-xs ${
                     props.noBorderVariant
-                      ? "!text-sm !text-[#6B7280] !font-semibold"
-                      : ""
+                      ? '!text-sm !text-[#6B7280] !font-semibold'
+                      : ''
                   } `}
                 />
               )
@@ -69,7 +69,7 @@ export const Selects = (props) => {
             ref={props?.ref}
             onDeselect={props.onDeselect}
             mode={props.mode}
-            maxTagCount={"responsive"}
+            maxTagCount={'responsive'}
             dropdownStyle={props.dropdownStyle}
             showSearch={props.nosearch}
             onBlur={props.onBlur}
@@ -92,8 +92,8 @@ export const Selects = (props) => {
               <div
                 className={`font-Poppins text-[11px] font-medium 2xl:text-[11px] ${
                   props.changePlaceholder
-                    ? "!font-Poppins !font-semibold mr-[12px] !text-[18px] !text-[#000]"
-                    : ""
+                    ? '!font-Poppins !font-semibold mr-[12px] !text-[18px] !text-[#000]'
+                    : ''
                 }`}
               >
                 {props.placeholder}
@@ -101,13 +101,13 @@ export const Selects = (props) => {
             }
             style={{
               ...props.style,
-              width: "100%",
-              height: "100%", // Set the width to props.width if it is defined, otherwise set it to '100%'
+              width: '100%',
+              height: '100%', // Set the width to props.width if it is defined, otherwise set it to '100%'
             }}
             {...(props.fieldProps || {
               showSearch: true,
               filterOption: (input, option) =>
-                (option?.children || "")
+                (option?.children || '')
                   .toLowerCase()
                   .includes(input.toLowerCase()),
             })}

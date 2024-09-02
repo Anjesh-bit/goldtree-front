@@ -1,26 +1,26 @@
-import { createSlice } from "@reduxjs/toolkit";
-import login from "../services/auth/login";
-import { getLocalStorage, removeLocalStorage } from "../utils/localStorage";
-import { deleteCookies, getCookies } from "../utils/cookies";
-import { auth } from "../utils/auth";
-import { jwtDecode } from "jwt-decode";
+import { createSlice } from '@reduxjs/toolkit';
+import login from '../services/auth/login';
+import { getLocalStorage, removeLocalStorage } from '../utils/localStorage';
+import { deleteCookies, getCookies } from '../utils/cookies';
+import { auth } from '../utils/auth';
+import { jwtDecode } from 'jwt-decode';
 
 const initialState = {
-  user: getLocalStorage("loginData"),
-  token: getCookies("token"),
+  user: getLocalStorage('loginData'),
+  token: getCookies('token'),
   loading: false,
   error: null,
 };
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     logOut: (state) => {
       state.user = null;
       state.token = null;
-      deleteCookies("token");
-      removeLocalStorage("loginData");
+      deleteCookies('token');
+      removeLocalStorage('loginData');
     },
   },
   extraReducers: (builder) => {

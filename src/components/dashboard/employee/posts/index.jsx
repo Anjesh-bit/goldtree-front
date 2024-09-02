@@ -1,213 +1,205 @@
-import AntdBreadCum from "../../../../common/AntdBreadCum";
-import Inputs from "../../../../common/form/AntdInputs";
-import TextAreas from "../../../../common/form/AntdTextArea";
-import CkEditors from "../../../../common/CkEditor";
-import AntdButton from "../../../../common/AntdButtons";
-import { useEffect, useState } from "react";
-import { Form } from "antd";
+import AntdBreadCum from '../../../../common/AntdBreadCum';
+import Inputs from '../../../../common/form/AntdInputs';
+import TextAreas from '../../../../common/form/AntdTextArea';
+import CkEditors from '../../../../common/CkEditor';
+import AntdButton from '../../../../common/AntdButtons';
+import { useEffect, useState } from 'react';
+import { Form } from 'antd';
 import {
   usePostJobs,
   useUpdatePostJobs,
-} from "../../../../services/employee/setUp";
-import DynamicTitle from "../../../../common/DynamicTitle";
-import { useLocation, useParams } from "react-router-dom";
-import useAuthHook from "../../../../hooks/useAuthHook";
-import { Selects } from "../../../../common/form/AntdSelects";
-import { AntRadio } from "../../../../common/form/AntdRadioGroup";
+} from '../../../../services/employee/setUp';
+import DynamicTitle from '../../../../common/DynamicTitle';
+import { useLocation, useParams } from 'react-router-dom';
+import useAuthHook from '../../../../hooks/useAuthHook';
+import { Selects } from '../../../../common/form/AntdSelects';
+import { AntRadio } from '../../../../common/form/AntdRadioGroup';
 
 const { useForm } = Form;
 
 const salaryOptions = [
   {
-    option: "Fixed",
-    value: "fixed",
+    option: 'Fixed',
+    value: 'fixed',
   },
   {
-    option: "Negotiable",
-    value: "negotiable",
+    option: 'Negotiable',
+    value: 'negotiable',
   },
   {
-    option: "Raneg",
-    value: "range",
+    option: 'Raneg',
+    value: 'range',
   },
 ];
 
 const expOptions = [
   {
-    option: "Fresher",
-    value: "fresher",
+    option: 'Fresher',
+    value: 'fresher',
   },
   {
-    option: "No Experience",
-    value: "noexp",
+    option: 'No Experience',
+    value: 'noexp',
   },
   {
-    option: "Experience",
-    value: "exp",
+    option: 'Experience',
+    value: 'exp',
   },
 ];
 
 const licenseOptions = [
   {
-    option: "Yes",
-    value: "y",
+    option: 'Yes',
+    value: 'y',
   },
   {
-    option: "No",
-    value: "n",
+    option: 'No',
+    value: 'n',
   },
 ];
 
 const genderOptions = [
   {
-    option: "Male",
-    value: "m",
+    option: 'Male',
+    value: 'm',
   },
   {
-    option: "Female",
-    value: "f",
+    option: 'Female',
+    value: 'f',
   },
   {
-    option: "Other",
-    value: "o",
+    option: 'Other',
+    value: 'o',
   },
 ];
 
 const applyOnlineOptions = [
   {
-    option: "Yes",
-    value: "y",
+    option: 'Yes',
+    value: 'y',
   },
   {
-    option: "No",
-    value: "n",
+    option: 'No',
+    value: 'n',
   },
 ];
 
 const applyDirectOptions = [
   {
-    option: "Yes",
-    value: "y",
+    option: 'Yes',
+    value: 'y',
   },
   {
-    option: "No",
-    value: "n",
+    option: 'No',
+    value: 'n',
   },
 ];
 
 const applyInstruction = [
   {
-    option: "Yes",
-    value: "m",
+    option: 'Yes',
+    value: 'm',
   },
   {
-    option: "No",
-    value: "f",
+    option: 'No',
+    value: 'f',
   },
 ];
 
 const categoryType = [
-  { id: 1, name: "IT & Engineering" },
-  { id: 2, name: "Others" },
+  { id: 1, name: 'IT & Engineering' },
+  { id: 2, name: 'Others' },
 ];
 
 const jobCategory = [
-  { id: 1, name: "Product Manager" },
-  { id: 2, name: "Accounting" },
-  { id: 3, name: "Android" },
-  { id: 4, name: "Angular JS" },
-  { id: 5, name: "React Developer" },
-  { id: 6, name: "Full Stack Engineer" },
-  { id: 7, name: "Flutter Developer" },
+  { id: 1, name: 'Product Manager' },
+  { id: 2, name: 'Accounting' },
+  { id: 3, name: 'Android' },
+  { id: 4, name: 'Angular JS' },
+  { id: 5, name: 'React Developer' },
+  { id: 6, name: 'Full Stack Engineer' },
+  { id: 7, name: 'Flutter Developer' },
 ];
 
-const industryType = [{ id: 1, name: "IT & Engineering" }];
+const industryType = [{ id: 1, name: 'IT & Engineering' }];
 
 const jobIndustry = [
-  { id: 1, name: "Software Industry" },
-  { id: 2, name: "Accounting/Finance" },
-  { id: 3, name: "Engineering Farm" },
+  { id: 1, name: 'Software Industry' },
+  { id: 2, name: 'Accounting/Finance' },
+  { id: 3, name: 'Engineering Farm' },
 ];
 
 const serviceType = [
-  { id: 1, name: "Top Jobs" },
-  { id: 2, name: "Hot Jobs" },
-  { id: 3, name: "Featured Jobs" },
-  { id: 4, name: "General Jobs" },
-  { id: 5, name: "Freelancing Jobs" },
-  { id: 6, name: "Intern" },
+  { id: 1, name: 'Top Jobs' },
+  { id: 2, name: 'Hot Jobs' },
+  { id: 3, name: 'Featured Jobs' },
+  { id: 4, name: 'General Jobs' },
+  { id: 5, name: 'Freelancing Jobs' },
+  { id: 6, name: 'Intern' },
 ];
 
 const degreeName = [
-  { id: 1, name: "BBA" },
-  { id: 2, name: "BBS" },
-  { id: 3, name: "BSc in Computer Science" },
-  { id: 4, name: "B.E in Compiter Engineering" },
-  { id: 5, name: "Bachelor in Education" },
+  { id: 1, name: 'BBA' },
+  { id: 2, name: 'BBS' },
+  { id: 3, name: 'BSc in Computer Science' },
+  { id: 4, name: 'B.E in Compiter Engineering' },
+  { id: 5, name: 'Bachelor in Education' },
 ];
 
 const jobLevel = [
-  { id: 1, name: "Intern Level", value: "intern-level" },
-  { id: 2, name: "Entry Level", value: "entry-level" },
-  { id: 3, name: "Mid Level", value: "mid-level" },
-  { id: 4, name: "Senior Level", value: "senior-level" },
-  { id: 5, name: "Top Level", value: "top-level" },
+  { id: 1, name: 'Intern Level', value: 'intern-level' },
+  { id: 2, name: 'Entry Level', value: 'entry-level' },
+  { id: 3, name: 'Mid Level', value: 'mid-level' },
+  { id: 4, name: 'Senior Level', value: 'senior-level' },
+  { id: 5, name: 'Top Level', value: 'top-level' },
 ];
 
 const eduPreferences = [
-  { id: 1, name: "Under SLC", value: "under-slc" },
-  { id: 2, name: "SLC", value: "slc" },
-  { id: 3, name: "Intermediate", value: "intermediate" },
-  { id: 4, name: "Masters", value: "masters" },
-  { id: 5, name: "Bachelors", value: "bachelors" },
-  { id: 6, name: "PHD", value: "phd" },
+  { id: 1, name: 'Under SLC', value: 'under-slc' },
+  { id: 2, name: 'SLC', value: 'slc' },
+  { id: 3, name: 'Intermediate', value: 'intermediate' },
+  { id: 4, name: 'Masters', value: 'masters' },
+  { id: 5, name: 'Bachelors', value: 'bachelors' },
+  { id: 6, name: 'PHD', value: 'phd' },
 ];
 
 const skillsArr = [
-  { id: 1, name: "MERN STACK DEVELOPER" },
-  { id: 2, name: "MEAN STACK DEVELOPER" },
-  { id: 3, name: "FLUTTER DEVELOPER" },
-  { id: 4, name: "PHP" },
-  { id: 5, name: "AGILE DEVELOPMENT" },
-  { id: 6, name: "GIT" },
+  { id: 1, name: 'MERN STACK DEVELOPER' },
+  { id: 2, name: 'MEAN STACK DEVELOPER' },
+  { id: 3, name: 'FLUTTER DEVELOPER' },
+  { id: 4, name: 'PHP' },
+  { id: 5, name: 'AGILE DEVELOPMENT' },
+  { id: 6, name: 'GIT' },
 ];
 
 export const jobTypeOptions = [
-  { id: 1, label: "Full Time", value: "full-time" },
-  { id: 2, label: "Contract", value: "contract" },
-  { id: 3, label: "Part Time", value: "part-time" },
+  { id: 1, label: 'Full Time', value: 'full-time' },
+  { id: 2, label: 'Contract', value: 'contract' },
+  { id: 3, label: 'Part Time', value: 'part-time' },
   {
     id: 4,
-    label: "Full Time/Part Time/Contract",
-    value: "full-time-part-time-contract",
+    label: 'Full Time/Part Time/Contract',
+    value: 'full-time-part-time-contract',
   },
-  { id: 5, label: "Full Time/Part Time", value: "full-time-part-time" },
+  { id: 5, label: 'Full Time/Part Time', value: 'full-time-part-time' },
 ];
 
 const PostJobs = () => {
   const isAuthenticated = useAuthHook(false);
-  const [value, setValue] = useState({ eQD: "", jD: "", jS: "", jB: "" });
+  const [value, setValue] = useState({ eQD: '', jD: '', jS: '', jB: '' });
   const location = useLocation();
   const params = useParams();
 
   const [form] = useForm();
   const {
-    data: postJobData,
     isPending: postJobPending,
-    isSuccess: postJobSuccess,
     isError: postJobError,
     mutateAsync: postJobMutate,
   } = usePostJobs(isAuthenticated?.id);
-  const {
-    data: postUpdateData,
-    isPending: postUpdatePending,
-    isSuccess: postUpdateSuccess,
-    isError: postUpdateError,
-    mutateAsync: postUpdateMutate,
-  } = useUpdatePostJobs(params?.id);
+  const { mutateAsync: postUpdateMutate } = useUpdatePostJobs(params?.id);
 
   const postEditItems = location?.state?.data || null;
-  const isMatchLocation = location.pathname === "/employee/dashboard/new-job";
+  const isMatchLocation = location.pathname === '/employee/dashboard/new-job';
 
   const handleFinish = async (values) => {
     try {
@@ -224,13 +216,13 @@ const PostJobs = () => {
 
   const handleCkEditor = (event, editor, filter) => {
     switch (filter) {
-      case "key0":
+      case 'key0':
         setValue({ ...value, eQD: editor.getData() });
         break;
-      case "key1":
+      case 'key1':
         setValue({ ...value, jD: editor.getData() });
         break;
-      case "key2":
+      case 'key2':
         setValue({ ...value, jS: editor.getData() });
         break;
       default:
@@ -251,7 +243,7 @@ const PostJobs = () => {
 
   return (
     <Form onFinish={handleFinish} form={form}>
-      <AntdBreadCum array={["Employee", "Post Jobs"]} />
+      <AntdBreadCum array={['Employee', 'Post Jobs']} />
       <div className="rounded-lg shadow-md bg-[#fff] p-4 md:p-6 lg:p-8">
         <DynamicTitle classNames="text-xl md:text-2xl font-medium text-[#3d2462]">
           Post A New Job
@@ -365,7 +357,7 @@ const PostJobs = () => {
             />
           </div>
           <div className="lg:col-span-12">
-            <TextAreas rows="6" Label={"Job Purpose"} name="job_purpose" />
+            <TextAreas rows="6" Label={'Job Purpose'} name="job_purpose" />
           </div>
           <div className="lg:col-span-12">
             <AntRadio options={salaryOptions} Label="Salary" name="salary" />
@@ -409,41 +401,41 @@ const PostJobs = () => {
           </div>
           <div className="lg:col-span-12">
             <CkEditors
-              Label={"Educational Qualification Description:"}
+              Label={'Educational Qualification Description:'}
               onChange={(event, editor) =>
-                handleCkEditor(event, editor, "key0")
+                handleCkEditor(event, editor, 'key0')
               }
               data={
-                !isMatchLocation ? postEditItems["education_qual_desc"] : " "
+                !isMatchLocation ? postEditItems['education_qual_desc'] : ' '
               }
             />
           </div>
 
           <div className="lg:col-span-12">
             <CkEditors
-              Label={"Job Description:"}
+              Label={'Job Description:'}
               onChange={(event, editor) =>
-                handleCkEditor(event, editor, "key1")
+                handleCkEditor(event, editor, 'key1')
               }
-              data={!isMatchLocation ? postEditItems["job_desc"] : " "}
+              data={!isMatchLocation ? postEditItems['job_desc'] : ' '}
             />
           </div>
           <div className="lg:col-span-12">
             <CkEditors
-              Label={"Job Specification:"}
+              Label={'Job Specification:'}
               onChange={(event, editor) =>
-                handleCkEditor(event, editor, "key2")
+                handleCkEditor(event, editor, 'key2')
               }
-              data={!isMatchLocation ? postEditItems["job_spec"] : " "}
+              data={!isMatchLocation ? postEditItems['job_spec'] : ' '}
             />
           </div>
           <div className="lg:col-span-12">
             <CkEditors
-              Label={"Job Benefits:"}
+              Label={'Job Benefits:'}
               onChange={(event, editor) =>
-                handleCkEditor(event, editor, "key3")
+                handleCkEditor(event, editor, 'key3')
               }
-              data={!isMatchLocation ? postEditItems["job_benifits"] : " "}
+              data={!isMatchLocation ? postEditItems['job_benifits'] : ' '}
             />
           </div>
           <div className="lg:col-span-6">
@@ -471,12 +463,12 @@ const PostJobs = () => {
           <div className="col-span-2">
             <AntdButton
               loading={postJobError ? false : postJobPending}
-              htmlType={"submit"}
+              htmlType={'submit'}
               classNames={
-                "bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors"
+                'bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors'
               }
             >
-              {!isMatchLocation ? "Update" : "Save"}
+              {!isMatchLocation ? 'Update' : 'Save'}
             </AntdButton>
           </div>
         </div>

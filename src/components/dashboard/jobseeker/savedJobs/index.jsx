@@ -1,4 +1,4 @@
-import AppliedJobs from "../appliedJobs";
+import AppliedJobs from '../appliedJobs';
 
 const SavedJobs = () => {
   return <AppliedJobs isSavedJobs />;

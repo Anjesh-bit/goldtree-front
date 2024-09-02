@@ -1,5 +1,5 @@
-import FormItem from "./FormItems";
-import { ConfigProvider, Radio } from "antd";
+import FormItem from './FormItems';
+import { ConfigProvider, Radio } from 'antd';
 
 export const AntRadio = (props) => {
   const onChange = (e) => {
@@ -21,7 +21,7 @@ export const AntRadio = (props) => {
     <ConfigProvider
       theme={{
         token: {
-          colorPrimary: "#119888",
+          colorPrimary: '#119888',
         },
         components: {
           Radio: {
@@ -36,7 +36,7 @@ export const AntRadio = (props) => {
           } ${
             props.required
               ? "after:text-[#dc4446] after:content-['*'] after:font-[400] after:ml-1 after:text-[16px]"
-              : ""
+              : ''
           }`}
         >
           {props.Label}
@@ -50,7 +50,7 @@ export const AntRadio = (props) => {
         >
           <div
             className={`flex ${
-              props.deactivateAccount ? "flex-col gap-4" : null
+              props.deactivateAccount ? 'flex-col gap-4' : null
             } whitespace-nowrap`}
           >
             {props.options?.map((item) => (
@@ -59,7 +59,7 @@ export const AntRadio = (props) => {
                   className={`whitespace-nowrap !text-[12px]
                 
                 ${
-                  props.commonRadio ? "items-center text-sm font-medium" : ""
+                  props.commonRadio ? 'items-center text-sm font-medium' : ''
                 } `}
                   value={item.value}
                   disabled={item.disabled}

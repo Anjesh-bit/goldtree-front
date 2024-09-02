@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Outlet, Link } from "react-router-dom";
-import { Layout, Menu, theme } from "antd";
-import { employeeSiderRoutes, JobSeekerSiderRoutes } from "../../utils/sider";
+import React, { useState } from 'react';
+import { Outlet, Link } from 'react-router-dom';
+import { Layout, Menu, theme } from 'antd';
+import { employeeSiderRoutes, JobSeekerSiderRoutes } from '../../utils/sider';
 
 const { Content, Sider } = Layout;
 
@@ -34,7 +34,7 @@ const DashBoardSider = ({
   };
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout style={{ minHeight: '100vh' }}>
       <Sider
         collapsible
         collapsed={collapsed}

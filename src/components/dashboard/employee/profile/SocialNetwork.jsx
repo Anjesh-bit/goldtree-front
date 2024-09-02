@@ -1,5 +1,5 @@
-import Inputs from "../../../../common/form/AntdInputs";
-import DynamicTitle from "../../../../common/DynamicTitle";
+import Inputs from '../../../../common/form/AntdInputs';
+import DynamicTitle from '../../../../common/DynamicTitle';
 
 const SocialNetworks = () => {
   return (

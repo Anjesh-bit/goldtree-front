@@ -1,17 +1,17 @@
-import { Form } from "antd";
-import Inputs from "../../common/form/AntdInputs";
-import { useState } from "react";
-import { useUpdateProfile } from "../../services/commonService/setUp";
-import AntdButton from "../../common/AntdButtons";
-import useAuthHook from "../../hooks/useAuthHook";
+import { Form } from 'antd';
+import Inputs from '../../common/form/AntdInputs';
+import { useState } from 'react';
+import { useUpdateProfile } from '../../services/commonService/setUp';
+import AntdButton from '../../common/AntdButtons';
+import useAuthHook from '../../hooks/useAuthHook';
 
 const { useForm } = Form;
 
 const UploadProfile = ({ type }) => {
   const [form] = useForm();
   const isAuthenticated = useAuthHook(false);
-  const [files, setFiles] = useState("");
-  const typeData = type === "jobSeeker" ? "jobSeeker" : "employee";
+  const [files, setFiles] = useState('');
+  const typeData = type === 'jobSeeker' ? 'jobSeeker' : 'employee';
   const {
     isError: updateError,
     isPending: updatePending,
@@ -21,7 +21,7 @@ const UploadProfile = ({ type }) => {
   const handleOnFinish = () => {
     try {
       const formData = new FormData();
-      formData.append("profile_image", files);
+      formData.append('profile_image', files);
       updateMutate(formData);
     } catch (e) {
       // Handle error if needed

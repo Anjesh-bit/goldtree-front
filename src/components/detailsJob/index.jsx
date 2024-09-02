@@ -1,18 +1,18 @@
-import { useParams } from "react-router-dom";
-import { useGetSinglePost } from "../../services/employee/setUp";
-import AntdCards from "../../common/AntdCards";
-import { Tag, Skeleton } from "antd";
-import AntdButton from "../../common/AntdButtons";
-import { useState } from "react";
-import ViewForm from "./ViewForm";
-import { useSavedJobs } from "../../services/jobSeeker/setUp";
-import useMessage from "../../hooks/useMessage";
-import useAuthHook from "../../hooks/useAuthHook";
+import { useParams } from 'react-router-dom';
+import { useGetSinglePost } from '../../services/employee/setUp';
+import AntdCards from '../../common/AntdCards';
+import { Tag, Skeleton } from 'antd';
+import AntdButton from '../../common/AntdButtons';
+import { useState } from 'react';
+import ViewForm from './ViewForm';
+import { useSavedJobs } from '../../services/jobSeeker/setUp';
+import useMessage from '../../hooks/useMessage';
+import useAuthHook from '../../hooks/useAuthHook';
 
 const DetailJobView = () => {
   const isAuthenticated = useAuthHook(false);
   const [open, setOpen] = useState({ open: false });
-  const [id, setId] = useState("");
+  const [id, setId] = useState('');
   const params = useParams();
 
   const {
@@ -29,8 +29,8 @@ const DetailJobView = () => {
 
   const handleClick = (e, filter, id) => {
     e.preventDefault();
-    const isOpen = filter === "easy";
-    const isSaveJobs = filter === "saveJobs";
+    const isOpen = filter === 'easy';
+    const isSaveJobs = filter === 'saveJobs';
 
     if (isAuthenticated && isSaveJobs) {
       setId(id);
@@ -38,17 +38,17 @@ const DetailJobView = () => {
         try {
           await mutateAsync();
           showMessage({
-            type: "success",
-            content: "The job has been successfully saved.",
-            className: "mt-[30vh] h-[40px]",
+            type: 'success',
+            content: 'The job has been successfully saved.',
+            className: 'mt-[30vh] h-[40px]',
           });
         } catch (error) {
           const apiMessage = error?.response?.data?.message;
           if (apiMessage) {
             showMessage({
-              type: "info",
+              type: 'info',
               content: apiMessage,
-              className: "mt-[30vh] h-[40px]",
+              className: 'mt-[30vh] h-[40px]',
             });
           }
         }
@@ -103,7 +103,7 @@ const DetailJobView = () => {
           />
           <AntdButton
             classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors mt-4"
-            onClick={(e) => handleClick(e, "saveJobs", singlePostData?._id)}
+            onClick={(e) => handleClick(e, 'saveJobs', singlePostData?._id)}
           >
             Save Job
           </AntdButton>
@@ -126,23 +126,23 @@ const DetailJobView = () => {
               <div>Job Type: {singlePostData?.job_type}</div>
               <div>Offered Salary: {singlePostData?.salary}</div>
               <div>
-                Gender:{" "}
-                {singlePostData?.gender === "m"
-                  ? "Male"
-                  : singlePostData?.gender === "f"
-                  ? "Female"
-                  : "Others"}
+                Gender:{' '}
+                {singlePostData?.gender === 'm'
+                  ? 'Male'
+                  : singlePostData?.gender === 'f'
+                    ? 'Female'
+                    : 'Others'}
               </div>
               <div>Career Level: {singlePostData?.job_level}</div>
               <div>Experience: {singlePostData?.exp_required}</div>
               <div className="col-span-full">
-                Skills:{" "}
+                Skills:{' '}
                 {singlePostData?.skills?.map((skill) => (
                   <Tag
                     key={skill}
                     color={`#${Math.floor(Math.random() * 16777215)
                       .toString(16)
-                      .padStart(6, "0")}`}
+                      .padStart(6, '0')}`}
                     className="mr-2 mb-2"
                   >
                     {skill}
@@ -195,7 +195,7 @@ const DetailJobView = () => {
           />
         </AntdCards>
 
-        {singlePostData?.is_apply_instruction === "m" && (
+        {singlePostData?.is_apply_instruction === 'm' && (
           <AntdCards className="p-6 bg-white shadow-lg rounded-lg border border-gray-200">
             <p className="text-gray-800">
               Interested candidates fulfilling the mentioned criteria are
@@ -205,13 +205,13 @@ const DetailJobView = () => {
             <div className="flex gap-4 mt-4">
               <AntdButton
                 classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors"
-                onClick={(e) => handleClick(e, "easy")}
+                onClick={(e) => handleClick(e, 'easy')}
               >
                 Easy Apply
               </AntdButton>
               <AntdButton
                 classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors"
-                onClick={(e) => handleClick(e, "now")}
+                onClick={(e) => handleClick(e, 'now')}
               >
                 Apply Now
               </AntdButton>

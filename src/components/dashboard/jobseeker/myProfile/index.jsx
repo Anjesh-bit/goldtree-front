@@ -1,20 +1,20 @@
-import Profile from "./profileInfo/profile";
-import Experience from "./profileInfo/experience";
-import TrainingCertification from "./profileInfo/trainingCertification";
-import AntdButton from "../../../../common/AntdButtons";
-import DynamicTitle from "../../../../common/DynamicTitle";
-import { Avatar, Form } from "antd";
-import Education from "./profileInfo/education";
-import { useEffect, useMemo, useState } from "react";
+import Profile from './profileInfo/profile';
+import Experience from './profileInfo/experience';
+import TrainingCertification from './profileInfo/trainingCertification';
+import AntdButton from '../../../../common/AntdButtons';
+import DynamicTitle from '../../../../common/DynamicTitle';
+import { Avatar, Form } from 'antd';
+import Education from './profileInfo/education';
+import { useEffect, useMemo, useState } from 'react';
 import {
   useGetProfileInfo,
   useProfileInfo,
   useUpdateProfileInfo,
-} from "../../../../services/jobSeeker/setUp";
-import useMessage from "../../../../hooks/useMessage";
-import dayjs from "dayjs";
-import useAuthHook from "../../../../hooks/useAuthHook";
-import Loading from "../../../../assets/svg/loading.svg";
+} from '../../../../services/jobSeeker/setUp';
+import useMessage from '../../../../hooks/useMessage';
+import dayjs from 'dayjs';
+import useAuthHook from '../../../../hooks/useAuthHook';
+import Loading from '../../../../assets/svg/loading.svg';
 
 const { useForm } = Form;
 
@@ -49,7 +49,7 @@ const MyProfile = () => {
   const isEmpty = Object.keys(profile).length > 0;
 
   const [inputValue, setInputValue] = useState({
-    editor: "",
+    editor: '',
     dob: dayjs(),
     from: dayjs(),
     to: dayjs(),
@@ -61,7 +61,7 @@ const MyProfile = () => {
   useEffect(() => {
     if (profile) {
       setInputValue({
-        editor: profile.experience?.description ?? "",
+        editor: profile.experience?.description ?? '',
         dob: profile.profile?.dob ? dayjs(profile.profile.dob) : dayjs(),
         from: profile.experience?.from
           ? dayjs(profile.experience.from)
@@ -131,9 +131,9 @@ const MyProfile = () => {
 
       if (profileSuccess) {
         showMessage({
-          type: "success",
-          content: "Your profile has been successfully saved.",
-          className: "mt-4",
+          type: 'success',
+          content: 'Your profile has been successfully saved.',
+          className: 'mt-4',
         });
       }
     } catch (e) {}

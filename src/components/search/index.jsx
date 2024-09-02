@@ -1,10 +1,9 @@
-import { useState } from "react";
-import AntdSearch from "../../common/AntdSearch";
-import { useGlobalSearch } from "../../services/search/setUp";
-import MatchView from "./MatchView";
-import SearchSider from "./SearchSider";
-import debounce from "lodash/debounce";
-import { useLocation } from "react-router-dom";
+import { useState } from 'react';
+import AntdSearch from '../../common/AntdSearch';
+import { useGlobalSearch } from '../../services/search/setUp';
+import MatchView from './MatchView';
+import SearchSider from './SearchSider';
+import { useLocation } from 'react-router-dom';
 
 const Search = () => {
   const { state } = useLocation();
@@ -17,7 +16,7 @@ const Search = () => {
     qualifications: [],
   });
 
-  const { data, isLoading, isError } = useGlobalSearch(querySearchParams);
+  const { data, isLoading } = useGlobalSearch(querySearchParams);
 
   const handleOnChange = (e) => {
     const { value } = e.target;
@@ -29,7 +28,7 @@ const Search = () => {
       <div className="col-span-12">
         <div className="w-[60%]">
           <AntdSearch
-            placeholder={"Enter Any Keywords.."}
+            placeholder={'Enter Any Keywords..'}
             onChange={handleOnChange}
           />
         </div>

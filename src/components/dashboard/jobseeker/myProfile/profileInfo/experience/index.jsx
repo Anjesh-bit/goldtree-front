@@ -1,21 +1,21 @@
-import CkEditors from "../../../../../../common/CkEditor";
-import Inputs from "../../../../../../common/form/AntdInputs";
-import DatePickers from "../../../../../../common/AntdDatePickers";
-import { Selects } from "../../../../../../common/form/AntdSelects";
-import dayjs from "dayjs";
-import "dayjs/locale/en";
-import { AntRadio } from "../../../../../../common/form/AntdRadioGroup";
+import CkEditors from '../../../../../../common/CkEditor';
+import Inputs from '../../../../../../common/form/AntdInputs';
+import DatePickers from '../../../../../../common/AntdDatePickers';
+import { Selects } from '../../../../../../common/form/AntdSelects';
+import dayjs from 'dayjs';
+import 'dayjs/locale/en';
+import { AntRadio } from '../../../../../../common/form/AntdRadioGroup';
 
-dayjs.locale("en");
+dayjs.locale('en');
 
 const currentlyWorkOpts = [
   {
-    option: "Yes",
-    value: "y",
+    option: 'Yes',
+    value: 'y',
   },
   {
-    option: "No",
-    value: "n",
+    option: 'No',
+    value: 'n',
   },
 ];
 
@@ -23,7 +23,7 @@ const Experience = ({ setInputValue, inputValue, dayjs }) => {
   const handleChange = (_, value, filter) => {
     setInputValue((prevState) => ({
       ...prevState,
-      [filter]: filter === "editor" ? value.getData() : value,
+      [filter]: filter === 'editor' ? value.getData() : value,
     }));
   };
 
@@ -41,7 +41,7 @@ const Experience = ({ setInputValue, inputValue, dayjs }) => {
             name="from"
             value={dayjs(inputValue?.from)}
             onHandleChange={(_, dateString) =>
-              handleChange(_, dateString, "from")
+              handleChange(_, dateString, 'from')
             }
           />
         </div>
@@ -53,7 +53,7 @@ const Experience = ({ setInputValue, inputValue, dayjs }) => {
             format="YYYY-MM-DD"
             value={dayjs(inputValue?.to)}
             onHandleChange={(_, dateString) =>
-              handleChange(_, dateString, "to")
+              handleChange(_, dateString, 'to')
             }
           />
         </div>
@@ -75,7 +75,7 @@ const Experience = ({ setInputValue, inputValue, dayjs }) => {
             Label="Descriptions"
             name="description"
             data={inputValue?.editor}
-            onChange={(event, editor) => handleChange(event, editor, "editor")}
+            onChange={(event, editor) => handleChange(event, editor, 'editor')}
           />
         </div>
         <div className="col-span-1 lg:col-span-3">

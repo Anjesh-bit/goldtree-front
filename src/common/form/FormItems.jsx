@@ -1,17 +1,17 @@
-import { Form } from "antd";
+import { Form } from 'antd';
 
 const FormItem = (props) => {
   const localFormStyle = props.formStyle || {};
 
-  const hiddenStyle = props.hidden ? { display: "null" } : {};
+  const hiddenStyle = props.hidden ? { display: 'null' } : {};
 
   const localStyle = props.overflowHidden
-    ? { overflowX: "hidden", overflowY: "hidden", ...localFormStyle }
+    ? { overflowX: 'hidden', overflowY: 'hidden', ...localFormStyle }
     : { ...localFormStyle };
 
   return (
     <Form.Item
-      className={props.handleMargin ? "oscillation" : ""}
+      className={props.handleMargin ? 'oscillation' : ''}
       {...props}
       name={props.name}
       valuePropName={props.valuePropName}
@@ -23,8 +23,8 @@ const FormItem = (props) => {
       getValueFromEvent={props.getValueFromEvent}
       initialValue={
         props.initialValue ||
-        typeof props.initialValue === "boolean" ||
-        props.initialValue === "" ||
+        typeof props.initialValue === 'boolean' ||
+        props.initialValue === '' ||
         props.initialValue === 0 ||
         Array.isArray(props.initialValue)
           ? props.initialValue
@@ -33,8 +33,8 @@ const FormItem = (props) => {
       style={{
         ...localStyle,
         ...hiddenStyle,
-        justifyContent: "center",
-        justifyItems: "center",
+        justifyContent: 'center',
+        justifyItems: 'center',
       }}
       {...props.formItemProps}
       rules={props.localRules}

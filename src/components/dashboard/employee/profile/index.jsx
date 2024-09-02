@@ -1,26 +1,26 @@
-import { Form } from "antd";
-import AntdBreadCum from "../../../../common/AntdBreadCum";
-import AntdButton from "../../../../common/AntdButtons";
-import PrimaryContactInfo from "./PrimaryContactInfo";
-import ProfileInfo from "./ProfileInfo";
-import SocialNetworks from "./SocialNetwork";
+import { Form } from 'antd';
+import AntdBreadCum from '../../../../common/AntdBreadCum';
+import AntdButton from '../../../../common/AntdButtons';
+import PrimaryContactInfo from './PrimaryContactInfo';
+import ProfileInfo from './ProfileInfo';
+import SocialNetworks from './SocialNetwork';
 
 import {
   useGetProfileInfo,
   useProfileInfo,
   useUpdateProfile,
-} from "../../../../services/employee/setUp";
+} from '../../../../services/employee/setUp';
 
-import { useEffect, useState } from "react";
-import useAuthHook from "../../../../hooks/useAuthHook";
-import DynamicTitle from "../../../../common/DynamicTitle"; // Import DynamicTitle for consistent title styling
+import { useEffect, useState } from 'react';
+import useAuthHook from '../../../../hooks/useAuthHook';
+import DynamicTitle from '../../../../common/DynamicTitle';
 
 const { useForm } = Form;
 
 const Profile = () => {
   const [form] = useForm();
   const isAuthenticated = useAuthHook(false);
-  const [ckValue, setCKValue] = useState("");
+  const [ckValue, setCKValue] = useState('');
   const {
     isError: empError,
     isPending: empLoading,
@@ -33,9 +33,7 @@ const Profile = () => {
     isPending: empLoadingUpdate,
   } = useUpdateProfile(isAuthenticated?.id);
 
-  const { data: profileData, isError: profileErr } = useGetProfileInfo(
-    isAuthenticated?.id
-  );
+  const { data: profileData } = useGetProfileInfo(isAuthenticated?.id);
 
   const isEmpty = profileData?.length > 0;
   const ckData = profileData?.[0]?.personalInfo?.description;
@@ -92,9 +90,7 @@ const Profile = () => {
       } else {
         await empMutateUpdate(profileData);
       }
-    } catch (error) {
-      console.error("Error saving profile:", error);
-    }
+    } catch (error) {}
   };
 
   return (
@@ -104,7 +100,7 @@ const Profile = () => {
       layout="vertical"
       className="space-y-6"
     >
-      <AntdBreadCum array={["Employee", "Profile"]} className="mb-6" />
+      <AntdBreadCum array={['Employee', 'Profile']} className="mb-6" />
 
       <div className="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md">
         <DynamicTitle classNames="text-xl md:text-2xl font-medium text-[#3d2462] mb-4">
@@ -135,7 +131,7 @@ const Profile = () => {
           htmlType="submit"
           classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors"
         >
-          {isEmpty ? "Update" : "Save"}
+          {isEmpty ? 'Update' : 'Save'}
         </AntdButton>
       </div>
     </Form>

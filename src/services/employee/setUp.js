@@ -1,8 +1,8 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { putUploader, uploader } from "../../axios/uploader";
-import { useState } from "react";
-import { fetcher } from "../../axios/fetcher";
-import { employeeQueryKeys } from "../../queryKeys/keys";
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { putUploader, uploader } from '../../axios/uploader';
+import { useState } from 'react';
+import { fetcher } from '../../axios/fetcher';
+import { employeeQueryKeys } from '../../queryKeys/keys';
 
 export const useProfileInfo = () => {
   const [localLoading, setLocalLoading] = useState(false);
@@ -10,13 +10,13 @@ export const useProfileInfo = () => {
     mutationFn: async (payload) => {
       setLocalLoading(true);
       try {
-        const data = await uploader("emp-profile-info", payload);
+        const data = await uploader('emp-profile-info', payload);
         return data;
       } finally {
         setLocalLoading(false);
       }
     },
-    onSuccess: (res) => {},
+    onSuccess: () => {},
   });
   return {
     mutateAsync: query.mutateAsync,
@@ -40,7 +40,7 @@ export const usePostJobs = (id) => {
         setLocalLoading(false);
       }
     },
-    onSuccess: (res) => {},
+    onSuccess: () => {},
   });
   return {
     mutateAsync: query.mutateAsync,
@@ -80,7 +80,7 @@ export const useUpdateProfile = (id) => {
         setLocalLoading(false);
       }
     },
-    onSuccess: (res) => {},
+    onSuccess: () => {},
   });
   return {
     mutateAsync: query.mutateAsync,
@@ -104,7 +104,7 @@ export const useUpdatePostJobs = (id) => {
         setLocalLoading(false);
       }
     },
-    onSuccess: (res) => {},
+    onSuccess: () => {},
   });
   return {
     mutateAsync: query.mutateAsync,
@@ -119,7 +119,7 @@ export const useUpdatePostJobs = (id) => {
 export const useGetAllPosts = () => {
   return useQuery({
     queryKey: [employeeQueryKeys.setUp.getAllPosts],
-    queryFn: () => fetcher("emp-post-job-info"),
+    queryFn: () => fetcher('emp-post-job-info'),
   });
 };
 
@@ -134,6 +134,6 @@ export const useGetSinglePost = (id) => {
 export const useGetAllShortListedCandidates = () => {
   return useQuery({
     queryKey: [employeeQueryKeys.setUp.getAllShortListedCandidates],
-    queryFn: () => fetcher("short-listed-candidates"),
+    queryFn: () => fetcher('short-listed-candidates'),
   });
 };

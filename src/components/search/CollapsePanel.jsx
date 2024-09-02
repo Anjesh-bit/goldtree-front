@@ -1,5 +1,5 @@
-import Collapse from "antd/es/collapse";
-import CollapsePanel from "antd/es/collapse/CollapsePanel";
+import Collapse from 'antd/es/collapse';
+import CollapsePanel from 'antd/es/collapse/CollapsePanel';
 
 const CollapseSearch = ({ header, children }) => {
   return (

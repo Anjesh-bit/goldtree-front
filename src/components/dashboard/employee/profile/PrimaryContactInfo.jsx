@@ -1,16 +1,15 @@
-import CkEditors from "../../../../common/CkEditor";
-import Inputs from "../../../../common/form/AntdInputs";
-import DynamicTitle from "../../../../common/DynamicTitle";
-import { Selects } from "../../../../common/form/AntdSelects";
+import CkEditors from '../../../../common/CkEditor';
+import Inputs from '../../../../common/form/AntdInputs';
+import { Selects } from '../../../../common/form/AntdSelects';
 
 const fakeArray = [
-  { id: 1, name: "Product Manager" },
-  { id: 2, name: "Accounting" },
-  { id: 3, name: "Android" },
-  { id: 4, name: "Angular JS" },
-  { id: 5, name: "React Developer" },
-  { id: 6, name: "Full Stack Engineer" },
-  { id: 7, name: "Flutter Developer" },
+  { id: 1, name: 'Product Manager' },
+  { id: 2, name: 'Accounting' },
+  { id: 3, name: 'Android' },
+  { id: 4, name: 'Angular JS' },
+  { id: 5, name: 'React Developer' },
+  { id: 6, name: 'Full Stack Engineer' },
+  { id: 7, name: 'Flutter Developer' },
 ];
 
 const PrimaryContactInfo = ({ setCKValue, data }) => {
@@ -76,7 +75,7 @@ const PrimaryContactInfo = ({ setCKValue, data }) => {
         <div className="lg:col-span-12 col-span-12">
           <CkEditors
             data={data}
-            Label={"Company Description:"}
+            Label={'Company Description:'}
             onChange={(event, editor) => handleChange(event, editor)}
           />
         </div>

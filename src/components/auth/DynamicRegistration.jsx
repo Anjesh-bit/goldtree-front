@@ -1,11 +1,10 @@
-import Inputs from "../../common/form/AntdInputs";
-import AntdButton from "../../common/AntdButtons";
-import { useRegister } from "../../services/auth/register";
-import { useNavigate } from "react-router-dom";
-import Form from "antd/es/form";
-import { message } from "antd";
-import { Fragment, useEffect } from "react";
-import useMessage from "../../hooks/useMessage";
+import Inputs from '../../common/form/AntdInputs';
+import AntdButton from '../../common/AntdButtons';
+import { useRegister } from '../../services/auth/register';
+import { useNavigate } from 'react-router-dom';
+import Form from 'antd/es/form';
+import { Fragment, useEffect } from 'react';
+import useMessage from '../../hooks/useMessage';
 
 const { useForm } = Form;
 
@@ -18,25 +17,23 @@ const DynamicRegistration = ({
   const { contextHolder, showMessage } = useMessage();
   const [form] = useForm();
   const {
-    data: registerData,
     mutateAsync: mutateRegister,
     isPending: registerPending,
-    isError,
     isSuccess,
   } = useRegister();
 
   const handleOnClick = (e) => {
     e.preventDefault();
     if (isEmployeeTabItems) {
-      navigate("/auth/register/employee");
+      navigate('/auth/register/employee');
     } else {
-      navigate("/auth/register/jobseeker");
+      navigate('/auth/register/jobseeker');
     }
   };
 
   const handleOnFinish = async (value) => {
     try {
-      const type = isEmployee ? "employee" : "jobSeeker";
+      const type = isEmployee ? 'employee' : 'jobSeeker';
       await mutateRegister({ ...value, type });
     } catch (e) {
       const error = {};
@@ -62,9 +59,9 @@ const DynamicRegistration = ({
     if (isSuccess) {
       form.resetFields();
       showMessage({
-        type: "success",
-        content: "You have been successfully registered.",
-        className: "mt-4 h-12",
+        type: 'success',
+        content: 'You have been successfully registered.',
+        className: 'mt-4 h-12',
       });
     }
   }, [isSuccess]);
@@ -74,7 +71,7 @@ const DynamicRegistration = ({
       {contextHolder}
       <div
         className={`flex flex-col ${
-          visibleTabs ? "w-full" : "w-full md:w-4/5 lg:w-1/2"
+          visibleTabs ? 'w-full' : 'w-full md:w-4/5 lg:w-1/2'
         } mx-auto shadow-lg p-6 my-6 bg-white rounded-lg`}
       >
         <Form form={form} onFinish={handleOnFinish}>
@@ -131,8 +128,8 @@ const DynamicRegistration = ({
                   classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors w-full h-[40px]"
                 >
                   {isEmployee
-                    ? "Create Employer Account"
-                    : "Create Job Seeker Account"}
+                    ? 'Create Employer Account'
+                    : 'Create Job Seeker Account'}
                 </AntdButton>
               </div>
             </>
@@ -148,8 +145,8 @@ const DynamicRegistration = ({
                 onClick={handleOnClick}
               >
                 {isEmployeeTabItems
-                  ? "Create an Employee Account"
-                  : "Create an Job Seeker Account"}
+                  ? 'Create an Employee Account'
+                  : 'Create an Job Seeker Account'}
               </AntdButton>
             </div>
           )}

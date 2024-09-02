@@ -1,6 +1,4 @@
-import { useGetShortListed } from "../../../../services/jobSeeker/setUp";
-import { isAuthenticated } from "../../../../utils/auth";
-import AppliedJobs from "../appliedJobs";
+import AppliedJobs from '../appliedJobs';
 
 const ShortListedJobs = () => {
   return (

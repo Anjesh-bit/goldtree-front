@@ -1,12 +1,12 @@
-import Form, { useForm } from "antd/es/form/Form";
-import AntdButton from "../../common/AntdButtons";
-import { AntModal } from "../../common/AntdModal";
-import Inputs from "../../common/form/AntdInputs";
-import { useUpdateEasyApply } from "../../services/jobSeeker/setUp";
-import { useEffect, useState } from "react";
-import DynamicLogin from "../auth/DynamicLogin";
-import useAuthHook from "../../hooks/useAuthHook";
-import TextAreas from "../../common/form/AntdTextArea";
+import Form, { useForm } from 'antd/es/form/Form';
+import AntdButton from '../../common/AntdButtons';
+import { AntModal } from '../../common/AntdModal';
+import Inputs from '../../common/form/AntdInputs';
+import { useUpdateEasyApply } from '../../services/jobSeeker/setUp';
+import { useState } from 'react';
+import DynamicLogin from '../auth/DynamicLogin';
+import useAuthHook from '../../hooks/useAuthHook';
+import TextAreas from '../../common/form/AntdTextArea';
 
 const ViewForm = ({ open, setOpen }) => {
   const isAuthenticated = useAuthHook(false);
@@ -20,21 +20,21 @@ const ViewForm = ({ open, setOpen }) => {
     try {
       const formData = new FormData();
       for (const key in value) {
-        if (key !== "cv_upload") {
+        if (key !== 'cv_upload') {
           formData.append(key, value[key]);
         }
       }
       if (files) {
-        formData.append("cv_upload", files);
+        formData.append('cv_upload', files);
       }
-      formData.append("type", `${!applyNow ? "easyApply" : "directApply"}`);
-      formData.append("userId", isAuthenticated?.id);
-      formData.append("postId", !applyNow ? open?.data : open?.data?.[0]);
+      formData.append('type', `${!applyNow ? 'easyApply' : 'directApply'}`);
+      formData.append('userId', isAuthenticated?.id);
+      formData.append('postId', !applyNow ? open?.data : open?.data?.[0]);
       await easyApply.mutateAsync(formData);
       setFiles(null);
       form.resetFields();
     } catch (error) {
-      console.error("Error occurred during easy apply:", error);
+      console.error('Error occurred during easy apply:', error);
     }
   };
 
@@ -68,7 +68,7 @@ const ViewForm = ({ open, setOpen }) => {
             </Form.Item>
           </>
         )}
-        {(!applyNow || type === "jobSeeker") && !open?.isSaveJobs && (
+        {(!applyNow || type === 'jobSeeker') && !open?.isSaveJobs && (
           <Form.Item label="Upload CV" name="cv_upload" className="mb-4">
             <Inputs type="file" onChange={handleFileChange} />
           </Form.Item>
@@ -82,7 +82,7 @@ const ViewForm = ({ open, setOpen }) => {
               htmlType="submit"
               loading={easyApply?.isError ? false : easyApply?.isPending}
             >
-              {applyNow ? "Apply Now" : "Easy Apply"}
+              {applyNow ? 'Apply Now' : 'Easy Apply'}
             </AntdButton>
           </Form.Item>
         )}
