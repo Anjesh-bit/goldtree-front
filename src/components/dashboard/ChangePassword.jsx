@@ -2,32 +2,17 @@ import { Form } from 'antd';
 import AntdBreadCum from '../../common/AntdBreadCum';
 import AntdButton from '../../common/AntdButtons';
 import Inputs from '../../common/form/AntdInputs';
-import useAuthHook from '../../hooks/useAuthHook';
-import { useChangePassword } from '../../services/auth/changePassword';
-import { useForm } from 'antd/es/form/Form';
-import { removeLocalStorage } from '../../utils/localStorage';
-import { useLogout } from '../../services/auth/login';
-import { useNavigate } from 'react-router-dom';
+import { useAccountManagement } from './hook/useAccountManagement';
 
 const ChangePassword = () => {
-  const isAuth = useAuthHook(false);
-  const [form] = useForm();
-  const navigate = useNavigate();
-  const { id, type } = isAuth;
-  const { isPending, isError, mutateAsync } = useChangePassword(id, type);
-  const { mutateAsync: mutateAsyncLogout } = useLogout();
-
-  const handleChangePassword = async (values) => {
-    try {
-      await mutateAsync({ ...values });
-      removeLocalStorage('loginData');
-      await mutateAsyncLogout();
-      navigate('/');
-    } catch (e) {}
-  };
-
+  const {
+    handleOnFinish,
+    isErrorChangePass,
+    isPendingChangePass,
+    form,
+  } = useAccountManagement();
   return (
-    <Form form={form} onFinish={handleChangePassword}>
+    <Form form={form} onFinish={handleOnFinish}>
       <div className="min-h-screen bg-gray-100 p-4 sm:p-6 lg:p-8">
         <div className="mb-6">
           <AntdBreadCum array={['Employee', 'Change Password']} />
@@ -64,7 +49,7 @@ const ChangePassword = () => {
               <AntdButton
                 htmlType="submit"
                 classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors"
-                loading={isError ? false : isPending}
+                loading={isErrorChangePass ? false : isPendingChangePass}
               >
                 Update
               </AntdButton>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Popover } from 'antd';
 import '../../styles/antd.css';
+
 const PopOver = ({ content, title, children }) => (
   <Popover
     content={content}

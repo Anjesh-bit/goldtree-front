@@ -1,13 +1,8 @@
 import { Descriptions, Form } from 'antd';
 import AntdButton from '../../common/AntdButtons';
 import { AntRadio } from '../../common/form/AntdRadioGroup';
-import { useDeactivateAccount } from '../../services/auth/deactivateAccount';
-import useAuthHook from '../../hooks/useAuthHook';
-import { useForm } from 'antd/es/form/Form';
-import { useState } from 'react';
-import { useLogout } from '../../services/auth/login';
-import { removeLocalStorage } from '../../utils/localStorage';
-import { useNavigate } from 'react-router-dom';
+import { useAccountManagement } from './hook/useAccountManagement';
+import { AppConstant } from '../../constant';
 
 const applyOnlineOptions = [
   {
@@ -25,30 +20,10 @@ const applyOnlineOptions = [
 ];
 
 const DeactivateAccount = () => {
-  const isAuth = useAuthHook(false);
-  const [deactivateReason, setDeactivateReason] = useState('');
-  const [form] = useForm();
-  const { id, type } = isAuth;
-  const navigate = useNavigate();
-  const { isPending, isError, mutateAsync } = useDeactivateAccount(id, type);
-  const { mutateAsync: mutateAsyncLogout } = useLogout();
-
-  const handleRadioChange = (e) => {
-    const { value } = e.target;
-    setDeactivateReason(value);
-  };
-
-  const handleDeactivateAccount = async () => {
-    try {
-      await mutateAsync(deactivateReason);
-      removeLocalStorage('loginData');
-      await mutateAsyncLogout();
-      navigate('/');
-    } catch (e) {}
-  };
-
+  const { handleOnFinish, handleRadioChange, isPending, isError, form } =
+    useAccountManagement(AppConstant.DEACTIVATE_ACCOUNT);
   return (
-    <Form form={form} onFinish={handleDeactivateAccount}>
+    <Form form={form} onFinish={handleOnFinish}>
       <div className="p-6 max-w-2xl mx-auto bg-white shadow-md rounded-lg">
         <Descriptions
           title="Are You Sure You Want To Deactivate Your Account?"

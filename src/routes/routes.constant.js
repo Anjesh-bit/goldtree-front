@@ -36,11 +36,11 @@ export const homeConfig = [
 
 export const authConfig = [
   {
-    path: 'register/jobseeker',
+    path: 'auth/register/jobseeker',
     element: <JobSeekerRegistration />,
   },
   {
-    path: 'register/employee',
+    path: 'auth/register/employee',
     element: <EmployeeRegistration />,
   },
 ];

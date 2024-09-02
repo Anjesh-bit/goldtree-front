@@ -1,70 +1,21 @@
 import Inputs from '../../common/form/AntdInputs';
 import AntdButton from '../../common/AntdButtons';
-import { useRegister } from '../../services/auth/register';
-import { useNavigate } from 'react-router-dom';
 import Form from 'antd/es/form';
-import { Fragment, useEffect } from 'react';
-import useMessage from '../../hooks/useMessage';
-
-const { useForm } = Form;
+import { Fragment } from 'react';
+import { useAuth } from './hook/useAuth';
 
 const DynamicRegistration = ({
   isEmployee,
   visibleTabs,
   isEmployeeTabItems,
 }) => {
-  const navigate = useNavigate();
-  const { contextHolder, showMessage } = useMessage();
-  const [form] = useForm();
   const {
-    mutateAsync: mutateRegister,
-    isPending: registerPending,
-    isSuccess,
-  } = useRegister();
-
-  const handleOnClick = (e) => {
-    e.preventDefault();
-    if (isEmployeeTabItems) {
-      navigate('/auth/register/employee');
-    } else {
-      navigate('/auth/register/jobseeker');
-    }
-  };
-
-  const handleOnFinish = async (value) => {
-    try {
-      const type = isEmployee ? 'employee' : 'jobSeeker';
-      await mutateRegister({ ...value, type });
-    } catch (e) {
-      const error = {};
-      const apiError = e?.response?.data?.feilds;
-      apiError?.map((items) => {
-        const [fieldName, errorMessage] = Object.entries(items)[0];
-        error[fieldName] = errorMessage;
-      });
-
-      const finalError = Object.entries(error).map(
-        ([fieldName, errorMessage]) => {
-          return {
-            name: fieldName,
-            errors: [errorMessage],
-          };
-        }
-      );
-      form.setFields(finalError);
-    }
-  };
-
-  useEffect(() => {
-    if (isSuccess) {
-      form.resetFields();
-      showMessage({
-        type: 'success',
-        content: 'You have been successfully registered.',
-        className: 'mt-4 h-12',
-      });
-    }
-  }, [isSuccess]);
+    contextHolder,
+    form,
+    handleOnFinishRegister,
+    handleOnClick,
+    registerPending,
+  } = useAuth(isEmployeeTabItems);
 
   return (
     <Fragment>
@@ -74,7 +25,7 @@ const DynamicRegistration = ({
           visibleTabs ? 'w-full' : 'w-full md:w-4/5 lg:w-1/2'
         } mx-auto shadow-lg p-6 my-6 bg-white rounded-lg`}
       >
-        <Form form={form} onFinish={handleOnFinish}>
+        <Form form={form} onFinish={handleOnFinishRegister}>
           {!visibleTabs && (
             <>
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">

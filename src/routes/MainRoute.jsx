@@ -9,6 +9,7 @@ import {
 import MainLayout from '../layouts/MainLayout';
 import DashboardLayout from '../layouts/DashBoardLayout';
 import ProtectedRoute from './ProtectedRoutes';
+import { AppConstant } from '../constant';
 
 const EmployeeDashboardLayouts = ProtectedRoute(DashboardLayout, 'employee');
 const JobSeekerDashboardLayouts = ProtectedRoute(DashboardLayout, 'jobSeeker');
@@ -17,7 +18,7 @@ const createRoutes = (config, Layout) => ({
   path:
     Layout === MainLayout
       ? '/'
-      : `${Layout === EmployeeDashboardLayouts ? 'employee' : 'jobSeeker'}/dashboard`,
+      : `${Layout === EmployeeDashboardLayouts ? AppConstant.EMPLOYEE : AppConstant.JOB_SEEKER}/dashboard`,
   element: <Layout />,
   children: config.map(({ path, element }) => ({
     path,
