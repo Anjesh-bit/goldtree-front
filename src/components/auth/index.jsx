@@ -40,6 +40,7 @@ const DynamicTabs = ({ dataKey }) => {
   const handleOnChangeTabs = (keys) => {};
   const foundItems = tabItems?.find((items) => items.key === dataKey);
   const tabItemsFound = foundItems?.tabItems;
+
   return (
     <div>
       <AntdTabs items={tabItemsFound} onChange={handleOnChangeTabs} centered />

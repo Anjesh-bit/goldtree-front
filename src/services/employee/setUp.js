@@ -4,6 +4,14 @@ import { useState } from 'react';
 import { fetcher } from '../../axios/fetcher';
 import { employeeQueryKeys } from '../../queryKeys/keys';
 
+export const useGetEasyApply = (id) => {
+  return useQuery({
+    queryFn: () => fetcher(`upload?userId=${id}`),
+    queryKey: [employeeQueryKeys.setUp.getAllApplied],
+    enabled: !!id,
+  });
+};
+
 export const useProfileInfo = () => {
   const [localLoading, setLocalLoading] = useState(false);
   const query = useMutation({
@@ -131,9 +139,10 @@ export const useGetSinglePost = (id) => {
   });
 };
 
-export const useGetAllShortListedCandidates = () => {
+export const useGetAllShortListedCandidates = (id) => {
   return useQuery({
     queryKey: [employeeQueryKeys.setUp.getAllShortListedCandidates],
-    queryFn: () => fetcher('short-listed-candidates'),
+    queryFn: () => fetcher(`short-listed-candidates?userId=${id}`),
+    enabled: !!id,
   });
 };

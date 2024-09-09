@@ -1,13 +1,16 @@
 import { Fragment, useState } from 'react';
 import AntdCards from '../../../../common/AntdCards';
-import { useGetEasyApply } from '../../../../services/jobSeeker/setUp';
 import AntdButton from '../../../../common/AntdButtons';
 import { useShortList } from '../../../../services/commonService/setUp';
 import useMessage from '../../../../hooks/useMessage';
 import Loading from '../../../../assets/svg/loading.svg';
+import { useGetEasyApply } from '../../../../services/employee/setUp';
+import useAuthHook from '../../../../hooks/useAuthHook';
 
 const JobApplied = () => {
-  const { data, isLoading } = useGetEasyApply();
+  const isAuthenticated = useAuthHook(false);
+  console.log(isAuthenticated);
+  const { data, isLoading } = useGetEasyApply(isAuthenticated?.id);
   const [queryParams, setQueryParams] = useState({
     uploadId: '',
     type: '',

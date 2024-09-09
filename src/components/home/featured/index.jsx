@@ -3,6 +3,7 @@ import AntdCards from '../../../common/AntdCards';
 import { useGetAllPosts } from '../../../services/employee/setUp';
 import { Collapse } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { useMemo } from 'react';
 
 const { Panel } = Collapse;
 
@@ -10,7 +11,18 @@ const FeaturedJobs = () => {
   const navigate = useNavigate();
   const { data: allPostsData } = useGetAllPosts();
 
-  const tempObj = {};
+  const postsByCompany = useMemo(() => {
+    const result = {};
+    allPostsData?.forEach((postsItems) => {
+      const firstPost = postsItems.posts.find((post) => post.company_name);
+      if (!firstPost) return;
+
+      const companyName = firstPost.company_name;
+      if (!result[companyName]) result[companyName] = [];
+      result[companyName].push(...postsItems.posts);
+    });
+    return result;
+  }, [allPostsData]);
 
   const handleProductClick = (e, id, name) => {
     e.preventDefault();
@@ -31,42 +43,37 @@ const FeaturedJobs = () => {
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {allPostsData?.map((postsItems) => {
-          const companyName = postsItems.posts[0]?.company_name || 'Unknown';
-          tempObj[companyName] = postsItems?.posts;
-
-          return Object.entries(tempObj).map(([companyName, posts]) => (
-            <AntdCards
-              key={companyName}
-              className="bg-white rounded-lg shadow-md border-none"
-            >
-              <Collapse className="bg-white">
-                <Panel
-                  header={
-                    <div className="text-xl font-semibold text-[#08142c] bg-white">
-                      {companyName}
+        {Object.entries(postsByCompany).map(([companyName, posts]) => (
+          <AntdCards
+            key={companyName}
+            className="bg-white rounded-lg shadow-md border-none"
+          >
+            <Collapse className="bg-white">
+              <Panel
+                header={
+                  <div className="text-xl font-semibold text-[#08142c] bg-white">
+                    {companyName}
+                  </div>
+                }
+                key={companyName}
+              >
+                {posts.map((post) => (
+                  <div
+                    key={post._id}
+                    className="py-2 cursor-pointer hover:bg-[#e8f4f9] hover:text-[#00b6b4] transition-colors"
+                    onClick={(e) =>
+                      handleProductClick(e, post._id, companyName)
+                    }
+                  >
+                    <div className="text-sm font-medium text-gray-800">
+                      {post.job_catagory}
                     </div>
-                  }
-                  key={companyName}
-                >
-                  {posts.map((post) => (
-                    <div
-                      key={post._id}
-                      className="py-2 cursor-pointer hover:bg-[#e8f4f9] hover:text-[#00b6b4] transition-colors"
-                      onClick={(e) =>
-                        handleProductClick(e, post._id, companyName)
-                      }
-                    >
-                      <div className="text-sm font-medium text-gray-800">
-                        {post.job_catagory}
-                      </div>
-                    </div>
-                  ))}
-                </Panel>
-              </Collapse>
-            </AntdCards>
-          ));
-        })}
+                  </div>
+                ))}
+              </Panel>
+            </Collapse>
+          </AntdCards>
+        ))}
       </div>
     </div>
   );

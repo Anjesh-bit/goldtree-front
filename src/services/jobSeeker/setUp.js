@@ -52,13 +52,6 @@ export const useUpdateEasyApply = () => {
   };
 };
 
-export const useGetEasyApply = () => {
-  return useQuery({
-    queryFn: () => fetcher('upload'),
-    queryKey: [jobSeekerQueryKeys.setUp.getAllApplied],
-  });
-};
-
 export const useUpdateProfileInfo = (id) => {
   const [localLoading, setLocalLoading] = useState(false);
   const query = useMutation({

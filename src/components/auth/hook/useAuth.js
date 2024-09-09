@@ -7,7 +7,7 @@ import login from '../../../services/auth/login';
 import useMessage from '../../../hooks/useMessage';
 import { useRegister } from '../../../services/auth/register';
 
-export const useAuth = (isEmployee, modalData, setOpen) => {
+export const useAuth = (isEmployee, isEmployeeTabItems, modalData, setOpen) => {
   const [form] = useForm();
   const {
     mutateAsync: mutateRegister,
@@ -24,7 +24,7 @@ export const useAuth = (isEmployee, modalData, setOpen) => {
 
   const handleOnClick = (e) => {
     e.preventDefault();
-    if (isEmployee) {
+    if (isEmployee ?? isEmployeeTabItems) {
       navigate(AppConstant.AUTH_EMPLOYEE);
     } else {
       navigate(AppConstant.AUTH_JOB_SEEKER);

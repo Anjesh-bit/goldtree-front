@@ -3,10 +3,11 @@ import AntdButton from '../../common/AntdButtons';
 import Form from 'antd/es/form';
 import { Fragment } from 'react';
 import { useAuth } from './hook/useAuth';
+import { AuthConstant } from './auth.constant';
 
 const DynamicLogin = ({ isEmployee, modalData, setOpen }) => {
   const { handleOnClick, handleOnFinishLogin, contextHolder, form, data } =
-    useAuth(isEmployee, modalData, setOpen);
+    useAuth(isEmployee, AuthConstant.DEFAULT_IS_TAB_ITEMS, modalData, setOpen);
 
   return (
     <Fragment>

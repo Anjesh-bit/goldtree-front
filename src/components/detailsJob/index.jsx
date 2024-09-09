@@ -11,6 +11,7 @@ import useAuthHook from '../../hooks/useAuthHook';
 
 const DetailJobView = () => {
   const isAuthenticated = useAuthHook(false);
+
   const [open, setOpen] = useState({ open: false });
   const [id, setId] = useState('');
   const params = useParams();

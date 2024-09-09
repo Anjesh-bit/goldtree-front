@@ -15,7 +15,7 @@ const DynamicRegistration = ({
     handleOnFinishRegister,
     handleOnClick,
     registerPending,
-  } = useAuth(isEmployeeTabItems);
+  } = useAuth(isEmployee, isEmployeeTabItems);
 
   return (
     <Fragment>

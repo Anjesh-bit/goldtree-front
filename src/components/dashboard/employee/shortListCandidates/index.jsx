@@ -3,9 +3,13 @@ import AntdBreadCum from '../../../../common/AntdBreadCum';
 import AntdCards from '../../../../common/AntdCards';
 import { useGetAllShortListedCandidates } from '../../../../services/employee/setUp';
 import Loading from '../../../../assets/svg/loading.svg';
+import useAuthHook from '../../../../hooks/useAuthHook';
 
 const ShortlistCandidate = () => {
-  const { data, isPending } = useGetAllShortListedCandidates();
+  const isAuthenticated = useAuthHook();
+  const { data, isPending } = useGetAllShortListedCandidates(
+    isAuthenticated?.id
+  );
 
   if (isPending) {
     return (
