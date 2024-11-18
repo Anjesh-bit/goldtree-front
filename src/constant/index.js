@@ -8,4 +8,5 @@ export const AppConstant = {
   LOGIN_DATA: 'loginData',
   DEACTIVATE_ACCOUNT: 'deactivate-account',
   DIRECT_APPLY: 'directApply',
+  EASY_APPLY: 'easyApply',
 };

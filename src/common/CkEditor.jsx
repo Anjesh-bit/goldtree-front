@@ -30,7 +30,7 @@ const CkEditors = ({
     <div>
       {Label && (
         <div
-          className={`whitespace-nowrap text-sm font-medium
+          className={`whitespace-nowrap text-sm font-medium mb-[7px]
           } ${
             required
               ? "after:text-[#dc4446] after:content-['*'] after:font-[400] after:ml-1 after:text-[16px]"

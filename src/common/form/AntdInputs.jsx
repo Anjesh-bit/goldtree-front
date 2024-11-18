@@ -92,7 +92,7 @@ const Inputs = (props) => {
     >
       {props.Label && (
         <div
-          className={`whitespace-nowrap text-sm font-medium ${
+          className={`whitespace-nowrap text-sm font-medium mb-[7px] ${
             props.required
               ? "after:text-[#dc4446] after:content-['*'] after:font-[400] after:ml-1 after:text-[16px]"
               : ''
@@ -106,11 +106,11 @@ const Inputs = (props) => {
         <Input
           defaultValue={props.defaultValue}
           min={props.minlength}
-          hidden={props.hidden || false}
+          hidden={props.hidden ?? false}
           type={props.type}
           onBlur={props.onBlur}
           focus={props.focus}
-          autoFocus={props.autoFocus || false}
+          autoFocus={props.autoFocus ?? false}
           style={{
             ...props.style,
           }}
@@ -123,16 +123,8 @@ const Inputs = (props) => {
           onChange={props.handleChange}
           className={`${props.className}`}
           ref={props.ref}
-          allowClear={props.allowclear || false}
-          prefix={
-            <div
-              className={`flex items-center ${
-                props.customprefix ? 'pl-0' : 'pl-2'
-              }`}
-            >
-              {props.prefix}
-            </div>
-          }
+          allowClear={props.allowClear ?? false}
+          prefix={props.prefix}
           suffix={props.suffix}
           placeholder={props.placeholder}
           {...props.fieldProps}

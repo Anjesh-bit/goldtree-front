@@ -74,7 +74,12 @@ const dashBoardData = [
   {
     key: 'employee',
     data: [
-      { header: 'Posted Jobs', subHeader: 'Job Posted', key: 'postedJobs' },
+      {
+        header: 'Posted Jobs',
+        subHeader: 'Job Posted',
+        key: 'postedJobs',
+        link: 'manage-jobs',
+      },
       { header: 'Live Jobs', subHeader: 'Live Jobs', key: 'liveJobs' },
       {
         header: 'Admin Approved',

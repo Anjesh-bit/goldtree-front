@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useMemo } from 'react';
 import AntdCards from '../../../../common/AntdCards';
 import AntdButton from '../../../../common/AntdButtons';
 import { useShortList } from '../../../../services/commonService/setUp';
@@ -9,7 +9,7 @@ import useAuthHook from '../../../../hooks/useAuthHook';
 
 const JobApplied = () => {
   const isAuthenticated = useAuthHook(false);
-  console.log(isAuthenticated);
+
   const { data, isLoading } = useGetEasyApply(isAuthenticated?.id);
   const [queryParams, setQueryParams] = useState({
     uploadId: '',
@@ -80,11 +80,15 @@ const JobApplied = () => {
                         candidate?.upload_cv?.lastIndexOf('/') + 1
                       );
                       const { jobSeekerProfile = [] } = candidate;
+
                       const hasProfile = jobSeekerProfile.length > 0;
 
-                      const { profile } = hasProfile ? jobSeekerProfile[0] : {};
-                      const name = profile?.full_name || candidate.name;
-                      const phoneNo = profile?.phone_no || candidate.email;
+                      const name = hasProfile
+                        ? jobSeekerProfile[0]?.profile?.full_name
+                        : candidate.name;
+                      const phoneNo = hasProfile
+                        ? jobSeekerProfile[0]?.profile?.phone_no
+                        : candidate.email;
 
                       return (
                         <AntdCards

@@ -77,8 +77,15 @@ const MyProfile = () => {
           ? dayjs(profile.trainingCert.from_course)
           : dayjs(),
       });
+
+      form.setFieldsValue({
+        ...profile.profile,
+        ...profile.experience,
+        ...profile.education,
+        ...profile.trainingCert,
+      });
     }
-  }, [profile]);
+  }, [profile, form]);
 
   const handleDetails = async (values) => {
     try {
@@ -151,12 +158,6 @@ const MyProfile = () => {
       {contextHolder}
       <Form
         form={form}
-        initialValues={{
-          ...profile.profile,
-          ...profile.experience,
-          ...profile.education,
-          ...profile.trainingCert,
-        }}
         onFinish={handleDetails}
         layout="vertical"
         className="space-y-6"

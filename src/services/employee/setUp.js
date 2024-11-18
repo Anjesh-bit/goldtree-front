@@ -131,11 +131,11 @@ export const useGetAllPosts = () => {
   });
 };
 
-export const useGetSinglePost = (id) => {
+export const useGetSinglePost = (id, userId) => {
   return useQuery({
-    queryKey: [employeeQueryKeys.setUp.getSinglePost, id],
-    queryFn: () => fetcher(`get-emp-post-single/${id}`),
-    enabled: !!id,
+    queryKey: [employeeQueryKeys.setUp.getSinglePost, id, userId],
+    queryFn: () => fetcher(`get-emp-post-single?id=${id}&userId=${userId}`),
+    enabled: !!(id && userId),
   });
 };
 

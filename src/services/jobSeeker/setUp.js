@@ -92,16 +92,16 @@ export const useGetJobsApplied = (id, isShorList, isSavedJobs) => {
   });
 };
 
-export const useGetShortListed = (userId, type, isShorList) => {
+export const useGetShortListed = (userId, type, isShortList) => {
   return useQuery({
     queryFn: () => fetcher(`shortlist?userId=${userId}&type=${type}`),
     queryKey: [
       jobSeekerQueryKeys.setUp.jobSeekerGetShortListed,
       userId,
       type,
-      isShorList,
+      isShortList,
     ],
-    enabled: !!(userId && type && isShorList),
+    enabled: !!(userId && type && isShortList),
   });
 };
 

@@ -8,6 +8,8 @@ import ViewForm from './ViewForm';
 import { useSavedJobs } from '../../services/jobSeeker/setUp';
 import useMessage from '../../hooks/useMessage';
 import useAuthHook from '../../hooks/useAuthHook';
+import { AppConstant } from '../../constant';
+import AppContext from 'antd/es/app/context';
 
 const DetailJobView = () => {
   const isAuthenticated = useAuthHook(false);
@@ -20,7 +22,7 @@ const DetailJobView = () => {
     data: singlePostData,
     isLoading: singlePostLoading,
     isError: singlePostError,
-  } = useGetSinglePost(params?.id);
+  } = useGetSinglePost(params?.id, isAuthenticated?.id);
 
   const { mutateAsync, isPending, isError } = useSavedJobs(
     id,
@@ -102,12 +104,14 @@ const DetailJobView = () => {
               __html: singlePostData?.company_description,
             }}
           />
-          <AntdButton
-            classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors mt-4"
-            onClick={(e) => handleClick(e, 'saveJobs', singlePostData?._id)}
-          >
-            Save Job
-          </AntdButton>
+          {isAuthenticated?.type === AppConstant.JOB_SEEKER && (
+            <AntdButton
+              classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors mt-4"
+              onClick={(e) => handleClick(e, 'saveJobs', singlePostData?._id)}
+            >
+              Save Job
+            </AntdButton>
+          )}
         </AntdCards>
 
         <AntdCards className="p-6 bg-white shadow-lg rounded-lg border border-gray-200">
@@ -196,13 +200,16 @@ const DetailJobView = () => {
           />
         </AntdCards>
 
-        {singlePostData?.is_apply_instruction === 'm' && (
+        {((singlePostData?.is_apply_instruction === 'm' &&
+          isAuthenticated?.type === AppConstant.JOB_SEEKER) ||
+          !isAuthenticated) && (
           <AntdCards className="p-6 bg-white shadow-lg rounded-lg border border-gray-200">
             <p className="text-gray-800">
               Interested candidates fulfilling the mentioned criteria are
               encouraged to apply using the Easy Apply Button below. Registered
               candidates may also apply using the Apply Now Button.
             </p>
+
             <div className="flex gap-4 mt-4">
               <AntdButton
                 classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors"

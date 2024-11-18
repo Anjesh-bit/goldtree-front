@@ -7,9 +7,9 @@ export const Selects = (props) => {
     {
       required: props.required,
       message: (
-        <div className={`${props.prefixname ? '!mt-5' : '!mt-1'}`}>
-          {props.valmessage?.charAt(0)?.toUpperCase() +
-            props.valmessage?.slice(1)?.toLowerCase()}
+        <div className={`${props.prefixName ? '!mt-5' : '!mt-1'}`}>
+          {props.valMessage?.charAt(0)?.toUpperCase() +
+            props.valMessage?.slice(1)?.toLowerCase()}
         </div>
       ),
     },
@@ -40,7 +40,7 @@ export const Selects = (props) => {
     >
       {props.Label && (
         <div
-          className={`whitespace-nowrap text-sm font-medium
+          className={`whitespace-nowrap text-sm font-medium mb-[7px]
           } ${
             props.required
               ? "after:text-[#dc4446] after:content-['*'] after:font-[400] after:ml-1 after:text-[16px]"
@@ -90,11 +90,9 @@ export const Selects = (props) => {
             popupMatchSelectWidth={props.popupMatchSelectWidth || false}
             placeholder={
               <div
-                className={`font-Poppins text-[11px] font-medium 2xl:text-[11px] ${
-                  props.changePlaceholder
-                    ? '!font-Poppins !font-semibold mr-[12px] !text-[18px] !text-[#000]'
-                    : ''
-                }`}
+                className={
+                  'font-Poppins text-[11px] font-medium 2xl:text-[11px] '
+                }
               >
                 {props.placeholder}
               </div>
@@ -102,12 +100,12 @@ export const Selects = (props) => {
             style={{
               ...props.style,
               width: '100%',
-              height: '100%', // Set the width to props.width if it is defined, otherwise set it to '100%'
+              height: '100%',
             }}
-            {...(props.fieldProps || {
+            {...(props.fieldProps ?? {
               showSearch: true,
               filterOption: (input, option) =>
-                (option?.children || '')
+                (option?.children ?? '')
                   .toLowerCase()
                   .includes(input.toLowerCase()),
             })}

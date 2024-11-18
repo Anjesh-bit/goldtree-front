@@ -14,6 +14,7 @@ import {
 import { useEffect, useState } from 'react';
 import useAuthHook from '../../../../hooks/useAuthHook';
 import DynamicTitle from '../../../../common/DynamicTitle';
+import Avatar from 'antd/es/avatar/avatar';
 
 const { useForm } = Form;
 
@@ -103,9 +104,13 @@ const Profile = () => {
       <AntdBreadCum array={['Employee', 'Profile']} className="mb-6" />
 
       <div className="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md">
-        <DynamicTitle classNames="text-xl md:text-2xl font-medium text-[#3d2462] mb-4">
-          Primary Contact Information
-        </DynamicTitle>
+        <div className="flex justify-between">
+          <DynamicTitle classNames="text-xl md:text-2xl font-medium text-[#3d2462] mb-4">
+            Primary Contact Information
+          </DynamicTitle>
+          <Avatar src={profileData?.[0]?.profile_images} size={100} />
+        </div>
+
         <PrimaryContactInfo setCKValue={setCKValue} data={ckData} />
       </div>
 
