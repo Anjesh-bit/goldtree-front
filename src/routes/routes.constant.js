@@ -21,6 +21,7 @@ import {
   SavedJobs,
   Search,
 } from './LazyRoute';
+import DynamicTabs from '../components/auth';
 
 export const homeConfig = [
   {
@@ -43,6 +44,7 @@ export const authConfig = [
     path: 'auth/register/employee',
     element: <EmployeeRegistration />,
   },
+  { path: 'auth/login', element: <DynamicTabs dataKey={'login'} /> },
 ];
 
 export const employeeConfig = [

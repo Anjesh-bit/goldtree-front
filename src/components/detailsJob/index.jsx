@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useGetSinglePost } from '../../services/employee/setUp';
 import AntdCards from '../../common/AntdCards';
 import { Tag, Skeleton } from 'antd';
@@ -13,7 +13,7 @@ import AppContext from 'antd/es/app/context';
 
 const DetailJobView = () => {
   const isAuthenticated = useAuthHook(false);
-
+  const navigate = useNavigate();
   const [open, setOpen] = useState({ open: false });
   const [id, setId] = useState('');
   const params = useParams();
@@ -32,7 +32,19 @@ const DetailJobView = () => {
 
   const handleClick = (e, filter, id) => {
     e.preventDefault();
-    const isOpen = filter === 'easy';
+
+    const isEasyApply = filter === 'easy';
+    const isDirectApply = filter === 'direct';
+
+    if (!isAuthenticated && isDirectApply) {
+      navigate('/auth/login', {
+        state: {
+          redirectTo: `/jobs/${singlePostData?.company_name}/${singlePostData?._id}`,
+        },
+      });
+      return;
+    }
+
     const isSaveJobs = filter === 'saveJobs';
 
     if (isAuthenticated && isSaveJobs) {
@@ -58,14 +70,14 @@ const DetailJobView = () => {
       };
       savedJobs();
     } else {
-      const postData = isOpen
+      const postData = isEasyApply
         ? singlePostData?._id
         : [singlePostData?._id, singlePostData?.company_name];
 
       setOpen({
         open: true,
         data: postData,
-        isApplyNow: !isOpen,
+        isApplyNow: !isEasyApply,
         isSaveJobs,
       });
     }
@@ -219,7 +231,7 @@ const DetailJobView = () => {
               </AntdButton>
               <AntdButton
                 classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors"
-                onClick={(e) => handleClick(e, 'now')}
+                onClick={(e) => handleClick(e, 'direct')}
               >
                 Apply Now
               </AntdButton>

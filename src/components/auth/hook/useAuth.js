@@ -1,13 +1,14 @@
 import { useForm } from 'antd/es/form/Form';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AppConstant } from '../../../constant';
 import login from '../../../services/auth/login';
 import useMessage from '../../../hooks/useMessage';
 import { useRegister } from '../../../services/auth/register';
 
-export const useAuth = (isEmployee, isEmployeeTabItems, modalData, setOpen) => {
+export const useAuth = (isEmployee, isEmployeeTabItems, setOpen) => {
+  const location = useLocation();
   const [form] = useForm();
   const {
     mutateAsync: mutateRegister,
@@ -71,19 +72,19 @@ export const useAuth = (isEmployee, isEmployeeTabItems, modalData, setOpen) => {
 
   useEffect(() => {
     const { user, token } = data;
+    const { state } = location;
     if (user && token) {
-      const isNotEmpty = modalData?.length > 0;
-      if (isNotEmpty) {
-        navigate(`/jobs/${modalData[1]}/${modalData[0]}`);
-        setOpen({ open: false, data: null });
+      const dashboardRoute = isEmployee
+        ? AppConstant.EMPLOYEE_URL
+        : AppConstant.JOB_SEEKER_URL;
+      if (state?.redirectTo) {
+        navigate(state.redirectTo, { replace: true });
+        window.location.reload();
       } else {
-        const dashboardRoute = isEmployee
-          ? AppConstant.EMPLOYEE_URL
-          : AppConstant.JOB_SEEKER_URL;
         navigate(dashboardRoute);
       }
     }
-  }, [navigate, data, modalData, isEmployee, setOpen]);
+  }, [navigate, data, isEmployee, setOpen, location]);
 
   useEffect(() => {
     if (isSuccess) {

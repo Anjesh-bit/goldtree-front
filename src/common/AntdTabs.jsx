@@ -1,5 +1,5 @@
 import { Tabs } from 'antd';
-import '../styles/antd.css';
+
 const AntdTabs = (props) => {
   return (
     <Tabs

@@ -6,3 +6,7 @@
   color: #3d2462;
   font-weight: bold;
 }
+
+.ant-message {
+  z-index: 9999;
+}

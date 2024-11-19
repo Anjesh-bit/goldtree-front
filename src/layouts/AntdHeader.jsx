@@ -16,6 +16,7 @@ const { Header } = Layout;
 const AntdHeader = () => {
   const dispatch = useDispatch();
   const isAuthenticated = useAuthHook(false);
+
   const { mutateAsync, isPending } = useLogout();
   const navigate = useNavigate();
 
@@ -26,6 +27,7 @@ const AntdHeader = () => {
       await mutateAsync();
       dispatch(logOut());
       navigate('/');
+      window.location.reload();
     } catch (e) {}
   };
 
@@ -68,12 +70,18 @@ const AntdHeader = () => {
         <div className="hidden lg:flex items-center gap-4">
           {!isAuthenticated ? (
             <>
-              <PopOver content={<DynamicTabs dataKey="login" />}>
+              <PopOver
+                content={<DynamicTabs dataKey="login" />}
+                trigger={'click'}
+              >
                 <AntdButton classNames="bg-transparent border border-white text-white px-6 hover:!bg-white hover:!text-black transition-colors font-semibold">
                   Login
                 </AntdButton>
               </PopOver>
-              <PopOver content={<DynamicTabs dataKey="registration" />}>
+              <PopOver
+                content={<DynamicTabs dataKey="registration" />}
+                trigger={'click'}
+              >
                 <AntdButton classNames="border border-white text-white px-6 hover:!bg-white hover:!text-black transition-colors font-semibold">
                   Register
                 </AntdButton>
@@ -81,6 +89,7 @@ const AntdHeader = () => {
             </>
           ) : (
             <PopOver
+              trigger={'click'}
               content={
                 <div className="flex flex-col gap-2 p-4 bg-white text-black">
                   <p className="font-semibold text-lg text-center">

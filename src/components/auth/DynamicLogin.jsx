@@ -5,9 +5,9 @@ import { Fragment } from 'react';
 import { useAuth } from './hook/useAuth';
 import { AuthConstant } from './auth.constant';
 
-const DynamicLogin = ({ isEmployee, modalData, setOpen }) => {
+const DynamicLogin = ({ isEmployee, setOpen }) => {
   const { handleOnClick, handleOnFinishLogin, contextHolder, form, data } =
-    useAuth(isEmployee, AuthConstant.DEFAULT_IS_TAB_ITEMS, modalData, setOpen);
+    useAuth(isEmployee, AuthConstant.DEFAULT_IS_TAB_ITEMS, setOpen);
 
   return (
     <Fragment>

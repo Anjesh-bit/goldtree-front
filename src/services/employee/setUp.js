@@ -135,7 +135,7 @@ export const useGetSinglePost = (id, userId) => {
   return useQuery({
     queryKey: [employeeQueryKeys.setUp.getSinglePost, id, userId],
     queryFn: () => fetcher(`get-emp-post-single?id=${id}&userId=${userId}`),
-    enabled: !!(id && userId),
+    enabled: !!id,
   });
 };
 
