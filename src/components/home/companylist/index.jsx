@@ -2,8 +2,12 @@ import AntdButton from '../../../common/AntdButtons';
 import AntdCards from '../../../common/AntdCards';
 import { dummyDataCompanyList } from '../Data';
 import DynamicTitle from '../../../common/DynamicTitle';
+import { useGetAllEmployeeList } from '../../../services/commonService/setUp';
 
 const CompanyList = () => {
+  const { isLoading, isError, data } = useGetAllEmployeeList();
+  console.log(data);
+
   return (
     <div className="bg-gray-200 p-4 md:p-8 lg:p-12 xl:p-[48px] py-6">
       <div className="bg-white p-6 rounded-lg shadow-md mb-6">
@@ -17,21 +21,37 @@ const CompanyList = () => {
         </p>
       </div>
       <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        {dummyDataCompanyList?.map((item, index) => (
+        {data?.map((item, index) => (
           <AntdCards
-            className="p-4 bg-white rounded-lg shadow-md border"
+            className="p-4 bg-white rounded-lg shadow-md border transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl hover:bg-[#e8f4f9]"
             key={index}
           >
             <div className="flex flex-col gap-4">
-              <div className="text-lg md:text-xl font-semibold text-gray-800">
-                {item.company}
+              <div className="flex justify-center mb-4">
+                <img
+                  src={item.profile_images ?? 'default-image.jpg'}
+                  alt={item.personalInfo.company_name}
+                  className="w-24 h-24 object-cover rounded-full"
+                />
               </div>
-              <div className="text-sm text-gray-600">{item.description}</div>
-              <div className="flex flex-wrap gap-2">
-                <AntdButton classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors">
+
+              <div className="text-lg md:text-xl font-semibold text-gray-800">
+                {item.personalInfo.company_name ?? 'N/A'}
+              </div>
+
+              <div className="text-sm text-gray-600">
+                <strong>Company Type:</strong>{' '}
+                {item.personalInfo.company_type ?? 'N/A'}
+              </div>
+
+              <div className="text-sm text-gray-600">
+                <strong>Location:</strong> {item.personalInfo.location ?? 'N/A'}
+              </div>
+              <div className="flex flex-wrap gap-2 mt-4">
+                <AntdButton classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors transform hover:scale-105">
                   Full Time
                 </AntdButton>
-                <AntdButton classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors">
+                <AntdButton classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors transform hover:scale-105">
                   Remote
                 </AntdButton>
               </div>

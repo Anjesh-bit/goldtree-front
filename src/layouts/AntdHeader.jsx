@@ -56,7 +56,11 @@ const AntdHeader = () => {
           className="hidden lg:flex flex-grow justify-center items-center text-lg font-semibold"
           theme="dark"
         >
-          <Menu.Item key="1" className="text-gray-300">
+          <Menu.Item
+            key="1"
+            className="text-gray-300"
+            onClick={() => navigate('/search')}
+          >
             Find Jobs
           </Menu.Item>
           <Menu.Item key="2" className="text-gray-300">
@@ -133,6 +137,15 @@ const AntdHeader = () => {
             <Menu.Item key="1">Find Jobs</Menu.Item>
             <Menu.Item key="2">Companies</Menu.Item>
             <Menu.Item key="3">Career Mentoring</Menu.Item>
+            <Menu.Item
+              key="4"
+              onClick={() => {
+                navigate('auth/login');
+                setDrawerVisible(false);
+              }}
+            >
+              Login
+            </Menu.Item>
           </Menu>
         </Drawer>
       </Header>

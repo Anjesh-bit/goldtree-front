@@ -10,3 +10,10 @@
 .ant-message {
   z-index: 9999;
 }
+
+.css-dev-only-do-not-override-1rqnfsa .ant-menu-dark .ant-menu-item-selected,
+.css-dev-only-do-not-override-1rqnfsa
+  .ant-menu-dark
+  .ant-menu-item-selected:hover {
+  background-color: transparent;
+}

@@ -48,24 +48,28 @@ const FeaturedJobs = () => {
             key={companyName}
             className="bg-white rounded-lg shadow-md border-none"
           >
-            <Collapse className="bg-white">
+            <Collapse
+              className="bg-white border-none rounded-lg shadow-md"
+              accordion
+            >
               <Panel
                 header={
-                  <div className="text-xl font-semibold text-[#08142c] bg-white">
+                  <div className="text-lg lg:text-xl font-semibold text-[#08142c]">
                     {companyName}
                   </div>
                 }
                 key={companyName}
+                className="rounded-lg"
               >
                 {posts.map((post) => (
                   <div
                     key={post._id}
-                    className="py-2 cursor-pointer hover:bg-[#e8f4f9] hover:text-[#00b6b4] transition-colors"
+                    className="py-2 px-4 rounded-lg cursor-pointer hover:bg-[#e8f4f9] hover:text-[#00b6b4] transition-colors"
                     onClick={(e) =>
                       handleProductClick(e, post._id, companyName)
                     }
                   >
-                    <div className="text-sm font-medium text-gray-800">
+                    <div className="text-sm lg:text-base font-medium text-gray-800">
                       {post.job_catagory}
                     </div>
                   </div>

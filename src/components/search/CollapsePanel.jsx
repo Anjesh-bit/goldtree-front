@@ -3,13 +3,14 @@ import CollapsePanel from 'antd/es/collapse/CollapsePanel';
 
 const CollapseSearch = ({ header, children }) => {
   return (
-    <Collapse>
+    <Collapse className="border-none shadow-sm rounded-md">
       <CollapsePanel
         header={
-          <div className="text-[0.9rem] font-normal text-[#3d2462] tracking-wide">
+          <div className="text-base font-medium text-gray-800 tracking-wide">
             {header}
           </div>
         }
+        className="bg-gray-50"
       >
         {children}
       </CollapsePanel>

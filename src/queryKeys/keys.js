@@ -24,3 +24,9 @@ export const searchQueryKeys = {
     globalSearch: 'globalSearch',
   },
 };
+
+export const commonServiceKeys = {
+  setUp: {
+    findAllEmployeeList: 'findAllEmployeeList',
+  },
+};

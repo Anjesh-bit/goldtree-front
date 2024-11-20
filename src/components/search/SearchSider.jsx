@@ -9,7 +9,6 @@ import {
 
 import CollapseSearch from './CollapsePanel';
 
-//use database fetch on future
 const fakeArr = [
   { id: 1, name: 'Top Jobs' },
   { id: 2, name: 'Hot Jobs' },
@@ -27,58 +26,55 @@ const SearchSider = ({ setQuerySearchParams }) => {
   };
 
   return (
-    <div>
-      <Selects
-        className="w-full"
-        Label="Location"
-        name="industry_type"
-        description="name"
-        value="name"
-        array={fakeArr}
-      />
-      <Selects
-        className="w-full"
-        Label="Company"
-        name="industry_type"
-        description="name"
-        value="name"
-        array={fakeArr}
-      />
-      <div className="flex flex-col gap-y-[24px]">
-        <div className="text-[1.2rem] font-medium">Catagories :</div>
-
-        <div>
-          <CollapseSearch header={'VACANCY TYPE'}>
-            <AntdCheckBoxGroup
-              options={timeOptions}
-              onChange={(e) => handleOnchange(e, 'vacancyType')}
-            />
-          </CollapseSearch>
-        </div>
-        <div>
-          <CollapseSearch header={'CAREER LEVEL'}>
-            <AntdCheckBoxGroup
-              options={levelOptions}
-              onChange={(e) => handleOnchange(e, 'careerLevel')}
-            />
-          </CollapseSearch>
-        </div>
-        <div>
-          <CollapseSearch header={'GENDER'}>
-            <AntdCheckBoxGroup
-              options={genderOptions}
-              onChange={(e) => handleOnchange(e, 'gender')}
-            />
-          </CollapseSearch>
-        </div>
-        <div>
-          <CollapseSearch header={'QUALIFICATIONS'}>
-            <AntdCheckBoxGroup
-              options={educationOptions}
-              onChange={(e) => handleOnchange(e, 'qualifications')}
-            />
-          </CollapseSearch>
-        </div>
+    <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+      <div className="mb-8">
+        <Selects
+          className="w-full"
+          Label="Location"
+          name="industry_type"
+          description="name"
+          value="name"
+          array={fakeArr}
+        />
+      </div>
+      <div className="mb-8">
+        <Selects
+          className="w-full"
+          Label="Company"
+          name="industry_type"
+          description="name"
+          value="name"
+          array={fakeArr}
+        />
+      </div>
+      <div className="text-xl font-semibold text-gray-900 mb-6 border-b border-gray-300 pb-2">
+        Categories
+      </div>
+      <div className="flex flex-col gap-8">
+        <CollapseSearch header="VACANCY TYPE">
+          <AntdCheckBoxGroup
+            options={timeOptions}
+            onChange={(e) => handleOnchange(e, 'vacancyType')}
+          />
+        </CollapseSearch>
+        <CollapseSearch header="CAREER LEVEL">
+          <AntdCheckBoxGroup
+            options={levelOptions}
+            onChange={(e) => handleOnchange(e, 'careerLevel')}
+          />
+        </CollapseSearch>
+        <CollapseSearch header="GENDER">
+          <AntdCheckBoxGroup
+            options={genderOptions}
+            onChange={(e) => handleOnchange(e, 'gender')}
+          />
+        </CollapseSearch>
+        <CollapseSearch header="QUALIFICATIONS">
+          <AntdCheckBoxGroup
+            options={educationOptions}
+            onChange={(e) => handleOnchange(e, 'qualifications')}
+          />
+        </CollapseSearch>
       </div>
     </div>
   );

@@ -1,5 +1,7 @@
 import { Input } from 'antd';
+
 const { Search } = Input;
+
 const AntdSearch = ({
   placeholder,
   enterButton,
@@ -18,17 +20,19 @@ const AntdSearch = ({
   };
 
   return (
-    <>
+    <div
+      className={`flex items-center bg-[#f5f5f5] rounded-lg shadow-md p-4 transition-all duration-300 hover:bg-[#f0f4f8] hover:shadow-lg ${className}`}
+    >
       <Search
-        className={className}
         placeholder={placeholder}
         enterButton={enterButton}
         onSearch={handleOnSearch}
         onChange={handleOnchange}
-        size={size}
+        size={size || 'large'}
         loading={loading}
+        className="w-full border-none focus:ring-2 focus:ring-[#00b6b4] rounded-lg"
       />
-    </>
+    </div>
   );
 };
 

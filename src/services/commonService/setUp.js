@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { putUploader } from '../../axios/uploader';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { fetcher } from '../../axios/fetcher';
+import { commonServiceKeys } from '../../queryKeys/keys';
 
 export const useUpdateProfile = (type, id) => {
   const [localLoading, setLocalLoading] = useState(false);
@@ -55,4 +57,11 @@ export const useShortList = (data) => {
     data: query.data,
     isSuccess: query.isSuccess,
   };
+};
+
+export const useGetAllEmployeeList = () => {
+  return useQuery({
+    queryKey: [commonServiceKeys.setUp.getAllPosts],
+    queryFn: () => fetcher('emp-profile-info'),
+  });
 };
