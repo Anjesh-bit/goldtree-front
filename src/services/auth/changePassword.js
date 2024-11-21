@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
-import { uploader } from '../../axios/uploader';
+import { uploader } from '../../lib/axios/uploader';
 
 export const useChangePassword = (userId, type) => {
   const [localLoading, setLocalLoading] = useState(false);

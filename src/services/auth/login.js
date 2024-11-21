@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axiosInstance from '../../axios/AxiosInstance';
+import axiosInstance from '../../lib/axios/AxiosInstance';
 
-import { getLocalStorage } from '../../utils/localStorage';
-import { uploader } from '../../axios/uploader';
+import { getLocalStorage } from '../../shared/utils/localStorage';
+import { uploader } from '../../lib/axios/uploader';
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 
@@ -35,8 +35,13 @@ const login = createAsyncThunk(
 export const getNewAccessToken = async (axiosInstance) => {
   const type = getLocalStorage('loginData')?.type;
   try {
-    const response = await axiosInstance.post(`/token/${type || 'jobSeeker'}`);
-    return response.data.accessToken;
+    if (type) {
+      const response = await axiosInstance.post(
+        `/token/${type || 'jobSeeker'}`
+      );
+      return response.data.accessToken;
+    }
+    return null;
   } catch (error) {
     throw error;
   }

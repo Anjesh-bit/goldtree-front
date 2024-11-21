@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { isAuthenticated } from '../utils/auth';
+import { isAuthenticated } from '../shared/utils/auth';
 
 const useAuthHook = (init) => {
   const [isAuth, setIsAuth] = useState(init);

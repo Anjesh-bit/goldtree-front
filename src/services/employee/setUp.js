@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { putUploader, uploader } from '../../axios/uploader';
+import { putUploader, uploader } from '../../lib/axios/uploader';
 import { useState } from 'react';
-import { fetcher } from '../../axios/fetcher';
+import { fetcher } from '../../lib/axios/fetcher';
 import { employeeQueryKeys } from '../../queryKeys/keys';
 
 export const useGetEasyApply = (id) => {

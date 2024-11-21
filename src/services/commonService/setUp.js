@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { putUploader } from '../../axios/uploader';
+import { putUploader } from '../../lib/axios/uploader';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { fetcher } from '../../axios/fetcher';
+import { fetcher } from '../../lib/axios/fetcher';
 import { commonServiceKeys } from '../../queryKeys/keys';
 
 export const useUpdateProfile = (type, id) => {

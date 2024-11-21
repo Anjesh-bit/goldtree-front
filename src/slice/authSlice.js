@@ -1,8 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import login from '../services/auth/login';
-import { getLocalStorage, removeLocalStorage } from '../utils/localStorage';
-import { deleteCookies, getCookies } from '../utils/cookies';
-import { auth } from '../utils/auth';
+import {
+  getLocalStorage,
+  removeLocalStorage,
+} from '../shared/utils/localStorage';
+import { deleteCookies, getCookies } from '../shared/utils/cookies';
+import { auth } from '../shared/utils/auth';
 import { jwtDecode } from 'jwt-decode';
 
 const initialState = {

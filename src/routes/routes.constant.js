@@ -22,7 +22,7 @@ import {
   Search,
   EmployeeDetails,
 } from './LazyRoute';
-import DynamicTabs from '../components/auth';
+import DynamicTabs from '../features/auth';
 
 export const homeConfig = [
   {

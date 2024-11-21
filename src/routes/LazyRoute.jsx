@@ -1,59 +1,57 @@
 import { lazy } from 'react';
 
-export const JobPortalHome = lazy(() => import('../components/home'));
-export const DashBoard = lazy(
-  () => import('../components/dashboard/DashBoard')
-);
+export const JobPortalHome = lazy(() => import('../features/home'));
+export const DashBoard = lazy(() => import('../features/dashboard/DashBoard'));
 export const JobSeekerRegistration = lazy(
-  () => import('../components/auth/register/jobSeeker')
+  () => import('../features/auth/register/jobSeeker')
 );
 export const EmployeeRegistration = lazy(
-  () => import('../components/auth/register/employers')
+  () => import('../features/auth/register/employers')
 );
 export const MyProfile = lazy(
-  () => import('../components/dashboard/jobseeker/myProfile')
+  () => import('../features/dashboard/jobseeker/myProfile')
 );
 export const JobApplied = lazy(
-  () => import('../components/dashboard/employee/jobsApplied')
+  () => import('../features/dashboard/employee/jobsApplied')
 );
 export const ManageJobs = lazy(
-  () => import('../components/dashboard/employee/manageJobs')
+  () => import('../features/dashboard/employee/manageJobs')
 );
 export const PostJobs = lazy(
-  () => import('../components/dashboard/employee/posts')
+  () => import('../features/dashboard/employee/posts')
 );
 export const Profile = lazy(
-  () => import('../components/dashboard/employee/profile')
+  () => import('../features/dashboard/employee/profile')
 );
 export const ShorlistCandidate = lazy(
-  () => import('../components/dashboard/employee/shortListCandidates')
+  () => import('../features/dashboard/employee/shortListCandidates')
 );
 export const ChangePassword = lazy(
-  () => import('../components/dashboard/ChangePassword')
+  () => import('../features/dashboard/ChangePassword')
 );
 export const DeactivateAccount = lazy(
-  () => import('../components/dashboard/DeactivateAccount')
+  () => import('../features/dashboard/DeactivateAccount')
 );
-export const DetailJobView = lazy(() => import('../components/detailsJob'));
+export const DetailJobView = lazy(() => import('../features/detailsJob'));
 export const AppliedJobs = lazy(
-  () => import('../components/dashboard/jobseeker/appliedJobs')
+  () => import('../features/dashboard/jobseeker/appliedJobs')
 );
 export const UploadPhotoJobSeeker = lazy(
-  () => import('../components/dashboard/jobseeker/uploadPhoto')
+  () => import('../features/dashboard/jobseeker/uploadPhoto')
 );
 export const UploadPhotoEmployee = lazy(
-  () => import('../components/dashboard/employee/uploadphoto')
+  () => import('../features/dashboard/employee/uploadphoto')
 );
 export const MyResume = lazy(
-  () => import('../components/dashboard/jobseeker/myResume')
+  () => import('../features/dashboard/jobseeker/myResume')
 );
 export const ShortListedJobs = lazy(
-  () => import('../components/dashboard/jobseeker/shortListed')
+  () => import('../features/dashboard/jobseeker/shortListed')
 );
 export const SavedJobs = lazy(
-  () => import('../components/dashboard/jobseeker/savedJobs')
+  () => import('../features/dashboard/jobseeker/savedJobs')
 );
-export const Search = lazy(() => import('../components/search'));
+export const Search = lazy(() => import('../features/search'));
 export const EmployeeDetails = lazy(
-  () => import('../components/employeeDetails')
+  () => import('../features/employeeDetails')
 );

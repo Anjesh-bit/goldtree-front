@@ -6,10 +6,10 @@ import {
   employeeConfig,
   jobSeekerConfig,
 } from './routes.constant';
-import MainLayout from '../layouts/MainLayout';
-import DashboardLayout from '../layouts/DashBoardLayout';
+import MainLayout from '../shared/components/layouts/MainLayout';
+import DashboardLayout from '../shared/components/layouts/DashBoardLayout';
 import ProtectedRoute from './ProtectedRoutes';
-import { AppConstant } from '../constant';
+import { AppConstant } from '../shared/constants';
 
 const EmployeeDashboardLayouts = ProtectedRoute(DashboardLayout, 'employee');
 const JobSeekerDashboardLayouts = ProtectedRoute(DashboardLayout, 'jobSeeker');

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { searchQueryKeys } from '../../queryKeys/keys';
-import { fetcher } from '../../axios/fetcher';
+import { fetcher } from '../../lib/axios/fetcher';
 import isEmpty from 'lodash/isEmpty';
 
 export const useGlobalSearch = (params) => {

@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import './styles/antd.css';
+@import './shared/styles/antd.css';
 
 @layer base {
   :root {

@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { uploader } from '../../axios/uploader';
+import { uploader } from '../../lib/axios/uploader';
 import { useState } from 'react';
 
 export const useDeactivateAccount = (userId, type) => {
