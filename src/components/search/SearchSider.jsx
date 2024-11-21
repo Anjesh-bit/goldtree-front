@@ -7,7 +7,7 @@ import {
   timeOptions,
 } from '../../utils/checkGroup';
 
-import CollapseSearch from './CollapsePanel';
+import { CollapseSearch } from './CollapsePanel';
 
 const fakeArr = [
   { id: 1, name: 'Top Jobs' },
@@ -18,7 +18,7 @@ const fakeArr = [
   { id: 6, name: 'Intern' },
 ];
 
-const SearchSider = ({ setQuerySearchParams }) => {
+export const SearchSider = ({ setQuerySearchParams }) => {
   const handleOnchange = (e, name) => {
     setQuerySearchParams((prevParams) => {
       return { ...prevParams, [name]: e };
@@ -79,5 +79,3 @@ const SearchSider = ({ setQuerySearchParams }) => {
     </div>
   );
 };
-
-export default SearchSider;

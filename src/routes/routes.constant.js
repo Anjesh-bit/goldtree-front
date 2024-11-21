@@ -20,6 +20,7 @@ import {
   ShortListedJobs,
   SavedJobs,
   Search,
+  EmployeeDetails,
 } from './LazyRoute';
 import DynamicTabs from '../components/auth';
 
@@ -32,7 +33,14 @@ export const homeConfig = [
     path: 'jobs/:jobtitle/:id',
     element: <DetailJobView />,
   },
-  { path: 'search', element: <Search /> },
+  {
+    path: 'search',
+    element: <Search />,
+  },
+  {
+    path: 'employee/:id',
+    element: <EmployeeDetails />,
+  },
 ];
 
 export const authConfig = [
@@ -44,7 +52,10 @@ export const authConfig = [
     path: 'auth/register/employee',
     element: <EmployeeRegistration />,
   },
-  { path: 'auth/login', element: <DynamicTabs dataKey={'login'} /> },
+  {
+    path: 'auth/login',
+    element: <DynamicTabs dataKey={'login'} />,
+  },
 ];
 
 export const employeeConfig = [

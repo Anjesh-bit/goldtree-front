@@ -8,7 +8,7 @@ import useAuthHook from '../../hooks/useAuthHook';
 import TextAreas from '../../common/form/AntdTextArea';
 import useMessage from '../../hooks/useMessage';
 
-const ViewForm = ({ open, setOpen }) => {
+export const ViewForm = ({ open, setOpen }) => {
   const isAuthenticated = useAuthHook(false);
 
   const [form] = useForm();
@@ -134,5 +134,3 @@ const ViewForm = ({ open, setOpen }) => {
     </AntModal>
   );
 };
-
-export default ViewForm;

@@ -54,3 +54,6 @@ export const SavedJobs = lazy(
   () => import('../components/dashboard/jobseeker/savedJobs')
 );
 export const Search = lazy(() => import('../components/search'));
+export const EmployeeDetails = lazy(
+  () => import('../components/employeeDetails')
+);

@@ -1,7 +1,7 @@
 import Collapse from 'antd/es/collapse';
 import CollapsePanel from 'antd/es/collapse/CollapsePanel';
 
-const CollapseSearch = ({ header, children }) => {
+export const CollapseSearch = ({ header, children }) => {
   return (
     <Collapse className="border-none shadow-sm rounded-md">
       <CollapsePanel
@@ -17,5 +17,3 @@ const CollapseSearch = ({ header, children }) => {
     </Collapse>
   );
 };
-
-export default CollapseSearch;

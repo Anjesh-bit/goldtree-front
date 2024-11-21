@@ -6,6 +6,7 @@ export const employeeQueryKeys = {
     getSinglePost: 'getSinglePost',
     getAllShortListedCandidates: 'getAllShortListedCandidates',
     getAllApplied: 'getAllApplied',
+    getSingleEmployeeDataById: 'getSingleEmployeeDataById',
   },
 };
 

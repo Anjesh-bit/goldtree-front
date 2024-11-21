@@ -3,10 +3,14 @@ import AntdCards from '../../../common/AntdCards';
 import { dummyDataCompanyList } from '../Data';
 import DynamicTitle from '../../../common/DynamicTitle';
 import { useGetAllEmployeeList } from '../../../services/commonService/setUp';
+import { useNavigate } from 'react-router-dom';
 
 const CompanyList = () => {
   const { isLoading, isError, data } = useGetAllEmployeeList();
-  console.log(data);
+  const navigate = useNavigate();
+  const handleCardClick = (id) => {
+    if (id) navigate(`/employee/${id}`);
+  };
 
   return (
     <div className="bg-gray-200 p-4 md:p-8 lg:p-12 xl:p-[48px] py-6">
@@ -23,6 +27,7 @@ const CompanyList = () => {
       <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {data?.map((item, index) => (
           <AntdCards
+            onClick={() => handleCardClick(item._id)}
             className="p-4 bg-white rounded-lg shadow-md border transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl hover:bg-[#e8f4f9]"
             key={index}
           >

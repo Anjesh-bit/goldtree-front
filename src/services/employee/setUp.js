@@ -146,3 +146,11 @@ export const useGetAllShortListedCandidates = (id) => {
     enabled: !!id,
   });
 };
+
+export const useGetSingleEmployeeDataById = (id) => {
+  return useQuery({
+    queryKey: [employeeQueryKeys.setUp.getSingleEmployeeDataById],
+    queryFn: () => fetcher(`emp-profile-information/${id}`),
+    enabled: !!id,
+  });
+};

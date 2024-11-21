@@ -1,6 +1,6 @@
 import isEmpty from 'lodash/isEmpty';
 
-const MatchView = ({ matchedData, isLoading }) => {
+export const MatchView = ({ matchedData, isLoading }) => {
   if (isEmpty(matchedData))
     return (
       <div className="text-center flex justify-center items-center h-full text-gray-700">
@@ -44,5 +44,3 @@ const MatchView = ({ matchedData, isLoading }) => {
     </div>
   );
 };
-
-export default MatchView;

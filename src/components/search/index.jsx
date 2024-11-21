@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import AntdSearch from '../../common/AntdSearch';
 import { useGlobalSearch } from '../../services/search/setUp';
-import MatchView from './MatchView';
-import SearchSider from './SearchSider';
+import { MatchView } from './MatchView';
+import { SearchSider } from './SearchSider';
 import { useLocation } from 'react-router-dom';
 
 const Search = () => {

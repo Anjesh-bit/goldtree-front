@@ -4,12 +4,12 @@ import AntdCards from '../../common/AntdCards';
 import { Tag, Skeleton } from 'antd';
 import AntdButton from '../../common/AntdButtons';
 import { useState } from 'react';
-import ViewForm from './ViewForm';
+import { ViewForm } from './ViewForm';
 import { useSavedJobs } from '../../services/jobSeeker/setUp';
 import useMessage from '../../hooks/useMessage';
 import useAuthHook from '../../hooks/useAuthHook';
 import { AppConstant } from '../../constant';
-import AppContext from 'antd/es/app/context';
+import dayjs from 'dayjs';
 
 const DetailJobView = () => {
   const isAuthenticated = useAuthHook(false);
@@ -96,6 +96,13 @@ const DetailJobView = () => {
     );
   }
 
+  const applyBeforeDate = dayjs(singlePostData?.timestamp).add(
+    singlePostData?.apply_before,
+    'day'
+  );
+
+  const isClosed = dayjs().isAfter(applyBeforeDate);
+
   return (
     <>
       {contextHolder}
@@ -132,7 +139,11 @@ const DetailJobView = () => {
               {singlePostData?.job_title}
             </h2>
             <span className="text-sm text-gray-600">
-              Apply Before: {singlePostData?.apply_before} days
+              {isClosed ? (
+                <div className="text-[#FF0000]">Closed</div>
+              ) : (
+                `Apply Before: ${applyBeforeDate.format('MMMM D, YYYY')}`
+              )}
             </span>
           </div>
 
