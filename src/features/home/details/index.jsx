@@ -26,9 +26,7 @@ const DetailedComponent = () => {
             <AntdSearch
               className="bg-white rounded-lg shadow-md"
               placeholder="Job Titles, Salaries, or Companies"
-              enterButton={
-                <div className="text-black font-semibold">Search</div>
-              }
+              enterButton={<div className="font-semibold">Search</div>}
               size="large"
               loading={false}
               onSearch={handleSearch}

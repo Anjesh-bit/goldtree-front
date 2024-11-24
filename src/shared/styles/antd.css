@@ -11,9 +11,13 @@
   z-index: 9999;
 }
 
-.css-dev-only-do-not-override-1rqnfsa .ant-menu-dark .ant-menu-item-selected,
-.css-dev-only-do-not-override-1rqnfsa
-  .ant-menu-dark
-  .ant-menu-item-selected:hover {
-  background-color: transparent;
+.ant-menu-item-active,
+.ant-menu-item-selected {
+  background-color: transparent !important;
+}
+
+.ant-input-search-button {
+  background-color: #08142c !important;
+  color: #ffffff !important;
+  border-color: #08142c !important;
 }

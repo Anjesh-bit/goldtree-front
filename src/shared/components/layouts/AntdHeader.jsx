@@ -87,7 +87,7 @@ const AntdHeader = () => {
                 content={<DynamicTabs dataKey="registration" />}
                 trigger={'click'}
               >
-                <AntdButton classNames="border border-white text-white px-6 hover:!bg-white hover:!text-black transition-colors font-semibold">
+                <AntdButton classNames="border border-white bg-transparent text-white px-6 hover:!bg-white hover:!text-black transition-colors font-semibold">
                   Register
                 </AntdButton>
               </PopOver>
@@ -119,7 +119,7 @@ const AntdHeader = () => {
               }
             >
               <AntdButton
-                classNames="border border-white text-white px-6 hover:!bg-white hover:!text-black transition-colors font-semibold"
+                classNames="border border-white bg-transparent text-white px-6 hover:!bg-white hover:!text-black transition-colors font-semibold"
                 loading={isPending}
               >
                 Logout
