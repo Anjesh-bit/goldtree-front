@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Layout, Menu, Drawer, Button } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
 import AntdButton from '../AntdButtons';
-import PopOver from '../../../features/auth/PopOver';
 import DynamicTabs from '../../../features/auth';
 import { useDispatch } from 'react-redux';
 import { logOut } from '../../../slice/authSlice';
@@ -11,6 +10,7 @@ import useAuthHook from '../../../hooks/useAuthHook';
 import { useLogout } from '../../../services/auth/login';
 
 import '../../styles/main.css';
+import PopOver from '../../../features/auth/components/PopOver';
 
 const { Header } = Layout;
 
