@@ -7,8 +7,11 @@ import { getNewAccessToken } from '../../services/auth/login';
 
 let isRefreshing = false;
 let refreshSubscribers = [];
-const url = 'http://localhost:5000/goldtree/';
-const axiosInstance = axios.create({ baseURL: url, withCredentials: true });
+
+const axiosInstance = axios.create({
+  baseURL: process.env.GOLD_JOB_TREE_API_URL,
+  withCredentials: true,
+});
 
 /* eslint-disable no-useless-catch */
 axiosInstance.interceptors.request.use(

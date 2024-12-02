@@ -120,4 +120,12 @@ module.exports = {
     open: true,
     historyApiFallback: true,
   },
+  externals: [
+    function ({ request }, callback) {
+      if (/^node_modules\//.test(request)) {
+        return callback(null, 'commonjs ' + request);
+      }
+      callback();
+    },
+  ],
 };
