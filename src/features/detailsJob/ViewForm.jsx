@@ -45,6 +45,7 @@ export const ViewForm = ({ open, setOpen }) => {
       setFiles(null);
       form.resetFields();
     } catch (error) {
+      console.log(error);
       if (error?.response.data.error) {
         showMessage({
           type: 'error',
@@ -64,7 +65,7 @@ export const ViewForm = ({ open, setOpen }) => {
     if (isSuccess)
       showMessage({
         type: 'success',
-        content: 'Your details have been saved successfully.',
+        content: 'Your post have been saved successfully.',
         className: 'mt-[30vh] h-[40px]',
       });
   }, [isSuccess]);

@@ -5,7 +5,13 @@ const ProfileInfo = () => {
     <div className="p-4 md:p-6 lg:p-8">
       <div className="grid grid-cols-12 gap-4">
         <div className="lg:col-span-6 md:col-span-6 col-span-12">
-          <Inputs className="w-full" Label="Full Name" name="full_name" />
+          <Inputs
+            className="w-full"
+            Label="Full Name"
+            name="full_name"
+            required
+            valMessage={'Full Name field is required.'}
+          />
         </div>
         <div className="lg:col-span-6 md:col-span-6 col-span-12">
           <Inputs className="w-full" Label="Address 1" name="address_1" />
@@ -14,7 +20,13 @@ const ProfileInfo = () => {
           <Inputs className="w-full" Label="Address 2" name="address_2" />
         </div>
         <div className="lg:col-span-6 md:col-span-6 col-span-12">
-          <Inputs className="w-full" Label="Phone" name="phone" />
+          <Inputs
+            className="w-full"
+            Label="Phone"
+            name="phone"
+            required
+            valMessage={'Phone Number field is required.'}
+          />
         </div>
         <div className="lg:col-span-6 md:col-span-6 col-span-12">
           <Inputs className="w-full" Label="Alternate Phone" name="alt_phone" />
@@ -26,13 +38,26 @@ const ProfileInfo = () => {
           <Inputs className="w-full" Label="P.O. Box No." name="po_box" />
         </div>
         <div className="lg:col-span-6 md:col-span-6 col-span-12">
-          <Inputs className="w-full" Label="E-mail" name="email" />
+          <Inputs
+            className="w-full"
+            Label="E-mail"
+            name="email"
+            type="email"
+            required
+            valMessage={'Email field is required.'}
+          />
         </div>
         <div className="lg:col-span-6 md:col-span-6 col-span-12">
           <Inputs className="w-full" Label="Sec.E-mail" name="sec_email" />
         </div>
         <div className="lg:col-span-6 md:col-span-6 col-span-12">
-          <Inputs className="w-full" Label="Website" name="website" />
+          <Inputs
+            className="w-full"
+            Label="Website"
+            name="website"
+            required
+            valMessage={'Website field is required.'}
+          />
         </div>
       </div>
     </div>

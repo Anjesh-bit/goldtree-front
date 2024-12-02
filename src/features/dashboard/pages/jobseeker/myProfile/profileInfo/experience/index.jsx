@@ -31,7 +31,13 @@ const Experience = ({ setInputValue, inputValue, dayjs }) => {
     <div className="p-4 md:p-6 lg:p-8">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
         <div className="col-span-1">
-          <Inputs className="w-full" Label="Designation" name="designation" />
+          <Inputs
+            className="w-full"
+            Label="Designation"
+            name="designation"
+            required
+            valMessage={'Designation field is required.'}
+          />
         </div>
         <div className="col-span-1">
           <DatePickers
@@ -58,10 +64,22 @@ const Experience = ({ setInputValue, inputValue, dayjs }) => {
           />
         </div>
         <div className="col-span-1">
-          <Inputs className="w-full" Label="Company" name="company" />
+          <Inputs
+            className="w-full"
+            Label="Company"
+            name="company"
+            required
+            valMessage={'Company name field is required.'}
+          />
         </div>
         <div className="col-span-1">
-          <Inputs className="w-full" Label="Address" name="addr" />
+          <Inputs
+            className="w-full"
+            Label="Address"
+            name="addr"
+            required
+            valMessage={'Designation field is required.'}
+          />
         </div>
         <div className="col-span-1">
           <Selects Label="Job Level" />

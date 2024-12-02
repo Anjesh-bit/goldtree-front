@@ -126,18 +126,19 @@ const Profile = () => {
           Profile Information
         </DynamicTitle>
         <ProfileInfo />
-      </div>
-
-      <div className="flex justify-end mt-6">
-        <AntdButton
-          loading={
-            empError || empErrorUpdate ? false : empLoadingUpdate || empLoading
-          }
-          htmlType="submit"
-          classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors"
-        >
-          {isEmpty ? 'Update' : 'Save'}
-        </AntdButton>
+        <div className="flex justify-center mt-6">
+          <AntdButton
+            loading={
+              empError || empErrorUpdate
+                ? false
+                : empLoadingUpdate || empLoading
+            }
+            htmlType="submit"
+            classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors"
+          >
+            {isEmpty ? 'Update' : 'Save'}
+          </AntdButton>
+        </div>
       </div>
     </Form>
   );

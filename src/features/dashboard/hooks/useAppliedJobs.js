@@ -25,22 +25,19 @@ export const useAppliedJobs = (isSavedJobs, isShortList) => {
     isShortList
   );
 
-  const [firstAppliedJob] = appliedJobs ?? [];
-  const [firstSavedJob] = savedJobs ?? [];
-  const [firstShortListedJob] = shortListedJobs ?? [];
-
   const handleCardClick = (e, postId, name) => {
     e.preventDefault();
+
     if (postId && name) {
       navigate(`/jobs/${name}/${postId}`, { replace: true });
     }
   };
 
   const appliedJobsData = isShortList
-    ? firstShortListedJob
+    ? shortListedJobs
     : isSavedJobs
-      ? firstSavedJob
-      : firstAppliedJob;
+      ? savedJobs
+      : appliedJobs;
 
   return { handleCardClick, appliedJobsData };
 };

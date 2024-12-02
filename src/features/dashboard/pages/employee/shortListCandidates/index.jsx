@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AntdBreadCum from '../../../../../shared/components/AntdBreadCum';
 import AntdCards from '../../../../../shared/components/AntdCards';
 import { useGetAllShortListedCandidates } from '../../../../../services/employee/setUp';
@@ -6,6 +6,7 @@ import Loading from '../../../../../assets/svg/loading.svg';
 import useAuthHook from '../../../../../hooks/useAuthHook';
 
 const ShortlistCandidate = () => {
+  const navigate = useNavigate();
   const isAuthenticated = useAuthHook();
   const { data, isPending } = useGetAllShortListedCandidates(
     isAuthenticated?.id
@@ -27,44 +28,60 @@ const ShortlistCandidate = () => {
           Shortlisted Candidates
         </h2>
         {data?.map((items) => {
-          const {
-            profileInfo: {
-              profile: { full_name, phone_no },
-            },
-          } = items;
-          const url = items?.upload_cv?.substring(
-            items?.upload_cv?.lastIndexOf('/') + 1
-          );
+          const { profile, experience, postId, companyName } = items;
 
           return (
             <AntdCards
-              key={items.postId}
+              onClick={() => navigate(`/jobs/${companyName}/${postId}`)}
+              key={items._id}
               className="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 p-4 bg-white rounded-lg shadow-md cursor-pointer hover:bg-gray-300 transition-colors"
             >
               <Link className="block">
                 <div className="text-md font-medium text-[#3d2462] mb-2">
-                  Name: <span className="font-normal">{full_name}</span>
-                </div>
-                <div className="text-md font-medium text-gray-800 mb-1">
-                  Email / Phone :{' '}
-                  <span className="font-normal">{phone_no}</span>
-                </div>
-                <div className="text-md font-medium text-gray-800 mb-1">
-                  Job Location:{' '}
+                  Name:{' '}
                   <span className="font-normal">
-                    {items.postInfo.job_location}
+                    {profile?.full_name || 'N/A'}
                   </span>
                 </div>
-                <div className="text-md font-medium text-gray-800">
-                  Job Level:{' '}
+                <div className="text-md font-medium text-gray-800 mb-1">
+                  Phone:{' '}
                   <span className="font-normal">
-                    {items.postInfo.job_level}
+                    {profile?.phone_no || 'N/A'}
                   </span>
                 </div>
+
+                <div className="text-md font-medium text-gray-800 mb-1">
+                  Permanent Address:{' '}
+                  <span className="font-normal">
+                    {profile?.permanent_addr || 'N/A'}
+                  </span>
+                </div>
+                <div className="text-md font-medium text-gray-800 mb-1">
+                  Current Address:{' '}
+                  <span className="font-normal">
+                    {profile?.current_addr || 'N/A'}
+                  </span>
+                </div>
+
+                {experience && (
+                  <div className="text-md font-medium text-gray-800 mb-1">
+                    Designation:{' '}
+                    <span className="font-normal">
+                      {experience?.designation || 'N/A'}
+                    </span>
+                  </div>
+                )}
+
                 <div className="text-md font-medium text-gray-800 mt-1">
                   Resume:{' '}
-                  <a href={items.upload_cv} download={url} target="_blank">
-                    {url}
+                  <a
+                    href={items.upload_cv}
+                    target="_blank"
+                    download={items.upload_cv?.substring(
+                      items.upload_cv.lastIndexOf('/') + 1
+                    )}
+                  >
+                    Download
                   </a>
                 </div>
               </Link>

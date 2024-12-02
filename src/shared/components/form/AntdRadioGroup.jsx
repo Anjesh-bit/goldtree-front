@@ -10,11 +10,15 @@ export const AntRadio = (props) => {
   const tempRule = [
     {
       required: props.required,
-      message: `Please select ${props.label}`,
+      message: (
+        <div className={`${props.prefixName ? '!mt-5' : '!mt-1'}`}>
+          {props.valMessage}
+        </div>
+      ),
     },
   ];
 
-  const localrules =
+  const localRules =
     props.rules instanceof Array ? [...tempRule, ...props.rules] : tempRule;
 
   return (
@@ -42,7 +46,7 @@ export const AntRadio = (props) => {
           {props.Label}
         </div>
       )}
-      <FormItem {...props} localrules={localrules}>
+      <FormItem {...props} localRules={localRules}>
         <Radio.Group
           onChange={onChange}
           className={`${props.className}`}

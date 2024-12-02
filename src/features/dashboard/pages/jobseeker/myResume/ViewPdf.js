@@ -17,7 +17,7 @@ const ViewPdf = () => {
       </div>
     );
 
-  const patient = profileData?.[0];
+  const [patient] = profileData ?? [];
 
   return (
     <div>
@@ -28,22 +28,23 @@ const ViewPdf = () => {
               <>
                 <div className="col-span-6 p-2 flex flex-col gap-1">
                   <img
-                    src={patient.profile_images}
+                    src={patient.profile_images ?? 'no-image'}
                     size={100}
                     className="h-[60px] w-[60px] object-cover mt-4"
+                    alt="Profile"
                   />
                   <div className="font-medium text-[1rem]">
-                    {patient.experience.designation}
+                    {patient.experience?.designation ?? 'N/A'}
                   </div>
-                  <div>{patient.profile.nationality}</div>
-                  <div>{patient.profile.permanent_addr}</div>
+                  <div>{patient.profile?.nationality ?? 'N/A'}</div>
+                  <div>{patient.profile?.permanent_addr ?? 'N/A'}</div>
                   <div>
-                    <i>{patient.profile.phone_no}</i>
+                    <i>{patient.profile?.phone_no ?? 'N/A'}</i>
                   </div>
                 </div>
                 <div className="col-span-6 p-2">
                   <div className="text-[2.5rem] font-bold">
-                    {patient.profile.full_name}
+                    {patient.profile?.full_name ?? 'N/A'}
                   </div>
                   <div className="rounded-xl p-2">
                     <div className="text-[1.3rem] font-medium">Profile</div>
@@ -57,7 +58,7 @@ const ViewPdf = () => {
                     </div>
                     <div
                       dangerouslySetInnerHTML={{
-                        __html: patient.profile.description,
+                        __html: patient.profile?.description ?? 'N/A',
                       }}
                     ></div>
                   </div>
@@ -69,16 +70,16 @@ const ViewPdf = () => {
                 <div className="text-[2.5rem] font-bold">Experience</div>
                 <div className="flex flex-col gap-1">
                   <div className="font-medium text-[1.3rem]">
-                    {patient.experience.designation}
+                    {patient.experience?.designation ?? 'N/A'}
                   </div>
                   <div>
-                    <i>{`${patient.experience.from} - ${patient.experience.to}`}</i>
+                    <i>{`${patient.experience?.from ?? 'N/A'} - ${patient.experience?.to || 'N/A'}`}</i>
                   </div>
 
-                  <div>{patient.experience.company}</div>
+                  <div>{patient.experience?.company ?? 'N/A'}</div>
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: patient.experience.description,
+                      __html: patient.experience?.description || 'N/A',
                     }}
                   ></div>
                 </div>
@@ -88,12 +89,12 @@ const ViewPdf = () => {
               <div className="col-span-6 h-fit p-2 flex flex-col gap-2">
                 <div className="text-[2.5rem] font-bold">Education</div>
                 <div className="font-medium text-[1.3rem]">
-                  {patient.education.degree}
+                  {patient.education?.degree ?? 'N/A'}
                 </div>
                 <div>
-                  <i>{patient.education.passed_year}</i>
+                  <i>{patient.education?.passed_year ?? 'N/A'}</i>
                 </div>
-                <div>{patient.education.level}</div>
+                <div>{patient.education?.level ?? 'N/A'}</div>
               </div>
             )}
           </div>

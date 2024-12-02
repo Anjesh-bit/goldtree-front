@@ -37,6 +37,7 @@ const MyProfile = () => {
 
   const {
     mutateAsync: jobSeekerMutateUpdate,
+    isSuccess: profileUpdateSuccess,
     isError: jobSeErrorUpdate,
     isPending: jobSeLoadingUpdate,
   } = useUpdateProfileInfo(isAuthenticated?.id);
@@ -57,35 +58,6 @@ const MyProfile = () => {
     toCourse: dayjs(),
     fromCourse: dayjs(),
   });
-
-  useEffect(() => {
-    if (profile) {
-      setInputValue({
-        editor: profile.experience?.description ?? '',
-        dob: profile.profile?.dob ? dayjs(profile.profile.dob) : dayjs(),
-        from: profile.experience?.from
-          ? dayjs(profile.experience.from)
-          : dayjs(),
-        to: profile.experience?.to ? dayjs(profile.experience.to) : dayjs(),
-        passedYear: profile.education?.passed_year
-          ? dayjs(profile.education.passed_year)
-          : dayjs(),
-        toCourse: profile.trainingCert?.to_course
-          ? dayjs(profile.trainingCert.to_course)
-          : dayjs(),
-        fromCourse: profile.trainingCert?.from_course
-          ? dayjs(profile.trainingCert.from_course)
-          : dayjs(),
-      });
-
-      form.setFieldsValue({
-        ...profile.profile,
-        ...profile.experience,
-        ...profile.education,
-        ...profile.trainingCert,
-      });
-    }
-  }, [profile, form]);
 
   const handleDetails = async (values) => {
     try {
@@ -135,16 +107,49 @@ const MyProfile = () => {
       } else {
         await jobSeekerMutateUpdate(profileFinalData);
       }
-
-      if (profileSuccess) {
-        showMessage({
-          type: 'success',
-          content: 'Your profile has been successfully saved.',
-          className: 'mt-4',
-        });
-      }
     } catch (e) {}
   };
+
+  useEffect(() => {
+    if (profile) {
+      setInputValue({
+        editor: profile.experience?.description ?? '',
+        dob: profile.profile?.dob ? dayjs(profile.profile.dob) : dayjs(),
+        from: profile.experience?.from
+          ? dayjs(profile.experience.from)
+          : dayjs(),
+        to: profile.experience?.to ? dayjs(profile.experience.to) : dayjs(),
+        passedYear: profile.education?.passed_year
+          ? dayjs(profile.education.passed_year)
+          : dayjs(),
+        toCourse: profile.trainingCert?.to_course
+          ? dayjs(profile.trainingCert.to_course)
+          : dayjs(),
+        fromCourse: profile.trainingCert?.from_course
+          ? dayjs(profile.trainingCert.from_course)
+          : dayjs(),
+      });
+
+      form.setFieldsValue({
+        ...profile.profile,
+        ...profile.experience,
+        ...profile.education,
+        ...profile.trainingCert,
+      });
+    }
+  }, [profile, form]);
+
+  useEffect(() => {
+    const isSuccess = profileSuccess || profileUpdateSuccess;
+
+    if (isSuccess) {
+      showMessage({
+        type: 'success',
+        content: 'Your profile has been successfully saved.',
+        className: 'mt-4',
+      });
+    }
+  }, [profileSuccess, profileUpdateSuccess]);
 
   if (isLoading)
     return (

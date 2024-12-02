@@ -28,28 +28,24 @@ const AppliedJobs = ({ isShortList, isSavedJobs }) => {
                 : 'Applied Jobs'}
           </h2>
         </div>
-        {appliedJobsData?.data?.map((items) => (
+        {appliedJobsData?.map((items) => (
           <AntdCards
             key={items.postId}
             className="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 p-4 bg-white rounded-lg shadow-md cursor-pointer hover:bg-gray-300 transition-colors"
-            onClick={(e) =>
-              handleCardClick(e, items.postId, items.postInfo.company_name)
-            }
+            onClick={(e) => handleCardClick(e, items._id, items.company_name)}
           >
             <div className="text-lg font-semibold text-[#3d2462] mb-2">
-              {items.postInfo.company_name}
+              {items.company_name}
             </div>
             <div className="text-md font-medium text-gray-800 mb-1">
-              Job Title:{' '}
-              <span className="font-normal">{items.postInfo.job_title}</span>
+              Job Title: <span className="font-normal">{items.job_title}</span>
             </div>
             <div className="text-md font-medium text-gray-800 mb-1">
               Job Location:{' '}
-              <span className="font-normal">{items.postInfo.job_location}</span>
+              <span className="font-normal">{items.job_location}</span>
             </div>
             <div className="text-md font-medium text-gray-800">
-              Job Level:{' '}
-              <span className="font-normal">{items.postInfo.job_level}</span>
+              Job Level: <span className="font-normal">{items.job_level}</span>
             </div>
           </AntdCards>
         ))}

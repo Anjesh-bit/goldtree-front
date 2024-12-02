@@ -1,5 +1,5 @@
 import { useForm } from 'antd/es/form/Form';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AppConstant } from '../../../shared/constants';
@@ -9,6 +9,7 @@ import { useRegister } from '../../../services/auth/register';
 
 export const useAuth = (isEmployee, isEmployeeTabItems, setOpen) => {
   const location = useLocation();
+  const [checked, setChecked] = useState(false);
   const [form] = useForm();
   const {
     mutateAsync: mutateRegister,
@@ -22,6 +23,11 @@ export const useAuth = (isEmployee, isEmployeeTabItems, setOpen) => {
 
   const data = useSelector((state) => state.auth);
   const userType = isEmployee ? AppConstant.EMPLOYEE : AppConstant.JOB_SEEKER;
+
+  const handleCheckBoxChange = (event) => {
+    const { checked } = event.target;
+    setChecked(checked);
+  };
 
   const handleOnClick = (e) => {
     e.preventDefault();
@@ -50,6 +56,15 @@ export const useAuth = (isEmployee, isEmployeeTabItems, setOpen) => {
   };
 
   const handleOnFinishRegister = async (value) => {
+    if (!checked) {
+      showMessage({
+        type: 'warning',
+        content: 'Please accept the terms and condition',
+        className: 'mt-4 h-12',
+      });
+      return;
+    }
+
     try {
       await mutateRegister({ ...value, userType });
     } catch (e) {
@@ -105,5 +120,7 @@ export const useAuth = (isEmployee, isEmployeeTabItems, setOpen) => {
     form,
     data,
     registerPending,
+    handleCheckBoxChange,
+    checked,
   };
 };

@@ -20,10 +20,11 @@ const JobApplied = () => {
 
   const { contextHolder, showMessage } = useMessage();
 
-  const handleOnClick = async (_, uploadId, type) => {
+  const handleOnClick = async (_, uploadId, postId, type) => {
     setQueryParams({
       shortList: 'shortlist',
       uploadId: uploadId,
+      postId,
       type,
     });
 
@@ -97,9 +98,14 @@ const JobApplied = () => {
                         >
                           <AntdButton
                             classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors"
-                            onClick={(e) =>
-                              handleOnClick(e, candidate._id, candidate.type)
-                            }
+                            onClick={(e) => {
+                              handleOnClick(
+                                e,
+                                candidate.userId,
+                                candidate.postId,
+                                candidate.type
+                              );
+                            }}
                           >
                             ShortList
                           </AntdButton>

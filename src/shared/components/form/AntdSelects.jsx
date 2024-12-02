@@ -8,14 +8,13 @@ export const Selects = (props) => {
       required: props.required,
       message: (
         <div className={`${props.prefixName ? '!mt-5' : '!mt-1'}`}>
-          {props.valMessage?.charAt(0)?.toUpperCase() +
-            props.valMessage?.slice(1)?.toLowerCase()}
+          {props.valMessage}
         </div>
       ),
     },
   ];
 
-  const localrules =
+  const localRules =
     props.rules instanceof Array ? [...tempRule, ...props.rules] : tempRule;
 
   return (
@@ -51,7 +50,7 @@ export const Selects = (props) => {
         </div>
       )}
       <div>
-        <FormItem {...props} localrules={localrules}>
+        <FormItem {...props} localRules={localRules}>
           <Select
             defaultValue={props.defaultValue}
             onClear={props.onClear}
@@ -71,7 +70,7 @@ export const Selects = (props) => {
             mode={props.mode}
             maxTagCount={'responsive'}
             dropdownStyle={props.dropdownStyle}
-            showSearch={props.nosearch}
+            showSearch={props.noSearch}
             onBlur={props.onBlur}
             variant={props.variant || props.noBorderVariant}
             autoFocus={false}

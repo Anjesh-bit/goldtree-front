@@ -43,11 +43,13 @@ const AntdHeader = () => {
   return (
     <Layout>
       <Header className="flex justify-between items-center h-full px-4 sm:px-6 md:px-8 lg:px-12 ant-header">
-        <div className="text-2xl font-bold text-gray-300">Logo</div>
+        <div className="text-2xl font-bold text-gray-300">
+          <img src="/app-logo.jpg" height={90} width={90} />
+        </div>
 
         <Button
-          type="primary"
-          className="lg:hidden"
+          type="default"
+          className="lg:hidden bg-transparent text-[#f5f5f5]"
           icon={<MenuOutlined />}
           onClick={showDrawer}
         />

@@ -22,7 +22,7 @@ const createRoutes = (config, Layout) => ({
   element: <Layout />,
   children: config.map(({ path, element }) => ({
     path,
-    element: <Suspense fallback={<div>Loading ...</div>}>{element}</Suspense>,
+    element: <Suspense>{element}</Suspense>,
   })),
 });
 

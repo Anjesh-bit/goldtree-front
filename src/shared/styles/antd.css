@@ -21,3 +21,14 @@
   color: #ffffff !important;
   border-color: #08142c !important;
 }
+
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #47839d !important;
+  border-color: #47839d !important;
+}
+
+.ant-checkbox-wrapper:hover .ant-checkbox-inner,
+.ant-checkbox-checked:hover .ant-checkbox-inner {
+  background-color: #47839d !important;
+  border-color: #47839d !important;
+}

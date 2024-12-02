@@ -37,10 +37,17 @@ const ProfileInformation = ({ setInputValue, inputValue, dayjs }) => {
     <div className="p-4 md:p-6 lg:p-8">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
         <div className="col-span-1">
-          <Inputs className="w-full" Label="Full Name" name="full_name" />
+          <Inputs
+            className="w-full"
+            Label="Full Name"
+            name="full_name"
+            required
+            valMessage={'Full Name field is required'}
+          />
         </div>
         <div className="col-span-1">
           <DatePickers
+            required
             className="w-full"
             format="YYYY-MM-DD"
             Label="Date Of Birth"
@@ -53,6 +60,8 @@ const ProfileInformation = ({ setInputValue, inputValue, dayjs }) => {
         </div>
         <div className="col-span-1">
           <Inputs
+            required
+            valMessage={'Permanent Address field is required.'}
             className="w-full"
             Label="Permanent Address"
             name="permanent_addr"
@@ -60,17 +69,31 @@ const ProfileInformation = ({ setInputValue, inputValue, dayjs }) => {
         </div>
         <div className="col-span-1">
           <Inputs
+            required
+            valMessage={'Current Address field is required.'}
             className="w-full"
             Label="Current Address"
             name="current_addr"
           />
         </div>
         <div className="col-span-1">
-          <Inputs className="w-full" Label="Phone No." name="phone_no" />
+          <Inputs
+            className="w-full"
+            Label="Phone No."
+            name="phone_no"
+            required
+            valMessage={'Phone field is required.'}
+          />
         </div>
 
         <div className="col-span-1 lg:col-span-2">
-          <AntRadio options={genderOptions} Label="Gender" name="gender" />
+          <AntRadio
+            options={genderOptions}
+            Label="Gender"
+            name="gender"
+            required
+            valMessage="Please Select Gender."
+          />
         </div>
         <div className="col-span-1 lg:col-span-2">
           <AntRadio
