@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
-import { Layout, Menu, Drawer, Button } from 'antd';
-import { MenuOutlined } from '@ant-design/icons';
+import { Layout, Menu, Drawer, Button, Avatar } from 'antd';
+import {
+  DashboardOutlined,
+  KeyOutlined,
+  LogoutOutlined,
+  MenuOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
 import AntdButton from '../AntdButtons';
 import DynamicTabs from '../../../features/auth';
 import { useDispatch } from 'react-redux';
@@ -8,9 +14,11 @@ import { logOut } from '../../../slice/authSlice';
 import { useNavigate } from 'react-router-dom';
 import useAuthHook from '../../../hooks/useAuthHook';
 import { useLogout } from '../../../services/auth/login';
-
+import { useGetProfileInfo as employeeProfileInfo } from '../../../services/employee/setUp';
+import { useGetProfileInfo as jobSeekerProfileInfo } from '../../../services/jobSeeker/setUp';
 import '../../styles/main.css';
 import PopOver from '../../../features/auth/components/PopOver';
+import { AppConstant } from '../../constants';
 
 const { Header } = Layout;
 
@@ -39,6 +47,13 @@ const AntdHeader = () => {
   const closeDrawer = () => {
     setDrawerVisible(false);
   };
+
+  const isJobSeeker = isAuthenticated?.type === AppConstant.JOB_SEEKER;
+  const [{ profile_images: employeeProfileImage } = {}] =
+    employeeProfileInfo(isJobSeeker ? null : isAuthenticated?.id)?.data || [];
+
+  const [{ profile_images: jobSeekerProfileImage } = {}] =
+    jobSeekerProfileInfo(isJobSeeker ? isAuthenticated?.id : null)?.data || [];
 
   return (
     <Layout>
@@ -95,38 +110,76 @@ const AntdHeader = () => {
               </PopOver>
             </>
           ) : (
-            <PopOver
-              trigger={'click'}
-              content={
-                <div className="flex flex-col gap-2 p-4 bg-white text-black">
-                  <p className="font-semibold text-lg text-center">
-                    Are you sure you want to logout?
-                  </p>
-                  <div className="flex justify-between gap-2">
-                    <AntdButton
-                      onClick={handleLogOut}
-                      classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors"
-                      loading={isPending}
-                    >
-                      Ok
-                    </AntdButton>
-                    <AntdButton
-                      onClick={() => navigate('/')}
-                      classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors"
-                    >
-                      Cancel
-                    </AntdButton>
+            <div className="flex gap-16">
+              <PopOver
+                trigger="click"
+                content={
+                  <div>
+                    <ul>
+                      <li
+                        onClick={() =>
+                          isJobSeeker
+                            ? navigate('/jobseeker/dashboard')
+                            : navigate('/employee/dashboard')
+                        }
+                        className="flex items-center gap-3 font-semibold text-lg py-2 px-4 rounded-lg cursor-pointer hover:bg-[#e8f4f9] hover:text-[#00b6b4] transition-colors"
+                      >
+                        <DashboardOutlined className="text-xl" />
+                        <span>DashBoard</span>
+                      </li>
+                      <li
+                        onClick={() =>
+                          isJobSeeker
+                            ? navigate('/jobseeker/dashboard/change-password')
+                            : navigate('/employee/dashboard/change-password')
+                        }
+                        className="flex items-center gap-3 font-semibold text-lg py-2 px-4 rounded-lg cursor-pointer hover:bg-[#e8f4f9] hover:text-[#00b6b4] transition-colors"
+                      >
+                        <KeyOutlined className="text-xl" />
+                        <span>Change Password</span>
+                      </li>
+                      <PopOver
+                        trigger="click"
+                        content={
+                          <div className="flex flex-col gap-2 p-4 bg-white text-black">
+                            <p className="font-semibold text-lg text-center">
+                              Are you sure you want to logout?
+                            </p>
+                            <div className="flex justify-between gap-2">
+                              <AntdButton
+                                onClick={handleLogOut}
+                                classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors"
+                                loading={isPending}
+                              >
+                                Ok
+                              </AntdButton>
+                              <AntdButton
+                                onClick={() => navigate('/')}
+                                classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors"
+                              >
+                                Cancel
+                              </AntdButton>
+                            </div>
+                          </div>
+                        }
+                      >
+                        <li className="flex items-center gap-3 font-semibold text-lg py-2 px-4 rounded-lg cursor-pointer hover:bg-[#e8f4f9] hover:text-[#00b6b4] transition-colors">
+                          <LogoutOutlined className="text-xl" />
+                          <span>Logout</span>
+                        </li>
+                      </PopOver>
+                    </ul>
                   </div>
-                </div>
-              }
-            >
-              <AntdButton
-                classNames="border border-white bg-transparent text-white px-6 hover:!bg-white hover:!text-black transition-colors font-semibold"
-                loading={isPending}
+                }
               >
-                Logout
-              </AntdButton>
-            </PopOver>
+                <Avatar
+                  src={employeeProfileImage || jobSeekerProfileImage}
+                  size={64}
+                  icon={<UserOutlined />}
+                  className="cursor-pointer border-2 border-gray-300 rounded-full"
+                />
+              </PopOver>
+            </div>
           )}
         </div>
 

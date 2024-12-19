@@ -7,21 +7,27 @@ const EmployeeDetails = () => {
 
   if (isLoading) return <div className="text-center">Loading...</div>;
 
-  const {
-    personalInfo: {
-      company_name,
-      company_type,
-      business_type,
-      company_size,
-      location,
-      description,
-      head_person_name,
-      head_person_pos,
-    },
-    primaryContact: { email, phone, website },
-    socialLink: { fb_link, ig_link, linkedin_link, twitter_link },
-    profile_images,
-  } = data;
+const {
+  personalInfo: {
+    company_name = '',
+    company_type = '',
+    business_type = '',
+    company_size = '',
+    location = '',
+    description = '',
+    head_person_name = '',
+    head_person_pos = '',
+  } = {},
+  primaryContact: { email = '', phone = '', website = '' } = {},
+  socialLink: {
+    fb_link = '',
+    ig_link = '',
+    linkedin_link = '',
+    twitter_link = '',
+  } = {},
+  profile_images = '',
+} = data || {};
+
 
   return (
     <div className="bg-gray-200 p-6 md:p-8 lg:p-12 xl:p-[48px]">

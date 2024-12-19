@@ -101,8 +101,6 @@ const DetailJobView = () => {
     'day'
   );
 
-  const isClosed = dayjs().isAfter(applyBeforeDate);
-
   return (
     <>
       {contextHolder}
@@ -139,7 +137,7 @@ const DetailJobView = () => {
               {singlePostData?.job_title}
             </h2>
             <span className="text-sm text-gray-600">
-              {isClosed ? (
+              {singlePostData?.closed ? (
                 <div className="text-[#FF0000]">Closed</div>
               ) : (
                 `Apply Before: ${applyBeforeDate.format('MMMM D, YYYY')}`
