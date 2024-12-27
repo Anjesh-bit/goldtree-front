@@ -11,6 +11,8 @@ import { AppConstant } from '../../shared/constants';
 import dayjs from 'dayjs';
 import AntdButton from '../../shared/components/AntdButtons';
 
+const JOB_STATUS = { CLOSED: 'closed' };
+
 const DetailJobView = () => {
   const isAuthenticated = useAuthHook(false);
   const navigate = useNavigate();
@@ -137,7 +139,7 @@ const DetailJobView = () => {
               {singlePostData?.job_title}
             </h2>
             <span className="text-sm text-gray-600">
-              {singlePostData?.closed ? (
+              {singlePostData?.status === JOB_STATUS.CLOSED ? (
                 <div className="text-[#FF0000]">Closed</div>
               ) : (
                 `Apply Before: ${applyBeforeDate.format('MMMM D, YYYY')}`
