@@ -12,15 +12,15 @@ import {
 } from '../../../../../services/employee/setUp';
 
 import { useEffect, useState } from 'react';
-import useAuthHook from '../../../../../hooks/useAuthHook';
 import DynamicTitle from '../../../../../shared/components/DynamicTitle';
 import Avatar from 'antd/es/avatar/avatar';
+import { isAuthenticated } from '../../../../../shared/utils/auth';
 
 const { useForm } = Form;
 
 const Profile = () => {
   const [form] = useForm();
-  const isAuthenticated = useAuthHook(false);
+
   const [ckValue, setCKValue] = useState('');
   const {
     isError: empError,
@@ -32,9 +32,9 @@ const Profile = () => {
     mutateAsync: empMutateUpdate,
     isError: empErrorUpdate,
     isPending: empLoadingUpdate,
-  } = useUpdateProfile(isAuthenticated?.id);
+  } = useUpdateProfile(isAuthenticated()?.id);
 
-  const { data: profileData } = useGetProfileInfo(isAuthenticated?.id);
+  const { data: profileData } = useGetProfileInfo(isAuthenticated()?.id);
 
   const isEmpty = profileData?.length > 0;
   const ckData = profileData?.[0]?.personalInfo?.description;
@@ -54,7 +54,7 @@ const Profile = () => {
   const handleOnFinish = async (values) => {
     try {
       const profileData = {
-        userId: isAuthenticated?.id,
+        userId: isAuthenticated()?.id,
         personalInfo: {
           company_name: values.company_name,
           alt_company_name: values.alt_company_name,

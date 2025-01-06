@@ -4,23 +4,26 @@ import {
   useGetSavedJobs,
   useGetShortListed,
 } from '../../../services/jobSeeker/setUp';
-import useAuthHook from '../../../hooks/useAuthHook';
+
 import { AppConstant } from '../../../shared/constants';
+import { isAuthenticated } from '../../../shared/utils/auth';
 
 export const useAppliedJobs = (isSavedJobs, isShortList) => {
   const navigate = useNavigate();
-  const isAuthenticated = useAuthHook(false);
 
   const { data: appliedJobs } = useGetJobsApplied(
-    isAuthenticated?.id,
+    isAuthenticated()?.id,
     isShortList,
     isSavedJobs
   );
 
-  const { data: savedJobs } = useGetSavedJobs(isAuthenticated?.id, isSavedJobs);
+  const { data: savedJobs } = useGetSavedJobs(
+    isAuthenticated()?.id,
+    isSavedJobs
+  );
 
   const { data: shortListedJobs } = useGetShortListed(
-    isAuthenticated?.id,
+    isAuthenticated()?.id,
     AppConstant.DIRECT_APPLY,
     isShortList
   );

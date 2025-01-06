@@ -23,6 +23,7 @@ const authSlice = createSlice({
       state.user = null;
       state.token = null;
       deleteCookies('token');
+      deleteCookies('refreshToken');
       removeLocalStorage('loginData');
     },
   },

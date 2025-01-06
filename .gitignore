@@ -1,5 +1,6 @@
 # Node modules and package-related files
 /node_modules
+/dist
 /.pnp
 .pnp.js
 

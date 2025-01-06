@@ -1,13 +1,11 @@
 import { Fragment } from 'react';
 import { useGetProfileInfo } from '../../../../../services/jobSeeker/setUp';
-import useAuthHook from '../../../../../hooks/useAuthHook';
 import Loading from '../../../../../assets/svg/loading.svg';
+import { isAuthenticated } from '../../../../../shared/utils/auth';
 
 const ViewPdf = () => {
-  const isAuthenticated = useAuthHook(false);
-
   const { data: profileData, isLoading } = useGetProfileInfo(
-    isAuthenticated?.id
+    isAuthenticated()?.id
   );
 
   if (isLoading)

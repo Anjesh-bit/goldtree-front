@@ -11,23 +11,22 @@ import {
 } from '../../../../../services/jobSeeker/setUp';
 import useMessage from '../../../../../hooks/useMessage';
 import dayjs from 'dayjs';
-import useAuthHook from '../../../../../hooks/useAuthHook';
 import Loading from '../../../../../assets/svg/loading.svg';
 import AntdButton from '../../../../../shared/components/AntdButtons';
 import DynamicTitle from '../../../../../shared/components/DynamicTitle';
+import { isAuthenticated } from '../../../../../shared/utils/auth';
 
 const { useForm } = Form;
 
 const MyProfile = () => {
   const [form] = useForm();
-  const isAuthenticated = useAuthHook(false);
   const { contextHolder, showMessage } = useMessage();
 
   const {
     data: profileData,
     isError: profileErr,
     isLoading,
-  } = useGetProfileInfo(isAuthenticated?.id);
+  } = useGetProfileInfo(isAuthenticated()?.id);
 
   const {
     mutateAsync: jobSeekerMutate,
@@ -40,7 +39,7 @@ const MyProfile = () => {
     isSuccess: profileUpdateSuccess,
     isError: jobSeErrorUpdate,
     isPending: jobSeLoadingUpdate,
-  } = useUpdateProfileInfo(isAuthenticated?.id);
+  } = useUpdateProfileInfo(isAuthenticated()?.id);
 
   const profile = useMemo(() => {
     const [firstProfile = {}] = Array.isArray(profileData) ? profileData : [];
@@ -62,7 +61,7 @@ const MyProfile = () => {
   const handleDetails = async (values) => {
     try {
       const profileFinalData = {
-        userId: isAuthenticated?.id,
+        userId: isAuthenticated()?.id,
         profile: {
           full_name: values.full_name,
           dob: inputValue.dob,

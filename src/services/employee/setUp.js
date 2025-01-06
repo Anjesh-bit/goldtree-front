@@ -60,10 +60,10 @@ export const usePostJobs = (id) => {
   };
 };
 
-export const useGetPostJobs = (id) => {
+export const useGetPostJobs = (id, status) => {
   return useQuery({
-    queryKey: [employeeQueryKeys.setUp.getPostsByUserId, id],
-    queryFn: () => fetcher(`emp-posts-by-id/${id}`),
+    queryKey: [employeeQueryKeys.setUp.getPostsByUserId, id, status],
+    queryFn: () => fetcher(`emp-posts-by-id?userId=${id}&status=${status}`),
     enabled: !!id,
   });
 };

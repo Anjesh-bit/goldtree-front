@@ -1,3 +1,5 @@
+import { JOB_STATUS } from '../dashboard/pages/dashboard.constant';
+
 const dummyDataFeatured = [
   {
     position: 'Senior level Developer',
@@ -79,11 +81,18 @@ const dashBoardData = [
         subHeader: 'Job Posted',
         key: 'postedJobs',
         link: 'manage-jobs',
+        status: '',
       },
-      { header: 'Live Jobs', subHeader: 'Live Jobs', key: 'liveJobs' },
+      {
+        header: 'Live Jobs',
+        subHeader: 'Live Jobs',
+        key: 'liveJobs',
+        link: 'manage-jobs',
+        status: JOB_STATUS.LIVE,
+      },
       {
         header: 'Admin Approved',
-        subHeader: 'Approved Posts',
+        subHeader: 'Feature Coming Soon.',
         key: 'adminApproved',
       },
       {
@@ -123,6 +132,8 @@ const dashBoardData = [
           },
         ],
         key: 'jobStatus',
+        link: 'manage-jobs',
+        status: '',
       },
       {
         header: 'ShortListed',
@@ -132,7 +143,7 @@ const dashBoardData = [
       },
       {
         header: 'Pending Count',
-        subHeader: 'Pending Jobs',
+        subHeader: 'Feature Coming Soon.',
         key: 'pendingCount',
       },
       {

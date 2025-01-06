@@ -8,20 +8,21 @@ const AntdTabs = (props) => {
       onChange={props.onChange}
       tabBarStyle={{
         ...props.tabBarStyle,
-        backgroundColor: props.backgroundColor,
+        backgroundColor: props.backgroundColor || '#ffffff',
         width: '100%',
         fontWeight: 600,
         overflowX: 'hidden',
         paddingLeft: 20,
         paddingRight: 20,
         margin: 0,
-        fontSize: '16px',
-        color: '#3d2462',
       }}
+      tabBarGutter={40}
+      tabPosition="top"
       centered={props.centered}
-      activeKey={props.value}
+      activeKey={props.activeKey}
       onTabClick={props.onTabClick}
-      className="custom-tabs"
+      animated
+      tabBarExtraContent={props.extraContent}
     >
       {props.children}
     </Tabs>

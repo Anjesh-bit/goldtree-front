@@ -1,0 +1,60 @@
+<svg
+  width="300"
+  height="300"
+  viewBox="0 0 300 300"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <rect
+    x="85"
+    y="85"
+    width="130"
+    height="160"
+    rx="12"
+    fill="#FFFFFF"
+    stroke="#CBD5E1"
+    stroke-width="2"
+    shadow="2px 2px 10px rgba(0,0,0,0.1)"
+  />
+
+  <line x1="100" y1="110" x2="180" y2="110" stroke="#A5B4FC" stroke-width="2" />
+  <line x1="100" y1="130" x2="180" y2="130" stroke="#A5B4FC" stroke-width="2" />
+  <line x1="100" y1="150" x2="180" y2="150" stroke="#A5B4FC" stroke-width="2" />
+  <line x1="100" y1="170" x2="180" y2="170" stroke="#A5B4FC" stroke-width="2" />
+  <rect x="100" y="190" width="80" height="12" rx="6" fill="#E0E7FF" />
+
+  <circle
+    cx="200"
+    cy="200"
+    r="20"
+    stroke="#6366F1"
+    stroke-width="3"
+    fill="none"
+  />
+  <line
+    x1="214"
+    y1="214"
+    x2="230"
+    y2="230"
+    stroke="#6366F1"
+    stroke-width="3"
+    stroke-linecap="round"
+  />
+
+  <circle cx="50" cy="60" r="4" fill="#E0E7FF" />
+  <circle cx="250" cy="80" r="6" fill="#E0E7FF" />
+  <circle cx="60" cy="240" r="3" fill="#E0E7FF" />
+  <circle cx="230" cy="260" r="4" fill="#E0E7FF" />
+
+  <text
+    x="50%"
+    y="270"
+    font-family="Arial, sans-serif"
+    font-size="16"
+    font-weight="600"
+    fill="#374151"
+    text-anchor="middle"
+  >
+    No Data Available
+  </text>
+</svg>

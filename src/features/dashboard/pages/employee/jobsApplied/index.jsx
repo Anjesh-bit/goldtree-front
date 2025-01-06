@@ -3,14 +3,14 @@ import { useShortList } from '../../../../../services/commonService/setUp';
 import useMessage from '../../../../../hooks/useMessage';
 import Loading from '../../../../../assets/svg/loading.svg';
 import { useGetEasyApply } from '../../../../../services/employee/setUp';
-import useAuthHook from '../../../../../hooks/useAuthHook';
+
 import AntdCards from '../../../../../shared/components/AntdCards';
 import AntdButton from '../../../../../shared/components/AntdButtons';
+import { isAuthenticated } from '../../../../../shared/utils/auth';
+import EmptyState from '../../components/emptyState';
 
 const JobApplied = () => {
-  const isAuthenticated = useAuthHook(false);
-
-  const { data, isLoading } = useGetEasyApply(isAuthenticated?.id);
+  const { data, isLoading } = useGetEasyApply(isAuthenticated()?.id);
   const [queryParams, setQueryParams] = useState({
     uploadId: '',
     type: '',
@@ -53,6 +53,12 @@ const JobApplied = () => {
     );
   }
 
+  const isEmpty = data?.length === 0;
+  if (isEmpty)
+    return (
+      <EmptyState message="There is no any jobs applied candidates found." />
+    );
+
   return (
     <Fragment>
       {contextHolder}
@@ -93,7 +99,7 @@ const JobApplied = () => {
 
                       return (
                         <AntdCards
-                          className="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 p-4 bg-white rounded-lg shadow-md hover:bg-gray-300"
+                          className="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 p-4 bg-white rounded-lg shadow-md hover:bg-gray-300 cursor-pointer transition-colors"
                           key={candidate._id}
                         >
                           <AntdButton

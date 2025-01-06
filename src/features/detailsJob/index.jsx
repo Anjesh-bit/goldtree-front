@@ -6,15 +6,14 @@ import { useState } from 'react';
 import { ViewForm } from './ViewForm';
 import { useSavedJobs } from '../../services/jobSeeker/setUp';
 import useMessage from '../../hooks/useMessage';
-import useAuthHook from '../../hooks/useAuthHook';
 import { AppConstant } from '../../shared/constants';
 import dayjs from 'dayjs';
 import AntdButton from '../../shared/components/AntdButtons';
+import { isAuthenticated } from '../../shared/utils/auth';
 
 const JOB_STATUS = { CLOSED: 'closed' };
 
 const DetailJobView = () => {
-  const isAuthenticated = useAuthHook(false);
   const navigate = useNavigate();
   const [open, setOpen] = useState({ open: false });
   const [id, setId] = useState('');
@@ -24,11 +23,11 @@ const DetailJobView = () => {
     data: singlePostData,
     isLoading: singlePostLoading,
     isError: singlePostError,
-  } = useGetSinglePost(params?.id, isAuthenticated?.id);
+  } = useGetSinglePost(params?.id, isAuthenticated()?.id);
 
   const { mutateAsync, isPending, isError } = useSavedJobs(
     id,
-    isAuthenticated?.id
+    isAuthenticated()?.id
   );
   const { contextHolder, showMessage } = useMessage();
 
@@ -38,7 +37,7 @@ const DetailJobView = () => {
     const isEasyApply = filter === 'easy';
     const isDirectApply = filter === 'direct';
 
-    if (!isAuthenticated && isDirectApply) {
+    if (!isAuthenticated() && isDirectApply) {
       navigate('/auth/login', {
         state: {
           redirectTo: `/jobs/${singlePostData?.company_name}/${singlePostData?._id}`,
@@ -49,7 +48,7 @@ const DetailJobView = () => {
 
     const isSaveJobs = filter === 'saveJobs';
 
-    if (isAuthenticated && isSaveJobs) {
+    if (isAuthenticated() && isSaveJobs) {
       setId(id);
       const savedJobs = async () => {
         try {
@@ -103,6 +102,9 @@ const DetailJobView = () => {
     'day'
   );
 
+  const isShowApplyButton =
+    isAuthenticated()?.type === AppConstant.JOB_SEEKER || !isAuthenticated();
+
   return (
     <>
       {contextHolder}
@@ -123,7 +125,7 @@ const DetailJobView = () => {
               __html: singlePostData?.company_description,
             }}
           />
-          {isAuthenticated?.type === AppConstant.JOB_SEEKER && (
+          {isAuthenticated()?.type === AppConstant.JOB_SEEKER && (
             <AntdButton
               classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors mt-4"
               onClick={(e) => handleClick(e, 'saveJobs', singlePostData?._id)}
@@ -223,16 +225,15 @@ const DetailJobView = () => {
           />
         </AntdCards>
 
-        {((singlePostData?.is_apply_instruction === 'm' &&
-          isAuthenticated?.type === AppConstant.JOB_SEEKER) ||
-          !isAuthenticated) && (
+        {isShowApplyButton && (
           <AntdCards className="p-6 bg-white shadow-lg rounded-lg border border-gray-200">
-            <p className="text-gray-800">
-              Interested candidates fulfilling the mentioned criteria are
-              encouraged to apply using the Easy Apply Button below. Registered
-              candidates may also apply using the Apply Now Button.
-            </p>
-
+            {singlePostData?.is_apply_instruction === 'y' && (
+              <p className="text-gray-800">
+                Interested candidates fulfilling the mentioned criteria are
+                encouraged to apply using the Easy Apply Button below.
+                Registered candidates may also apply using the Apply Now Button.
+              </p>
+            )}
             <div className="flex gap-4 mt-4">
               <AntdButton
                 classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors"

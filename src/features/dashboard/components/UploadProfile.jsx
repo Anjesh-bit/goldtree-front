@@ -3,14 +3,13 @@ import Inputs from '../../../shared/components/form/AntdInputs';
 import { useEffect, useState } from 'react';
 import { useUpdateProfile } from '../../../services/commonService/setUp';
 import AntdButton from '../../../shared/components/AntdButtons';
-import useAuthHook from '../../../hooks/useAuthHook';
 import useMessage from '../../../hooks/useMessage';
+import { isAuthenticated } from '../../../shared/utils/auth';
 
 const { useForm } = Form;
 
 const UploadProfile = ({ type }) => {
   const [form] = useForm();
-  const isAuthenticated = useAuthHook(false);
   const [files, setFiles] = useState(null);
   const [preview, setPreview] = useState('');
   const { contextHolder, showMessage } = useMessage();
@@ -20,7 +19,7 @@ const UploadProfile = ({ type }) => {
     isPending: updatePending,
     mutateAsync: updateMutate,
     isSuccess,
-  } = useUpdateProfile(typeData, isAuthenticated?.id);
+  } = useUpdateProfile(typeData, isAuthenticated()?.id);
 
   const handleOnFinish = async () => {
     try {

@@ -14,9 +14,7 @@ export const AntModal = (props) => {
         getContainer={false}
         centered={false}
         zIndex={props.zIndex || 2050}
-        maskClosable={props?.open?.mask || false}
-        wrapClassName="custom-modal submodal"
-        closeIcon={props.closeIcon ? false : <CloseOutlined />} //add default icon
+        closeIcon={<CloseOutlined />}
         okText={'Save'}
         okButtonProps={{
           className: 'bg-main',

@@ -3,13 +3,14 @@ import AntdBreadCum from '../../../../../shared/components/AntdBreadCum';
 import AntdCards from '../../../../../shared/components/AntdCards';
 import { useGetAllShortListedCandidates } from '../../../../../services/employee/setUp';
 import Loading from '../../../../../assets/svg/loading.svg';
-import useAuthHook from '../../../../../hooks/useAuthHook';
+import { isAuthenticated } from '../../../../../shared/utils/auth';
+import EmptyState from '../../components/emptyState';
 
 const ShortlistCandidate = () => {
   const navigate = useNavigate();
-  const isAuthenticated = useAuthHook();
+
   const { data, isPending } = useGetAllShortListedCandidates(
-    isAuthenticated?.id
+    isAuthenticated()?.id
   );
 
   if (isPending) {
@@ -19,6 +20,12 @@ const ShortlistCandidate = () => {
       </div>
     );
   }
+
+  const isEmpty = !data;
+  if (isEmpty)
+    return (
+      <EmptyState message="There is no any shortlisted candidates found." />
+    );
 
   return (
     <div className="bg-[#f5f5f5] min-h-screen p-4">

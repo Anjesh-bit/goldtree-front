@@ -12,23 +12,20 @@ import DynamicTabs from '../../../features/auth';
 import { useDispatch } from 'react-redux';
 import { logOut } from '../../../slice/authSlice';
 import { useNavigate } from 'react-router-dom';
-import useAuthHook from '../../../hooks/useAuthHook';
 import { useLogout } from '../../../services/auth/login';
 import { useGetProfileInfo as employeeProfileInfo } from '../../../services/employee/setUp';
 import { useGetProfileInfo as jobSeekerProfileInfo } from '../../../services/jobSeeker/setUp';
 import '../../styles/main.css';
 import PopOver from '../../../features/auth/components/PopOver';
 import { AppConstant } from '../../constants';
+import { isAuthenticated } from '../../utils/auth';
 
 const { Header } = Layout;
 
 const AntdHeader = () => {
-  const dispatch = useDispatch();
-  const isAuthenticated = useAuthHook(false);
-
   const { mutateAsync, isPending } = useLogout();
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const [drawerVisible, setDrawerVisible] = useState(false);
 
   const handleLogOut = async () => {
@@ -36,7 +33,6 @@ const AntdHeader = () => {
       await mutateAsync();
       dispatch(logOut());
       navigate('/');
-      window.location.reload();
     } catch (e) {}
   };
 
@@ -48,16 +44,17 @@ const AntdHeader = () => {
     setDrawerVisible(false);
   };
 
-  const isJobSeeker = isAuthenticated?.type === AppConstant.JOB_SEEKER;
+  const isJobSeeker = isAuthenticated()?.type === AppConstant.JOB_SEEKER;
   const [{ profile_images: employeeProfileImage } = {}] =
-    employeeProfileInfo(isJobSeeker ? null : isAuthenticated?.id)?.data || [];
+    employeeProfileInfo(isJobSeeker ? null : isAuthenticated()?.id)?.data || [];
 
   const [{ profile_images: jobSeekerProfileImage } = {}] =
-    jobSeekerProfileInfo(isJobSeeker ? isAuthenticated?.id : null)?.data || [];
+    jobSeekerProfileInfo(isJobSeeker ? isAuthenticated()?.id : null)?.data ||
+    [];
 
   return (
     <Layout>
-      <Header className="flex justify-between items-center h-full px-4 sm:px-6 md:px-8 lg:px-12 ant-header">
+      <Header className="flex justify-between items-center px-4 sm:px-6 md:px-8 lg:px-12 ant-header fixed w-full top-0 z-[1000] h-[80px] bg-[#08142c] overflow-visible">
         <div className="text-2xl font-bold text-gray-300">
           <img src="/logo.png" height={125} width={125} />
         </div>
@@ -90,7 +87,7 @@ const AntdHeader = () => {
         </Menu>
 
         <div className="hidden lg:flex items-center gap-4">
-          {!isAuthenticated ? (
+          {!isAuthenticated() ? (
             <>
               <PopOver
                 content={<DynamicTabs dataKey="login" />}
@@ -205,6 +202,7 @@ const AntdHeader = () => {
           </Menu>
         </Drawer>
       </Header>
+      <div className="xl:h-[80px] h-[60px]" />
     </Layout>
   );
 };

@@ -2,19 +2,24 @@ import React from 'react';
 import AntdCards from '../../../shared/components/AntdCards';
 import { Link, useOutletContext } from 'react-router-dom';
 import { dashBoardData } from '../../home/home.constant';
+import { isAuthenticated } from '../../../shared/utils/auth';
+import { useGetPostJobs } from '../../../services/employee/setUp';
 
 const DashBoard = ({ dataKey }) => {
-  const outletContext = useOutletContext();
-  const postData = outletContext?.postData;
   const foundItems = dashBoardData?.find((item) => item.key === dataKey);
+  console.log(foundItems);
+  const {
+    data: postData,
+    isLoading: postLoading,
+    isError: postError,
+  } = useGetPostJobs(isAuthenticated()?.id, '');
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {foundItems?.data?.map((item) => (
         <Link
-          to={`/${
-            dataKey === 'jobSeeker' ? 'jobSeeker' : 'employee'
-          }/dashboard/${item.link}`}
+          key={item.key}
+          to={`/${dataKey === 'jobSeeker' ? 'jobSeeker' : 'employee'}/dashboard/${item.link}${item.link === 'manage-jobs' ? `?status=${item?.status}` : ''}`}
         >
           <AntdCards
             key={item.key}

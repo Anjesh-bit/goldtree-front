@@ -94,7 +94,6 @@ export const useAuth = (isEmployee, isEmployeeTabItems, setOpen) => {
         : AppConstant.JOB_SEEKER_URL;
       if (state?.redirectTo) {
         navigate(state.redirectTo, { replace: true });
-        window.location.reload();
       } else {
         navigate(dashboardRoute);
       }

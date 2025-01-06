@@ -4,17 +4,16 @@ import { AntModal } from '../../shared/components/AntdModal';
 import Inputs from '../../shared/components/form/AntdInputs';
 import { useUpdateEasyApply } from '../../services/jobSeeker/setUp';
 import { useEffect, useState } from 'react';
-import useAuthHook from '../../hooks/useAuthHook';
 import TextAreas from '../../shared/components/form/AntdTextArea';
 import useMessage from '../../hooks/useMessage';
+import { isAuthenticated } from '../../shared/utils/auth';
+import { AppConstant } from '../../shared/constants';
 
 export const ViewForm = ({ open, setOpen }) => {
-  const isAuthenticated = useAuthHook(false);
-
   const [form] = useForm();
   const [files, setFiles] = useState(null);
   const { isSuccess, mutateAsync, isError, isPending } = useUpdateEasyApply();
-  const type = isAuthenticated?.type;
+  const type = isAuthenticated()?.type;
   const applyNow = open?.isApplyNow;
   const { contextHolder, showMessage } = useMessage();
 
@@ -38,8 +37,11 @@ export const ViewForm = ({ open, setOpen }) => {
       if (files) {
         formData.append('cv_upload', files);
       }
-      formData.append('type', `${!applyNow ? 'easyApply' : 'directApply'}`);
-      formData.append('userId', isAuthenticated?.id);
+      formData.append(
+        'type',
+        `${applyNow ? AppConstant.DIRECT_APPLY : AppConstant.EASY_APPLY}`
+      );
+      formData.append('userId', isAuthenticated()?.id);
       formData.append('postId', !applyNow ? open?.data : open?.data?.[0]);
       await mutateAsync(formData);
       setFiles(null);
