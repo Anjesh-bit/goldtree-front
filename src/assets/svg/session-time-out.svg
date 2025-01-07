@@ -1,0 +1,49 @@
+<svg
+  width="300"
+  height="300"
+  viewBox="0 0 300 300"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <rect width="300" height="300" rx="20" fill="#F8FAFC" />
+
+  <g
+    stroke="#2563EB"
+    stroke-width="6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+  >
+    <path
+      d="M100 70 L200 70 Q210 70 210 80 L210 100 Q210 110 200 120 L160 150 L200 180 Q210 190 210 200 L210 220 Q210 230 200 230 L100 230 Q90 230 90 220 L90 200 Q90 190 100 180 L140 150 L100 120 Q90 110 90 100 L90 80 Q90 70 100 70 Z"
+    />
+  </g>
+
+  <g fill="#60A5FA">
+    <path d="M140 150 L160 150 Q160 130 150 120 Q140 130 140 150 Z">
+      <animate
+        attributeName="d"
+        values="M140 150 L160 150 Q160 130 150 120 Q140 130 140 150 Z; 
+                M140 160 L160 160 Q160 140 150 130 Q140 140 140 160 Z"
+        dur="2s"
+        repeatCount="indefinite"
+      />
+    </path>
+  </g>
+
+  <g fill="none" stroke="#2563EB" stroke-width="4">
+    <circle cx="150" cy="40" r="20" />
+    <line x1="150" y1="40" x2="150" y2="30" />
+    <line x1="150" y1="40" x2="160" y2="40" />
+  </g>
+
+  <text
+    x="50%"
+    y="270"
+    text-anchor="middle"
+    font-family="Arial, sans-serif"
+    font-size="16"
+    fill="#475569"
+  >
+    Session Timed Out
+  </text>
+</svg>

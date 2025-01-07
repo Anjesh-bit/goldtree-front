@@ -57,3 +57,4 @@ export const Search = lazy(() => import('../features/search/pages'));
 export const EmployeeDetails = lazy(
   () => import('../features/employeeDetails')
 );
+export const SessionTimeOut = lazy(() => import('../features/sessionTimeOut'));

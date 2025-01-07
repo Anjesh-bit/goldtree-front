@@ -76,7 +76,7 @@ axiosInstance.interceptors.response.use(
         removeLocalStorage('loginData');
         deleteCookies('token');
         deleteCookies('refreshToken');
-        window.location.reload();
+        window.location.replace('/session-time-out');
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;

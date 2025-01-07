@@ -10,6 +10,7 @@ import MainLayout from '../shared/components/layouts/MainLayout';
 import DashboardLayout from '../shared/components/layouts/DashBoardLayout';
 import ProtectedRoute from './ProtectedRoutes';
 import { AppConstant } from '../shared/constants';
+import { SessionTimeOut } from './LazyRoute';
 
 const EmployeeDashboardLayouts = ProtectedRoute(DashboardLayout, 'employee');
 const JobSeekerDashboardLayouts = ProtectedRoute(DashboardLayout, 'jobSeeker');
@@ -31,6 +32,14 @@ const router = createBrowserRouter([
   createRoutes(authConfig, MainLayout),
   createRoutes(employeeConfig, EmployeeDashboardLayouts),
   createRoutes(jobSeekerConfig, JobSeekerDashboardLayouts),
+  {
+    path: 'session-time-out',
+    element: (
+      <Suspense>
+        <SessionTimeOut />
+      </Suspense>
+    ),
+  },
 ]);
 
 export default router;
