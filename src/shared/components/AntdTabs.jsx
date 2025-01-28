@@ -21,7 +21,6 @@ const AntdTabs = (props) => {
       centered={props.centered}
       activeKey={props.activeKey}
       onTabClick={props.onTabClick}
-      animated
       tabBarExtraContent={props.extraContent}
     >
       {props.children}

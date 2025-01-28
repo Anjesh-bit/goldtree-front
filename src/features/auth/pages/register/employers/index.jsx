@@ -1,4 +1,4 @@
-import DynamicRegistration from "../../../components/DynamicRegistration";
+import DynamicRegistration from '../../../components/DynamicRegistration';
 
 const EmployeeRegistration = () => {
   return (

@@ -7,7 +7,20 @@ import { useGetEasyApply } from '../../../../../services/employee/setUp';
 import AntdCards from '../../../../../shared/components/AntdCards';
 import AntdButton from '../../../../../shared/components/AntdButtons';
 import { isAuthenticated } from '../../../../../shared/utils/auth';
-import EmptyState from '../../components/emptyState';
+import { EmptyState } from '../../components/emptyState';
+import { HIRING_STATUS } from './jobsApplied.constant';
+import { filterHiringStatus } from '../../../dashboard.utils';
+
+const getHiringStatus = (query) => {
+  switch (query) {
+    case HIRING_STATUS.ACCEPTED:
+      return HIRING_STATUS.ACCEPTED;
+    case HIRING_STATUS.REJECTED:
+      return HIRING_STATUS.REJECTED;
+    default:
+      return HIRING_STATUS.PENDING;
+  }
+};
 
 const JobApplied = () => {
   const { data, isLoading } = useGetEasyApply(isAuthenticated()?.id);
@@ -16,13 +29,14 @@ const JobApplied = () => {
     type: '',
   });
 
-  const { mutateAsync } = useShortList(queryParams);
+  const { mutateAsync, data: jobsAppliedCandidate = { message: '' } } =
+    useShortList(queryParams);
 
   const { contextHolder, showMessage } = useMessage();
 
-  const handleOnClick = async (_, uploadId, postId, type) => {
+  const handleOnClick = async (_, uploadId, postId, type, status) => {
     setQueryParams({
-      shortList: 'shortlist',
+      status: getHiringStatus(status),
       uploadId: uploadId,
       postId,
       type,
@@ -32,7 +46,7 @@ const JobApplied = () => {
       await mutateAsync();
       showMessage({
         type: 'info',
-        content: 'Candidates have successfully shortlisted',
+        content: jobsAppliedCandidate.message,
         className: 'mt-[30vh] h-[40px]',
       });
     } catch (error) {
@@ -87,6 +101,13 @@ const JobApplied = () => {
                         candidate?.upload_cv?.lastIndexOf('/') + 1
                       );
                       const { jobSeekerProfile = [] } = candidate;
+                      const isShortListed = candidate.shortlisted;
+
+                      const isAccepted =
+                        candidate.status === HIRING_STATUS.ACCEPTED;
+                      const isRejected =
+                        candidate.status === HIRING_STATUS.REJECTED;
+                      const isRejectedOrAccepted = isRejected || isAccepted;
 
                       const hasProfile = jobSeekerProfile.length > 0;
 
@@ -97,24 +118,63 @@ const JobApplied = () => {
                         ? jobSeekerProfile[0]?.profile?.phone_no
                         : candidate.email;
 
+                      const { className, text } = filterHiringStatus(
+                        candidate.status
+                      );
                       return (
                         <AntdCards
-                          className="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 p-4 bg-white rounded-lg shadow-md hover:bg-gray-300 cursor-pointer transition-colors"
+                          className="col-span-12 sm:col-span-6 lg:col-span-4 p-4 bg-white rounded-lg shadow-md hover:bg-gray-300 cursor-pointer transition-colors"
                           key={candidate._id}
                         >
                           <AntdButton
-                            classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors"
+                            classNames={`${isShortListed ? 'hidden' : 'block'} bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors`}
                             onClick={(e) => {
                               handleOnClick(
                                 e,
                                 candidate.userId,
                                 candidate.postId,
-                                candidate.type
+                                candidate.type,
+                                HIRING_STATUS.PENDING
                               );
                             }}
                           >
                             ShortList
                           </AntdButton>
+                          <div
+                            className={`${isShortListed ? 'block' : 'hidden'} flex items-center justify-between`}
+                          >
+                            <AntdButton
+                              disabled={isRejectedOrAccepted}
+                              classNames={`bg-[#08142c] text-white font-semibold px-4 rounded ${isRejectedOrAccepted ? '' : 'hover:!bg-[#0a223f]'} transition-colors`}
+                              onClick={(e) => {
+                                handleOnClick(
+                                  e,
+                                  candidate.userId,
+                                  candidate.postId,
+                                  candidate.type,
+                                  HIRING_STATUS.ACCEPTED
+                                );
+                              }}
+                            >
+                              Accept
+                            </AntdButton>
+                            <AntdButton
+                              disabled={isRejectedOrAccepted}
+                              classNames={`bg-[#08142c] text-white font-semibold px-4 rounded ${isRejectedOrAccepted ? '' : 'hover:!bg-[#0a223f]'} transition-colors`}
+                              onClick={(e) => {
+                                handleOnClick(
+                                  e,
+                                  candidate.userId,
+                                  candidate.postId,
+                                  candidate.type,
+                                  HIRING_STATUS.REJECTED
+                                );
+                              }}
+                            >
+                              Reject
+                            </AntdButton>
+                          </div>
+
                           <div className="text-md font-medium text-[#3d2462] mt-2">
                             Name: {name}
                           </div>
@@ -133,6 +193,13 @@ const JobApplied = () => {
                             >
                               {url}
                             </a>
+                          </div>
+                          <div className="mt-2">
+                            <span
+                              className={`inline-block px-3 py-1 rounded-full text-sm ${className}`}
+                            >
+                              {text}
+                            </span>
                           </div>
                         </AntdCards>
                       );

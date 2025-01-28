@@ -11,6 +11,7 @@ import DashboardLayout from '../shared/components/layouts/DashBoardLayout';
 import ProtectedRoute from './ProtectedRoutes';
 import { AppConstant } from '../shared/constants';
 import { SessionTimeOut } from './LazyRoute';
+import { Skeleton } from 'antd';
 
 const EmployeeDashboardLayouts = ProtectedRoute(DashboardLayout, 'employee');
 const JobSeekerDashboardLayouts = ProtectedRoute(DashboardLayout, 'jobSeeker');
@@ -23,7 +24,19 @@ const createRoutes = (config, Layout) => ({
   element: <Layout />,
   children: config.map(({ path, element }) => ({
     path,
-    element: <Suspense>{element}</Suspense>,
+    element: (
+      <Suspense
+        fallback={
+          <Skeleton
+            active
+            paragraph={{ rows: 20 }}
+            className="h-[100vh] w-full"
+          />
+        }
+      >
+        {element}
+      </Suspense>
+    ),
   })),
 });
 

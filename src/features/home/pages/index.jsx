@@ -1,6 +1,6 @@
-import CompanyList from "../components/companylist";
-import DetailedComponent from "../components/details";
-import FeaturedJobs from "../components/featured";
+import CompanyList from '../components/companylist';
+import DetailedComponent from '../components/details';
+import FeaturedJobs from '../components/featured';
 
 const JobPortalHome = () => {
   return (

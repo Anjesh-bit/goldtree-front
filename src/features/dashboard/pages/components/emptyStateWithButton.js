@@ -1,6 +1,6 @@
 import AntdButton from '../../../../shared/components/AntdButtons';
 
-const EmptyState = ({
+export const EmptyStateWithButton = ({
   image,
   title,
   description,
@@ -26,5 +26,3 @@ const EmptyState = ({
     </AntdButton>
   </div>
 );
-
-export default EmptyState;

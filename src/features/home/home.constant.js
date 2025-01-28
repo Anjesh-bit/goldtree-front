@@ -1,4 +1,4 @@
-import { JOB_STATUS } from '../dashboard/pages/dashboard.constant';
+import { JOB_STATUS } from '../dashboard/dashboard.constant';
 
 const dummyDataFeatured = [
   {

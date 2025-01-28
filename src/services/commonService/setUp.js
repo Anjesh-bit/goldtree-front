@@ -39,7 +39,7 @@ export const useShortList = (data) => {
       setLocalLoading(true);
       try {
         const data = await putUploader(
-          `shortlist?${params.toString()}`,
+          `update-job-hiring-status?${params.toString()}`,
           payload
         );
         return data;

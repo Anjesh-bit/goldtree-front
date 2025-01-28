@@ -94,7 +94,8 @@ export const useGetJobsApplied = (id, isShorList, isSavedJobs) => {
 
 export const useGetShortListed = (userId, type, isShortList) => {
   return useQuery({
-    queryFn: () => fetcher(`shortlist?userId=${userId}&type=${type}`),
+    queryFn: () =>
+      fetcher(`get-shortlisted-jobs?userId=${userId}&type=${type}`),
     queryKey: [
       jobSeekerQueryKeys.setUp.jobSeekerGetShortListed,
       userId,

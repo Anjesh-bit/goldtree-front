@@ -47,7 +47,6 @@ export const ViewForm = ({ open, setOpen }) => {
       setFiles(null);
       form.resetFields();
     } catch (error) {
-      console.log(error);
       if (error?.response.data.error) {
         showMessage({
           type: 'error',

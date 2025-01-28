@@ -4,7 +4,7 @@ import AntdCards from '../../../../../shared/components/AntdCards';
 import { useGetAllShortListedCandidates } from '../../../../../services/employee/setUp';
 import Loading from '../../../../../assets/svg/loading.svg';
 import { isAuthenticated } from '../../../../../shared/utils/auth';
-import EmptyState from '../../components/emptyState';
+import { EmptyState } from '../../components/emptyState';
 
 const ShortlistCandidate = () => {
   const navigate = useNavigate();

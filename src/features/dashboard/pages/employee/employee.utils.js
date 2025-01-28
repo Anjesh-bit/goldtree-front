@@ -1,4 +1,4 @@
-import { JOB_STATUS } from '../dashboard.constant';
+import { JOB_STATUS } from '../../dashboard.constant';
 
 export const filterJobByStatus = (status) => {
   switch (status) {

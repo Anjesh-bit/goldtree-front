@@ -2,7 +2,8 @@ import AntdCards from '../../../../../shared/components/AntdCards';
 import { useAppliedJobs } from '../../../hooks/useAppliedJobs';
 import Loading from '../../../../../assets/svg/loading.svg';
 import NoDataSVG from '../../../../../assets/svg/no-data.svg';
-import EmptyState from '../../components/emptyStateWithButton';
+import { EmptyStateWithButton } from '../../components/emptyStateWithButton';
+import { filterHiringStatus } from '../../../dashboard.utils';
 
 const AppliedJobs = ({ isShortList, isSavedJobs }) => {
   const { handleCardClick, appliedJobsData } = useAppliedJobs(
@@ -20,7 +21,7 @@ const AppliedJobs = ({ isShortList, isSavedJobs }) => {
 
   if (appliedJobsData.length === 0) {
     return (
-      <EmptyState
+      <EmptyStateWithButton
         image={NoDataSVG}
         title={`No ${isShortList ? 'Shortlisted' : isSavedJobs ? 'Saved' : 'Applied'} Jobs Found`}
         description={`It seems like you haven't ${
@@ -45,27 +46,45 @@ const AppliedJobs = ({ isShortList, isSavedJobs }) => {
                 : 'Applied Jobs'}
           </h2>
         </div>
-        {appliedJobsData.map((items) => (
-          <AntdCards
-            key={items.postId}
-            className="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 p-4 bg-white rounded-lg shadow-md cursor-pointer hover:bg-gray-300 transition-colors"
-            onClick={(e) => handleCardClick(e, items._id, items.company_name)}
-          >
-            <div className="text-lg font-semibold text-[#3d2462] mb-2">
-              {items.company_name}
-            </div>
-            <div className="text-md font-medium text-gray-800 mb-1">
-              Job Title: <span className="font-normal">{items.job_title}</span>
-            </div>
-            <div className="text-md font-medium text-gray-800 mb-1">
-              Job Location:{' '}
-              <span className="font-normal">{items.job_location}</span>
-            </div>
-            <div className="text-md font-medium text-gray-800">
-              Job Level: <span className="font-normal">{items.job_level}</span>
-            </div>
-          </AntdCards>
-        ))}
+        {appliedJobsData.map((items) => {
+          const jobDetails = items.jobDetails;
+          const jobStatus = items.status;
+          const { className, text } = filterHiringStatus(jobStatus);
+
+          return (
+            <AntdCards
+              key={jobDetails.postId}
+              className="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 p-4 bg-white rounded-lg shadow-md cursor-pointer hover:bg-gray-300 transition-colors"
+              onClick={(e) =>
+                handleCardClick(e, jobDetails._id, jobDetails.company_name)
+              }
+            >
+              <div className="text-lg font-semibold text-[#3d2462] mb-2">
+                {jobDetails.company_name}
+              </div>
+              <div className="text-md font-medium text-gray-800 mb-1">
+                Job Title:{' '}
+                <span className="font-normal">{jobDetails.job_title}</span>
+              </div>
+              <div className="text-md font-medium text-gray-800 mb-1">
+                Job Location:{' '}
+                <span className="font-normal">{jobDetails.job_location}</span>
+              </div>
+              <div className="text-md font-medium text-gray-800 mb-1">
+                Job Level:{' '}
+                <span className="font-normal">{jobDetails.job_level}</span>
+              </div>
+
+              <div className="mt-2">
+                <span
+                  className={`inline-block px-3 py-1 rounded-full text-sm ${className}`}
+                >
+                  {text}
+                </span>
+              </div>
+            </AntdCards>
+          );
+        })}
       </div>
     </div>
   );

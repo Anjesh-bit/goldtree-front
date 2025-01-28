@@ -1,4 +1,4 @@
-import { JOB_STATUS } from '../dashboard.constant';
+import { JOB_STATUS } from '../../dashboard.constant';
 import { JobType } from './manageJobs/JobType';
 
 const tabConfig = [
