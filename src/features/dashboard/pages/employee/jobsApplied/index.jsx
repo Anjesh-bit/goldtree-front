@@ -39,7 +39,7 @@ const JobApplied = () => {
       status: getHiringStatus(status),
       uploadId: uploadId,
       postId,
-      type,
+      type, 
     });
 
     try {

@@ -17,6 +17,9 @@ export const jobSeekerQueryKeys = {
     jobSeekerAppliedJobs: 'jobSeekerAppliedJobs',
     jobSeekerGetShortListed: 'jobSeekerGetShortListed',
     jobSeekerSavedJobs: 'jobSeekerSavedJobs',
+    jobSeekerAcceptedJobs: 'jobSeekerAcceptedJobs',
+    jobSeekerRejectedJobs: 'jobSeekerRejectedJobs',
+    jobSeekerPendingJobs: 'jobSeekerPendingJobs',
   },
 };
 

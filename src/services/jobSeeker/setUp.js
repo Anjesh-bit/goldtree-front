@@ -3,6 +3,7 @@ import { putUploader, uploader } from '../../lib/axios/uploader';
 import { useState } from 'react';
 import { fetcher } from '../../lib/axios/fetcher';
 import { jobSeekerQueryKeys } from '../../queryKeys/keys';
+import { HIRING_STATUS } from '../../features/dashboard/pages/employee/jobsApplied/jobsApplied.constant';
 
 export const useProfileInfo = () => {
   const [localLoading, setLocalLoading] = useState(false);
@@ -84,11 +85,16 @@ export const useGetProfileInfo = (id) => {
   });
 };
 
-export const useGetJobsApplied = (id, isShorList, isSavedJobs) => {
+export const useGetJobsApplied = (
+  id,
+  isShorList,
+  isSavedJobs,
+  statusFilter
+) => {
   return useQuery({
     queryFn: () => fetcher(`jobSeeker-applied-jobs?userId=${id}`),
     queryKey: [jobSeekerQueryKeys.setUp.jobSeekerAppliedJobs, id],
-    enabled: !!(id && !isShorList && !isSavedJobs),
+    enabled: !!(id && !isShorList && !isSavedJobs && !statusFilter),
   });
 };
 
@@ -143,5 +149,29 @@ export const useGetSavedJobs = (jobSeekUserId, isSavedJobs) => {
       isSavedJobs,
     ],
     enabled: !!(jobSeekUserId && isSavedJobs),
+  });
+};
+
+export const useGetAcceptedJobs = (jobSeekUserId, statusFilter) => {
+  return useQuery({
+    queryFn: () => fetcher(`jobSeeker-accepted-jobs/${jobSeekUserId}`),
+    queryKey: [jobSeekerQueryKeys.setUp.jobSeekerAcceptedJobs, jobSeekUserId],
+    enabled: !!(jobSeekUserId && statusFilter === HIRING_STATUS.ACCEPTED),
+  });
+};
+
+export const useGetRejectedJobs = (jobSeekUserId, statusFilter) => {
+  return useQuery({
+    queryFn: () => fetcher(`jobSeeker-rejected-jobs/${jobSeekUserId}`),
+    queryKey: [jobSeekerQueryKeys.setUp.jobSeekerRejectedJobs, jobSeekUserId],
+    enabled: !!(jobSeekUserId && statusFilter === HIRING_STATUS.REJECTED),
+  });
+};
+
+export const useGetPendingJobs = (jobSeekUserId, statusFilter) => {
+  return useQuery({
+    queryFn: () => fetcher(`jobSeeker-pending-jobs/${jobSeekUserId}`),
+    queryKey: [jobSeekerQueryKeys.setUp.jobSeekerPendingJobs, jobSeekUserId],
+    enabled: !!(jobSeekUserId && statusFilter === HIRING_STATUS.PENDING),
   });
 };

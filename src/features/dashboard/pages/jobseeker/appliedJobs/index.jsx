@@ -6,12 +6,14 @@ import { EmptyStateWithButton } from '../../components/emptyStateWithButton';
 import { filterHiringStatus } from '../../../dashboard.utils';
 
 const AppliedJobs = ({ isShortList, isSavedJobs }) => {
-  const { handleCardClick, appliedJobsData } = useAppliedJobs(
+  const { handleCardClick, jobsData, statusFilter } = useAppliedJobs(
     isSavedJobs,
     isShortList
   );
 
-  if (!appliedJobsData) {
+  const { data, isLoading } = jobsData;
+
+  if (isLoading) {
     return (
       <div className="flex items-center justify-center h-[80vh]">
         <img src={Loading} alt="Loading" />
@@ -19,11 +21,13 @@ const AppliedJobs = ({ isShortList, isSavedJobs }) => {
     );
   }
 
-  if (appliedJobsData.length === 0) {
+  const isEmptyData = data?.data.length === 0;
+
+  if (isEmptyData) {
     return (
       <EmptyStateWithButton
         image={NoDataSVG}
-        title={`No ${isShortList ? 'Shortlisted' : isSavedJobs ? 'Saved' : 'Applied'} Jobs Found`}
+        title={`No ${isShortList ? 'Shortlisted' : isSavedJobs ? 'Saved' : ''} ${statusFilter ? statusFilter : 'Applied'} Jobs Found`}
         description={`It seems like you haven't ${
           isShortList ? 'shortlisted' : isSavedJobs ? 'saved' : 'applied for'
         } any jobs yet. Start exploring opportunities and take the first step toward your dream job!`}
@@ -46,7 +50,7 @@ const AppliedJobs = ({ isShortList, isSavedJobs }) => {
                 : 'Applied Jobs'}
           </h2>
         </div>
-        {appliedJobsData.map((items) => {
+        {data?.data.map((items) => {
           const jobDetails = items.jobDetails;
           const jobStatus = items.status;
           const { className, text } = filterHiringStatus(jobStatus);
@@ -74,7 +78,6 @@ const AppliedJobs = ({ isShortList, isSavedJobs }) => {
                 Job Level:{' '}
                 <span className="font-normal">{jobDetails.job_level}</span>
               </div>
-
               <div className="mt-2">
                 <span
                   className={`inline-block px-3 py-1 rounded-full text-sm ${className}`}
