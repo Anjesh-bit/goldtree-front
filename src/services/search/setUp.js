@@ -8,14 +8,10 @@ export const useGlobalSearch = (params) => {
 
   const { q, vacancyType, careerLevel, gender, qualifications } = params;
 
-  if (q) {
-    urlSearchParams.append('q', q);
-  }
+  if (q) urlSearchParams.append('q', q);
 
   const addArrayToParams = (key, array) => {
-    if (!isEmpty(array)) {
-      urlSearchParams.append(key, array.join(','));
-    }
+    if (!isEmpty(array)) urlSearchParams.append(key, array.join(','));
   };
 
   addArrayToParams('vacancyType', vacancyType);

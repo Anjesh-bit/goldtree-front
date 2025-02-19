@@ -1,7 +1,11 @@
 import { Fragment } from 'react';
+import dayjs from 'dayjs';
+import 'dayjs/locale/en';
 import { useGetProfileInfo } from '../../../../../services/jobSeeker/setUp';
 import Loading from '../../../../../assets/svg/loading.svg';
 import { isAuthenticated } from '../../../../../shared/utils/auth';
+
+dayjs.locale('en');
 
 const ViewPdf = () => {
   const { data: profileData, isLoading } = useGetProfileInfo(
@@ -46,14 +50,6 @@ const ViewPdf = () => {
                   </div>
                   <div className="rounded-xl p-2">
                     <div className="text-[1.3rem] font-medium">Profile</div>
-                    <div>
-                      Meet [Your Name], the epitome of versatility and wit. With
-                      a penchant for creativity and a knack for problem-solving,
-                      [he/she] navigates through life challenges with grace and
-                      charm. Armed with a curious mind and a contagious
-                      enthusiasm, [he/she] effortlessly leaves an indelible mark
-                      wherever [he/she] goes.
-                    </div>
                     <div
                       dangerouslySetInnerHTML={{
                         __html: patient.profile?.description ?? 'N/A',
@@ -71,7 +67,7 @@ const ViewPdf = () => {
                     {patient.experience?.designation ?? 'N/A'}
                   </div>
                   <div>
-                    <i>{`${patient.experience?.from ?? 'N/A'} - ${patient.experience?.to || 'N/A'}`}</i>
+                    <i>{`${dayjs(patient.experience?.from).format('DD MMM YYYY') ?? 'N/A'} - ${dayjs(patient.experience?.to).format('DD MMM YYYY') || 'N/A'}`}</i>
                   </div>
 
                   <div>{patient.experience?.company ?? 'N/A'}</div>
@@ -90,7 +86,11 @@ const ViewPdf = () => {
                   {patient.education?.degree ?? 'N/A'}
                 </div>
                 <div>
-                  <i>{patient.education?.passed_year ?? 'N/A'}</i>
+                  <i>
+                    {dayjs(patient.education?.passed_year).format(
+                      'DD MMM YYYY'
+                    ) ?? 'N/A'}
+                  </i>
                 </div>
                 <div>{patient.education?.level ?? 'N/A'}</div>
               </div>

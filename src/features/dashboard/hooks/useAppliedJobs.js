@@ -20,8 +20,7 @@ const getFilteredJobData = (
   pendingJobs,
   isLoadingAcceptedJobs,
   isLoadingRejectedJobs,
-  isLoadingPendingJobs,
-  isLoadingAppliedJobs
+  isLoadingPendingJobs
 ) => {
   switch (statusFilter) {
     case HIRING_STATUS.ACCEPTED:
@@ -31,7 +30,7 @@ const getFilteredJobData = (
     case HIRING_STATUS.PENDING:
       return { data: pendingJobs, isLoading: isLoadingPendingJobs };
     default:
-      return { data: appliedJobsData, isLoading: isLoadingAppliedJobs };
+      return appliedJobsData;
   }
 };
 
@@ -56,22 +55,23 @@ export const useAppliedJobs = (isSavedJobs, isShortList) => {
       statusFilter
     );
 
-  const { data: savedJobs } = useGetSavedJobs(
+  const { data: savedJobs, isLoading: isLoadingSaved } = useGetSavedJobs(
     isAuthenticated()?.id,
     isSavedJobs
   );
 
-  const { data: shortListedJobs } = useGetShortListed(
-    isAuthenticated()?.id,
-    AppConstant.DIRECT_APPLY,
-    isShortList
-  );
+  const { data: shortListedJobs, isLoading: isLoadingShortlisted } =
+    useGetShortListed(
+      isAuthenticated()?.id,
+      AppConstant.DIRECT_APPLY,
+      isShortList
+    );
 
   const appliedJobsData = isShortList
-    ? shortListedJobs
+    ? { data: shortListedJobs, isLoading: isLoadingShortlisted }
     : isSavedJobs
-      ? savedJobs
-      : appliedJobs;
+      ? { data: savedJobs, isLoading: isLoadingSaved }
+      : { data: appliedJobs, isLoading: isLoadingAppliedJobs };
 
   const jobsData = getFilteredJobData(
     statusFilter,
