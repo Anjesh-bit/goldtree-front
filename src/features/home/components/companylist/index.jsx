@@ -37,7 +37,8 @@ const CompanyList = () => {
                   <img
                     src={item.profile_images ?? 'default-image.jpg'}
                     alt={item.personalInfo.company_name}
-                    className="w-24 h-24 object-cover rounded-full"
+                    className="w-24 h-24 object-cover rounded-full shadow-lg p-2 "
+                    onError={(e) => (e.target.style.icon = 'none')}
                   />
                 </div>
 
