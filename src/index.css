@@ -11,33 +11,6 @@
   }
 }
 
-.ant-input {
-  border-width: 1px;
-  border-color: black;
-  border-radius: 4px;
-}
-.ant-picker {
-  margin-top: 7px;
-  border-width: 1px;
-  border-color: black;
-  border-radius: 4px;
-}
-
-.ant-select-selector {
-  border-width: 13px;
-  border-color: black;
-  border-radius: 4px;
-}
-.ant-radio {
-  /* background-color: black; */
-  border-width: 0.8px;
-  border-color: gray;
-}
-
-.ant-layout-content {
-  margin-left: 190px;
-}
-
 html,
 body {
   box-sizing: border-box;

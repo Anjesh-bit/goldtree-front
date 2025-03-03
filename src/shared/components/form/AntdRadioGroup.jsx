@@ -60,7 +60,7 @@ export const AntRadio = (props) => {
             {props.options?.map((item) => (
               <div key={item.value}>
                 <Radio
-                  className={`whitespace-nowrap !text-[14px]  font-medium
+                  className={`whitespace-nowrap !text-[12px]
                 
                 ${
                   props.commonRadio ? 'items-center text-sm font-medium' : ''

@@ -166,7 +166,7 @@ const MyProfile = () => {
         layout="vertical"
         className="space-y-6"
       >
-        <div className="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md sm:">
+        <div className="bg-white p-4 md:p-6 lg:p-8 rounded-lg shadow-md">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
             <DynamicTitle classNames="text-xl md:text-2xl font-medium text-[#3d2462] mb-4 md:mb-0">
               Personal Information
