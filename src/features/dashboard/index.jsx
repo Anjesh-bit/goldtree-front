@@ -39,7 +39,7 @@ const DashBoardSider = ({ isEmployeeDashboard, isJobSeekerDashboard }) => {
       <Sider
         collapsed={isMobileScreen ? true : false}
         theme="dark"
-        className="bg-dark-900 fixed  h-full "
+        className="bg-dark-900"
       >
         <Menu
           theme="dark"
