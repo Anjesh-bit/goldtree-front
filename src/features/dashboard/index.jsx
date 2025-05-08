@@ -37,9 +37,9 @@ const DashBoardSider = ({ isEmployeeDashboard, isJobSeekerDashboard }) => {
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider
-        collapsed={isMobileScreen ? true : false}
+        collapsed={isMobileScreen}
         theme="dark"
-        className="bg-dark-900"
+        className="bg-dark-900 fixed lg:top-[80px] top-[60px] left-0  bottom-0 z-[40]"
       >
         <Menu
           theme="dark"
@@ -57,7 +57,7 @@ const DashBoardSider = ({ isEmployeeDashboard, isJobSeekerDashboard }) => {
           ))}
         </Menu>
       </Sider>
-      <Layout>
+      <Layout className="xl:ml-[220px] sm:ml-[200px] ml-[80px]">
         <Content className="bg-light-100 p-4 md:p-8 lg:p-12 xl:p-[48px]">
           <Outlet />
         </Content>

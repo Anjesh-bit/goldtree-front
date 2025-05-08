@@ -42,7 +42,6 @@ export const JobType = ({ activeTab }) => {
         description="It seems like you haven't posted any jobs yet. Start exploring opportunities and take the first step toward your dream job!"
         buttonText="Post a new job"
         buttonAction={() => navigate('/employee/dashboard/new-job')}
-        containerHeight="h-[40vh]"
       />
     );
   }
