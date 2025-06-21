@@ -69,7 +69,9 @@ const PostJobs = () => {
         content: 'The job has been successfully posted.',
         className: 'mt-[30vh] h-[40px]',
       });
-    } catch (e) {}
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const handleCkEditor = (event, editor, filter) => {
@@ -184,10 +186,7 @@ const PostJobs = () => {
               />
             </div>
 
-            <div
-              className="md:col-span-4 sm:col-span-6 col-span-12"
-              Label="Service Type"
-            >
+            <div className="md:col-span-4 sm:col-span-6 col-span-12">
               <Selects
                 className="w-full"
                 Label="Job Type"
@@ -199,10 +198,7 @@ const PostJobs = () => {
                 valMessage={'This job type field is required.'}
               />
             </div>
-            <div
-              className="md:col-span-4 sm:col-span-6 col-span-12"
-              Label="Service Type"
-            >
+            <div className="md:col-span-4 sm:col-span-6 col-span-12">
               <Selects
                 className="w-full"
                 Label="Service Type"
@@ -214,10 +210,7 @@ const PostJobs = () => {
                 valMessage={'This service type field is required.'}
               />
             </div>
-            <div
-              className="md:col-span-4 sm:col-span-6 col-span-12"
-              Label="Service Type"
-            >
+            <div className="md:col-span-4 sm:col-span-6 col-span-12">
               <Selects
                 className="w-full"
                 Label="Job Level"
