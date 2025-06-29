@@ -42,7 +42,7 @@ export const employeeSiderRoutes = [
     '/employee/dashboard/manage-jobs'
   ),
   getItem(
-    'Jobs Applied Candidate',
+    'Jobs Applied',
     'jobsApplied',
     <UserAddOutlined />,
     '/employee/dashboard/jobs-applied'
@@ -54,7 +54,7 @@ export const employeeSiderRoutes = [
     '/employee/dashboard/upload-photo'
   ),
   getItem(
-    'Short Listed Candidates',
+    'Short Listed',
     'shortList',
     <CheckCircleOutlined />,
     '/employee/dashboard/short-list-candidates'

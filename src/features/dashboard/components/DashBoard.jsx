@@ -38,7 +38,7 @@ const DashBoard = ({ dataKey }) => {
   };
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {foundItems?.data?.map((item) => (
         <Link
           key={item.key}
@@ -46,25 +46,44 @@ const DashBoard = ({ dataKey }) => {
         >
           <AntdCards
             key={item.key}
-            className="bg-white shadow-md rounded-lg p-4 sm:p-6 flex flex-col items-start justify-between min-h-[200px] transition-transform transform hover:scale-105"
+            className="
+              bg-white
+              shadow-sm
+              border
+              border-gray-200
+              rounded-xl
+              p-5
+              flex flex-col justify-between
+              min-h-[220px]
+              hover:shadow-lg
+              hover:border-[#f1c40f]
+              hover:-translate-y-1
+              transition-all duration-300
+              group
+            "
           >
-            <div className="text-lg sm:text-xl font-semibold mb-2 sm:mb-4 text-[#3d2462]">
+            <div className="text-lg md:text-xl font-bold text-[#08142c] mb-2">
               {item.header}
             </div>
+
             {['cvs', 'jobStatus'].includes(item.key) && (
-              <div className="space-y-1 sm:space-y-2 text-[#3d2462]">
+              <div className="space-y-1 text-gray-700">
                 {item.cvsData.map((subItem) => (
-                  <div key={subItem.key} className="text-sm sm:text-base">
+                  <div
+                    key={subItem.key}
+                    className="text-sm md:text-base flex items-center gap-2"
+                  >
+                    <span className="inline-block w-2 h-2 bg-[#f1c40f] rounded-full"></span>
                     {item.key === 'cvs' ? subItem.cvsList : subItem.status}
                   </div>
                 ))}
               </div>
             )}
-            <div className="text-sm sm:text-base text-[#3d2462]">
-              {item.subHeader}
-            </div>
-            {jobCounts[item.key] && (
-              <div className="mt-2 sm:mt-4 text-lg font-bold text-[#3d2462]">
+
+            <div className="text-sm text-gray-600 mt-2">{item.subHeader}</div>
+
+            {jobCounts[item.key] > 0 && (
+              <div className="mt-4 text-lg font-bold text-[#f1c40f]">
                 {`(${jobCounts[item.key]})`}
               </div>
             )}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link, useLocation } from 'react-router-dom';
 import { Layout, Menu, theme, Grid } from 'antd';
 import {
   employeeSiderRoutes,
@@ -12,26 +12,27 @@ const { useBreakpoint } = Grid;
 const DashBoardSider = ({ isEmployeeDashboard, isJobSeekerDashboard }) => {
   const screens = useBreakpoint();
   const isMobileScreen = screens.xs;
-  const items = [
-    {
-      status: isEmployeeDashboard,
-      routes: employeeSiderRoutes,
-    },
-    {
-      status: isJobSeekerDashboard,
-      routes: JobSeekerSiderRoutes,
-    },
-  ];
+  const location = useLocation();
 
+  const items = [
+    { status: isEmployeeDashboard, routes: employeeSiderRoutes },
+    { status: isJobSeekerDashboard, routes: JobSeekerSiderRoutes },
+  ];
   const foundItems = items.find((item) => item.status);
 
-  const [selectedKeys, setSelectedKeys] = useState([]);
+  const [selectedKeys, setSelectedKeys] = useState(() => {
+    const matchedItem = foundItems?.routes.find((route) =>
+      location.pathname.startsWith(route.path)
+    );
+    return matchedItem ? [matchedItem.key] : [];
+  });
+
   const {
     token: { colorBgContainer },
   } = theme.useToken();
 
-  const handleMenuSelect = (selected) => {
-    setSelectedKeys([selected.key]);
+  const handleMenuSelect = ({ key }) => {
+    setSelectedKeys([key]);
   };
 
   return (
@@ -39,26 +40,37 @@ const DashBoardSider = ({ isEmployeeDashboard, isJobSeekerDashboard }) => {
       <Sider
         collapsed={isMobileScreen}
         theme="dark"
-        className="bg-dark-900 fixed lg:top-[80px] top-[60px] left-0  bottom-0 z-[40]"
+        width={220}
+        className="fixed lg:top-[80px] top-[60px] left-0 bottom-0 z-[40] bg-[#08142c] rounded-tr-xl rounded-br-xl shadow-lg"
       >
         <Menu
           theme="dark"
           selectedKeys={selectedKeys}
           mode="inline"
           onSelect={handleMenuSelect}
-          className="bg-dark-900 text-white"
-        >
-          {foundItems?.routes.map((item) => (
-            <Menu.Item key={item.key} icon={item.icon}>
-              <Link to={item.path} className="text-base hover:text-primary">
-                {item.label}
+          className="bg-[#08142c] text-gray-300"
+          items={foundItems?.routes.map(({ key, icon, label, path }) => ({
+            key,
+            icon,
+            label: (
+              <Link
+                to={path}
+                className="text-base font-medium transition-colors duration-200"
+              >
+                {label}
               </Link>
-            </Menu.Item>
-          ))}
-        </Menu>
+            ),
+          }))}
+          style={{
+            borderRight: 'none',
+          }}
+        />
       </Sider>
-      <Layout className="xl:ml-[220px] sm:ml-[200px] ml-[80px]">
-        <Content className="bg-light-100 p-4 md:p-8 lg:p-12 xl:p-[48px]">
+      <Layout
+        className="xl:ml-[220px] sm:ml-[220px] ml-[80px] bg-[#f5f5f5]"
+        style={{ minHeight: '100vh' }}
+      >
+        <Content className="p-6 md:p-10 lg:p-14 xl:p-[48px]">
           <Outlet />
         </Content>
       </Layout>
