@@ -16,82 +16,91 @@ const ShortlistCandidate = () => {
   if (isPending) {
     return (
       <div className="flex items-center justify-center h-[80vh]">
-        <img src={Loading} />
+        <img src={Loading} alt="Loading..." />
       </div>
     );
   }
 
-  const isEmpty = !data;
-  if (isEmpty)
-    return (
-      <EmptyState message="There is no any shortlisted candidates found." />
-    );
+  const isEmpty = !data || data.length === 0;
+  if (isEmpty) {
+    return <EmptyState message="There are no shortlisted candidates found." />;
+  }
 
   return (
-    <div className="bg-[#f5f5f5] min-h-screen p-4">
-      <AntdBreadCum array={['Employee', 'ShortListed Candidates']} />
-      <div className="grid grid-cols-12 gap-4">
-        <h2 className="col-span-12 text-2xl md:text-3xl font-medium text-[#3d2462] mb-4">
-          Shortlisted Candidates
-        </h2>
+    <div className="bg-[#f9f9f9] min-h-screen py-6 px-4 md:px-8 lg:px-12">
+      <AntdBreadCum array={['Employee', 'Shortlisted Candidates']} />
+
+      <h2 className="text-2xl md:text-3xl font-semibold text-[#08142c] mb-6">
+        Shortlisted Candidates
+      </h2>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
         {data?.map((items) => {
           const { profile, experience, postId, companyName } = items;
+          const resumeName = items.upload_cv?.substring(
+            items.upload_cv?.lastIndexOf('/') + 1
+          );
 
           return (
             <AntdCards
-              onClick={() => navigate(`/jobs/${companyName}/${postId}`)}
               key={items._id}
-              className="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 p-4 bg-white rounded-lg shadow-md cursor-pointer hover:bg-gray-300 transition-colors"
+              onClick={() => navigate(`/jobs/${companyName}/${postId}`)}
+              className="
+                p-5
+                bg-white
+                rounded-xl
+                border border-gray-200
+                shadow
+                hover:shadow-lg
+                hover:bg-[#fdf6e3]
+                transition-all
+                cursor-pointer
+              "
             >
-              <Link className="block">
-                <div className="text-md font-medium text-[#3d2462] mb-2">
-                  Name:{' '}
-                  <span className="font-normal">
-                    {profile?.full_name || 'N/A'}
-                  </span>
-                </div>
-                <div className="text-md font-medium text-gray-800 mb-1">
-                  Phone:{' '}
-                  <span className="font-normal">
-                    {profile?.phone_no || 'N/A'}
-                  </span>
-                </div>
+              <div className="text-lg font-semibold text-[#08142c] mb-2">
+                {profile?.full_name || 'Unnamed Candidate'}
+              </div>
 
-                <div className="text-md font-medium text-gray-800 mb-1">
-                  Permanent Address:{' '}
-                  <span className="font-normal">
-                    {profile?.permanent_addr || 'N/A'}
-                  </span>
-                </div>
-                <div className="text-md font-medium text-gray-800 mb-1">
-                  Current Address:{' '}
-                  <span className="font-normal">
-                    {profile?.current_addr || 'N/A'}
-                  </span>
-                </div>
+              <div className="text-sm text-gray-700 mb-1">
+                <span className="font-semibold text-[#08142c]">Phone:</span>{' '}
+                {profile?.phone_no || 'N/A'}
+              </div>
 
-                {experience && (
-                  <div className="text-md font-medium text-gray-800 mb-1">
-                    Designation:{' '}
-                    <span className="font-normal">
-                      {experience?.designation || 'N/A'}
-                    </span>
-                  </div>
-                )}
+              <div className="text-sm text-gray-700 mb-1">
+                <span className="font-semibold text-[#08142c]">
+                  Permanent Address:
+                </span>{' '}
+                {profile?.permanent_addr || 'N/A'}
+              </div>
 
-                <div className="text-md font-medium text-gray-800 mt-1">
-                  Resume:{' '}
-                  <a
-                    href={items.upload_cv}
-                    target="_blank"
-                    download={items.upload_cv?.substring(
-                      items.upload_cv.lastIndexOf('/') + 1
-                    )}
-                  >
-                    Download
-                  </a>
+              <div className="text-sm text-gray-700 mb-1">
+                <span className="font-semibold text-[#08142c]">
+                  Current Address:
+                </span>{' '}
+                {profile?.current_addr || 'N/A'}
+              </div>
+
+              {experience && (
+                <div className="text-sm text-gray-700 mb-1">
+                  <span className="font-semibold text-[#08142c]">
+                    Designation:
+                  </span>{' '}
+                  {experience?.designation || 'N/A'}
                 </div>
-              </Link>
+              )}
+
+              <div className="text-sm text-gray-700 mt-2">
+                <span className="font-semibold text-[#08142c]">Resume:</span>{' '}
+                <a
+                  href={items.upload_cv}
+                  target="_blank"
+                  rel="noreferrer"
+                  download={resumeName}
+                  className="underline text-[#f1c40f] hover:text-[#d4b80e]"
+                >
+                  {resumeName || 'Download'}
+                </a>
+              </div>
             </AntdCards>
           );
         })}

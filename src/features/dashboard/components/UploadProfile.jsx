@@ -1,5 +1,4 @@
 import { Form } from 'antd';
-import Inputs from '../../../shared/components/form/AntdInputs';
 import { useEffect, useState } from 'react';
 import { useUpdateProfile } from '../../../services/commonService/setUp';
 import AntdButton from '../../../shared/components/AntdButtons';
@@ -14,6 +13,7 @@ const UploadProfile = ({ type }) => {
   const [preview, setPreview] = useState('');
   const { contextHolder, showMessage } = useMessage();
   const typeData = type === 'jobSeeker' ? 'jobSeeker' : 'employee';
+
   const {
     isError: updateError,
     isPending: updatePending,
@@ -36,12 +36,13 @@ const UploadProfile = ({ type }) => {
       formData.append('profile_image', files);
       await updateMutate(formData);
     } catch (e) {
-      if (e.response?.data?.error)
+      if (e.response?.data?.error) {
         showMessage({
           type: 'error',
           content: e.response.data.error,
           className: 'mt-4',
         });
+      }
     }
   };
 
@@ -51,7 +52,7 @@ const UploadProfile = ({ type }) => {
     if (file && !file.type.startsWith('image/')) {
       showMessage({
         type: 'error',
-        content: 'Please select the image.',
+        content: 'Please select a valid image file.',
         className: 'mt-4',
       });
       setFiles(null);
@@ -69,14 +70,16 @@ const UploadProfile = ({ type }) => {
   };
 
   useEffect(() => {
-    if (isSuccess)
+    if (isSuccess) {
       showMessage({
         type: 'success',
-        content: 'Image have been saved successfully',
+        content: 'Profile image has been uploaded successfully.',
         className: 'mt-4',
       });
-    setFiles(null);
-    setPreview('');
+      setFiles(null);
+      setPreview('');
+      form.resetFields();
+    }
   }, [isSuccess, form]);
 
   return (
@@ -86,17 +89,16 @@ const UploadProfile = ({ type }) => {
         form={form}
         onFinish={handleOnFinish}
         layout="vertical"
-        className="p-6 space-y-6 bg-white rounded-lg shadow-md"
+        className="p-6 space-y-6 bg-[#f9f9f9] rounded-xl  border border-gray-100"
       >
         <Form.Item
           label={
-            <div className="text-xl md:text-2xl font-medium text-[#3d2462] mb-4 md:mb-0">
+            <div className="text-xl md:text-2xl font-semibold text-[#08142c] mb-4">
               Upload Profile Image
             </div>
           }
-          className="mb-4"
         >
-          <div className="relative flex flex-col items-center justify-center border border-gray-300 rounded-md p-4">
+          <div className="relative flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-lg p-6 bg-[#fdfdfd] hover:border-[#f1c40f] transition-all">
             <input
               type="file"
               accept="image/*"
@@ -105,28 +107,39 @@ const UploadProfile = ({ type }) => {
             />
             <button
               type="button"
-              className="flex items-center justify-center w-full py-2 px-4 font-semibold"
+              className="flex items-center justify-center text-[#08142c] border border-[#08142c] px-4 py-2 rounded-md font-medium hover:bg-[#08142c] hover:text-white transition-colors"
             >
               Choose File
             </button>
             {preview && (
-              <div className="mt-4">
+              <div className="mt-4 border rounded overflow-hidden shadow-md">
                 <img
                   src={preview}
-                  alt="Preview"
-                  className="w-64 h-64 object-contain  border"
+                  alt="Profile Preview"
+                  className="w-48 h-48 object-cover"
                 />
               </div>
             )}
           </div>
         </Form.Item>
+
         <Form.Item>
           <AntdButton
-            classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors"
+            classNames="
+              bg-[#f1c40f] 
+              text-[#08142c] 
+              font-semibold 
+              px-6 
+              py-2 
+              rounded-md 
+              hover:bg-[#d4b80e] 
+              transition-colors
+              shadow
+            "
             htmlType="submit"
             loading={updateError ? false : updatePending}
           >
-            Save
+            Save Image
           </AntdButton>
         </Form.Item>
       </Form>

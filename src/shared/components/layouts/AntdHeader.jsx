@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Layout, Menu, Drawer, Button, Avatar } from 'antd';
+import { Layout, Drawer, Button, Avatar } from 'antd';
 import {
   DashboardOutlined,
   KeyOutlined,
@@ -22,6 +22,12 @@ import { isAuthenticated } from '../../utils/auth';
 
 const { Header } = Layout;
 
+const navItems = [
+  { label: 'Find Jobs', path: '/search' },
+  { label: 'Companies', path: '/companies' },
+  { label: 'Career Mentoring', path: '/career-mentoring' },
+];
+
 const AntdHeader = () => {
   const { mutateAsync, isPending } = useLogout();
   const navigate = useNavigate();
@@ -33,150 +39,151 @@ const AntdHeader = () => {
       await mutateAsync();
       dispatch(logOut());
       navigate('/');
-    } catch (e) {}
+    } catch (e) {
+      /* empty */
+    }
   };
 
-  const showDrawer = () => {
-    setDrawerVisible(true);
-  };
-
-  const closeDrawer = () => {
-    setDrawerVisible(false);
-  };
+  const showDrawer = () => setDrawerVisible(true);
+  const closeDrawer = () => setDrawerVisible(false);
 
   const isJobSeeker = isAuthenticated()?.type === AppConstant.JOB_SEEKER;
   const [{ profile_images: employeeProfileImage } = {}] =
     employeeProfileInfo(isJobSeeker ? null : isAuthenticated()?.id)?.data || [];
-
   const [{ profile_images: jobSeekerProfileImage } = {}] =
     jobSeekerProfileInfo(isJobSeeker ? isAuthenticated()?.id : null)?.data ||
     [];
 
   return (
     <Layout>
-      <Header className="flex justify-between items-center px-4 sm:px-6 md:px-8 lg:px-12 ant-header fixed w-full top-0 z-[1000] h-[80px] bg-[#08142c] overflow-visible">
-        <div className="text-2xl font-bold text-gray-300">
-          <img src="/logo.png" height={125} width={125} />
+      <Header className="fixed w-full top-0 z-[1000] h-[80px] bg-[#08142c] px-4 sm:px-6 md:px-8 lg:px-12 flex justify-between items-center shadow-md">
+        <div
+          className="text-2xl lg:text-3xl font-bold text-[#f1c40f] tracking-wide cursor-pointer bg-black bg-opacity-20 px-3 py-1 rounded-md inline-block"
+          onClick={() => navigate('/')}
+        >
+          GJ
         </div>
 
         <Button
-          type="default"
-          className="lg:hidden bg-transparent text-[#f5f5f5]"
+          type="text"
+          className="lg:hidden text-white hover:text-[#f1c40f]"
           icon={<MenuOutlined />}
           onClick={showDrawer}
         />
 
-        <Menu
-          mode="horizontal"
-          className="hidden lg:flex flex-grow justify-center items-center text-lg font-semibold"
-          theme="dark"
-        >
-          <Menu.Item
-            key="1"
-            className="text-gray-300"
-            onClick={() => navigate('/search')}
-          >
-            Find Jobs
-          </Menu.Item>
-          <Menu.Item key="2" className="text-gray-300">
-            Companies
-          </Menu.Item>
-          <Menu.Item key="3" className="text-gray-300">
-            Career Mentoring
-          </Menu.Item>
-        </Menu>
+        <div className="hidden lg:flex gap-10 text-base font-medium">
+          {navItems.map((item) => (
+            <div
+              key={item.path}
+              className="text-gray-300 hover:text-[#f1c40f] cursor-pointer transition"
+              onClick={() => navigate(item.path)}
+            >
+              {item.label}
+            </div>
+          ))}
+        </div>
 
         <div className="hidden lg:flex items-center gap-4">
           {!isAuthenticated() ? (
             <>
               <PopOver
                 content={<DynamicTabs dataKey="login" />}
-                trigger={'click'}
+                trigger="click"
               >
-                <AntdButton classNames="bg-transparent border border-white text-white px-6 hover:!bg-white hover:!text-black transition-colors font-semibold">
+                <AntdButton classNames="border border-white text-black hover:!text-[#f1c40f] px-5 font-medium rounded transition">
                   Login
                 </AntdButton>
               </PopOver>
               <PopOver
                 content={<DynamicTabs dataKey="registration" />}
-                trigger={'click'}
+                trigger="click"
               >
-                <AntdButton classNames="border border-white bg-transparent text-white px-6 hover:!bg-white hover:!text-black transition-colors font-semibold">
+                <AntdButton classNames="border border-white text-black hover:!text-[#f1c40f] px-5 font-medium rounded transition">
                   Register
                 </AntdButton>
               </PopOver>
             </>
           ) : (
-            <div className="flex gap-16">
-              <PopOver
-                trigger="click"
-                content={
-                  <div>
-                    <ul>
-                      <li
-                        onClick={() =>
+            <PopOver
+              trigger="click"
+              content={
+                <div className="w-[240px] py-3 text-base text-[#08142c] font-medium">
+                  <ul className="space-y-2">
+                    <li
+                      className="flex items-center gap-3 px-4 py-2 rounded-md cursor-pointer hover:bg-[#f1c40f]/80 hover:text-black transition-all duration-200"
+                      onClick={() =>
+                        navigate(
                           isJobSeeker
-                            ? navigate('/jobseeker/dashboard')
-                            : navigate('/employee/dashboard')
-                        }
-                        className="flex items-center gap-3 font-semibold text-lg py-2 px-4 rounded-lg cursor-pointer hover:bg-[#e8f4f9] hover:text-[#00b6b4] transition-colors"
-                      >
-                        <DashboardOutlined className="text-xl" />
-                        <span>DashBoard</span>
-                      </li>
-                      <li
-                        onClick={() =>
+                            ? '/jobseeker/dashboard'
+                            : '/employee/dashboard'
+                        )
+                      }
+                    >
+                      <DashboardOutlined className="text-lg" />
+                      <span className="text-[15px] font-semibold">
+                        Dashboard
+                      </span>
+                    </li>
+
+                    <li
+                      className="flex items-center gap-3 px-4 py-2 rounded-md cursor-pointer hover:bg-[#f1c40f]/80 hover:text-black transition-all duration-200"
+                      onClick={() =>
+                        navigate(
                           isJobSeeker
-                            ? navigate('/jobseeker/dashboard/change-password')
-                            : navigate('/employee/dashboard/change-password')
-                        }
-                        className="flex items-center gap-3 font-semibold text-lg py-2 px-4 rounded-lg cursor-pointer hover:bg-[#e8f4f9] hover:text-[#00b6b4] transition-colors"
-                      >
-                        <KeyOutlined className="text-xl" />
-                        <span>Change Password</span>
-                      </li>
-                      <PopOver
-                        trigger="click"
-                        content={
-                          <div className="flex flex-col gap-2 p-4 bg-white text-black">
-                            <p className="font-semibold text-lg text-center">
-                              Are you sure you want to logout?
-                            </p>
-                            <div className="flex justify-between gap-2">
-                              <AntdButton
-                                onClick={handleLogOut}
-                                classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors"
-                                loading={isPending}
-                              >
-                                Ok
-                              </AntdButton>
-                              <AntdButton
-                                onClick={() => navigate('/')}
-                                classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors"
-                              >
-                                Cancel
-                              </AntdButton>
-                            </div>
+                            ? '/jobseeker/dashboard/change-password'
+                            : '/employee/dashboard/change-password'
+                        )
+                      }
+                    >
+                      <KeyOutlined className="text-lg" />
+                      <span className="text-[15px] font-semibold">
+                        Change Password
+                      </span>
+                    </li>
+
+                    <PopOver
+                      trigger="click"
+                      content={
+                        <div className="p-4 text-[#08142c] space-y-4 text-sm font-medium">
+                          <p className="text-center font-semibold text-base">
+                            Are you sure you want to logout?
+                          </p>
+                          <div className="flex gap-3 justify-between">
+                            <AntdButton
+                              onClick={handleLogOut}
+                              classNames="bg-[#08142c] text-white px-4 py-1.5 rounded hover:!bg-[#0a223f] transition"
+                              loading={isPending}
+                            >
+                              Ok
+                            </AntdButton>
+                            <AntdButton
+                              onClick={() => navigate('/')}
+                              classNames="bg-gray-200 text-black px-4 py-1.5 rounded hover:!bg-gray-300 transition"
+                            >
+                              Cancel
+                            </AntdButton>
                           </div>
-                        }
-                      >
-                        <li className="flex items-center gap-3 font-semibold text-lg py-2 px-4 rounded-lg cursor-pointer hover:bg-[#e8f4f9] hover:text-[#00b6b4] transition-colors">
-                          <LogoutOutlined className="text-xl" />
-                          <span>Logout</span>
-                        </li>
-                      </PopOver>
-                    </ul>
-                  </div>
-                }
-              >
-                <Avatar
-                  src={employeeProfileImage || jobSeekerProfileImage}
-                  size={64}
-                  icon={<UserOutlined />}
-                  className="cursor-pointer border-2 border-gray-300 rounded-full"
-                />
-              </PopOver>
-            </div>
+                        </div>
+                      }
+                    >
+                      <li className="flex items-center gap-3 px-4 py-2 rounded-md cursor-pointer hover:bg-[#f1c40f]/80 hover:text-black transition-all duration-200">
+                        <LogoutOutlined className="text-lg" />
+                        <span className="text-[15px] font-semibold">
+                          Logout
+                        </span>
+                      </li>
+                    </PopOver>
+                  </ul>
+                </div>
+              }
+            >
+              <Avatar
+                src={employeeProfileImage || jobSeekerProfileImage}
+                size={48}
+                icon={<UserOutlined />}
+                className="cursor-pointer border-2 border-[#f1c40f] hover:shadow-md transition"
+              />
+            </PopOver>
           )}
         </div>
 
@@ -185,23 +192,33 @@ const AntdHeader = () => {
           onClose={closeDrawer}
           open={drawerVisible}
           className="lg:hidden"
+          styles={{ body: { backgroundColor: '#08142c', color: '#fff' } }}
         >
-          <Menu mode="vertical" theme="dark" className="text-lg font-semibold">
-            <Menu.Item key="1">Find Jobs</Menu.Item>
-            <Menu.Item key="2">Companies</Menu.Item>
-            <Menu.Item key="3">Career Mentoring</Menu.Item>
-            <Menu.Item
-              key="4"
-              onClick={() => {
-                navigate('auth/login');
-                setDrawerVisible(false);
-              }}
-            >
-              Login
-            </Menu.Item>
-          </Menu>
+          <div className="flex flex-col space-y-6 text-white font-medium">
+            {navItems.map((item) => (
+              <div
+                key={item.path}
+                className="cursor-pointer hover:text-[#f1c40f] transition"
+                onClick={() => {
+                  navigate(item.path);
+                  closeDrawer();
+                }}
+              >
+                {item.label}
+              </div>
+            ))}
+            {!isAuthenticated() && (
+              <div
+                className="cursor-pointer hover:text-[#f1c40f] transition"
+                onClick={() => navigate('/auth/login')}
+              >
+                Login
+              </div>
+            )}
+          </div>
         </Drawer>
       </Header>
+
       <div className="xl:h-[80px] h-[60px]" />
     </Layout>
   );

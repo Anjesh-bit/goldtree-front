@@ -10,64 +10,70 @@ const CompanyList = () => {
   const isEmpty = data === undefined || data?.length === 0;
 
   return (
-    <div className="bg-gray-200 p-4 md:p-8 lg:p-12 xl:p-[48px] py-6">
-      <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-        <DynamicTitle classNames="text-2xl md:text-3xl lg:text-4xl font-extrabold text-[#08142c]">
+    <section className="bg-[#fff8e1] px-6 md:px-12 lg:px-24 xl:px-36 py-16">
+      <div className="max-w-4xl mx-auto mb-12 text-center">
+        <DynamicTitle classNames="text-3xl md:text-4xl font-extrabold text-[#f1c40f]">
           Choose Your Dream Companies
         </DynamicTitle>
-        <p className="text-sm md:text-base lg:text-lg text-gray-800 mt-2">
+        <p className="mt-3 text-lg md:text-xl text-gray-800 max-w-3xl mx-auto">
           Start your journey towards the job search by exploring the top
           companies around Nepal and also opportunities to meet top-notch
           mentors.
         </p>
       </div>
 
-      {isEmpty ? (
+      {isLoading ? (
+        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 max-w-7xl mx-auto">
+          {Array.from({ length: 8 }).map((_, idx) => (
+            <Skeleton
+              active
+              key={idx}
+              avatar={{ shape: 'circle', size: 96 }}
+              paragraph={{ rows: 4 }}
+              className="p-6 bg-white rounded-lg shadow-md"
+            />
+          ))}
+        </div>
+      ) : isEmpty || isError ? (
         <NoData />
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+        <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 max-w-7xl mx-auto">
           {data?.map((item, index) => (
             <AntdCards
               onClick={() => handleCardClick(item._id)}
-              className="p-4 bg-white rounded-lg shadow-md border transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl hover:bg-[#e8f4f9]"
+              className="
+              p-6 bg-white rounded-2xl shadow-md border border-gray-200 cursor-pointer
+              transition-transform duration-300 ease-in-out
+              hover:-translate-y-1 hover:shadow-[0_8px_15px_rgba(241,196,15,0.3)]
+              hover:border-[#f1c40f] hover:bg-[#fffce3]"
               key={index}
             >
-              <div className="flex flex-col gap-4">
-                <div className="flex justify-center mb-4">
-                  <img
-                    src={item.profile_images ?? 'default-image.jpg'}
-                    alt={item.personalInfo.company_name}
-                    className="w-24 h-24 object-cover rounded-full"
-                  />
-                </div>
+              <div className="flex flex-col gap-6 items-center text-center">
+                <img
+                  src={item.profile_images ?? '/default-image.jpg'}
+                  alt={item.personalInfo.company_name}
+                  className="w-24 h-24 object-cover rounded-full border-4 border-[#f1c40f]"
+                />
 
-                <div className="text-lg md:text-xl font-semibold text-gray-800">
+                <h3 className="text-xl font-bold text-[#08142c]">
                   {item.personalInfo.company_name ?? 'N/A'}
-                </div>
+                </h3>
 
-                <div className="text-sm text-gray-600">
+                <p className="text-sm text-gray-700">
                   <strong>Company Type:</strong>{' '}
                   {item.personalInfo.company_type ?? 'N/A'}
-                </div>
+                </p>
 
-                <div className="text-sm text-gray-600">
+                <p className="text-sm text-gray-700">
                   <strong>Location:</strong>{' '}
                   {item.personalInfo.location ?? 'N/A'}
-                </div>
-                <div className="flex flex-wrap gap-2 mt-4">
-                  <AntdButton classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors transform hover:scale-105">
-                    Full Time
-                  </AntdButton>
-                  <AntdButton classNames="bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors transform hover:scale-105">
-                    Remote
-                  </AntdButton>
-                </div>
+                </p>
               </div>
             </AntdCards>
           ))}
         </div>
       )}
-    </div>
+    </section>
   );
 };
 

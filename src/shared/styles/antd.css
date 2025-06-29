@@ -22,6 +22,10 @@
   border-color: #08142c !important;
 }
 
+.ant-input-search-button:hover {
+  color: #f1c40f !important;
+}
+
 .ant-checkbox-checked .ant-checkbox-inner {
   background-color: #47839d !important;
   border-color: #47839d !important;
@@ -31,4 +35,26 @@
 .ant-checkbox-checked:hover .ant-checkbox-inner {
   background-color: #47839d !important;
   border-color: #47839d !important;
+}
+
+.ant-layout-sider-trigger {
+  background-color: #08142c !important;
+}
+.ant-menu-dark,
+.ant-menu-dark .ant-menu-sub {
+  background: #08142c !important;
+}
+.ant-menu-dark .ant-menu-item:hover {
+  background-color: rgba(241, 196, 15, 0.15) !important;
+  color: #f1c40f !important;
+}
+.ant-menu-dark .ant-menu-item-selected {
+  background-color: #f1c40f !important;
+  color: #08142c !important;
+  font-weight: 600;
+  box-shadow: 0 0 10px #f1c40faa;
+}
+.ant-menu-dark .ant-menu-item-selected:hover {
+  background-color: #d4b80e !important;
+  color: #08142c !important;
 }

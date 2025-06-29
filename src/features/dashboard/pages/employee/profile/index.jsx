@@ -91,7 +91,9 @@ const Profile = () => {
       } else {
         await empMutateUpdate(profileData);
       }
-    } catch (error) {}
+    } catch (error) {
+      /* */
+    }
   };
 
   return (

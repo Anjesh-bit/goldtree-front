@@ -1,9 +1,8 @@
-import { Fragment, useState, useMemo } from 'react';
+import { Fragment, useState } from 'react';
 import { useShortList } from '../../../../../services/commonService/setUp';
 import useMessage from '../../../../../hooks/useMessage';
 import Loading from '../../../../../assets/svg/loading.svg';
 import { useGetEasyApply } from '../../../../../services/employee/setUp';
-
 import AntdCards from '../../../../../shared/components/AntdCards';
 import AntdButton from '../../../../../shared/components/AntdButtons';
 import { isAuthenticated } from '../../../../../shared/utils/auth';
@@ -31,15 +30,14 @@ const JobApplied = () => {
 
   const { mutateAsync, data: jobsAppliedCandidate = { message: '' } } =
     useShortList(queryParams);
-
   const { contextHolder, showMessage } = useMessage();
 
   const handleOnClick = async (_, uploadId, postId, type, status) => {
     setQueryParams({
       status: getHiringStatus(status),
-      uploadId: uploadId,
+      uploadId,
       postId,
-      type, 
+      type,
     });
 
     try {
@@ -62,154 +60,208 @@ const JobApplied = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-[80vh]">
-        <img src={Loading} />
+        <img src={Loading} alt="Loading..." />
       </div>
     );
   }
 
   const isEmpty = data?.length === 0;
-  if (isEmpty)
+  if (isEmpty) {
     return (
-      <EmptyState message="There is no any jobs applied candidates found." />
+      <EmptyState message="There are no applied candidates for your jobs yet." />
     );
+  }
 
   return (
     <Fragment>
       {contextHolder}
-      <div className="bg-[#f5f5f5] min-h-screen">
-        <div className="grid grid-cols-12 gap-4 p-4">
-          <div className="col-span-12 mb-6">
-            <h2 className="text-2xl md:text-3xl font-medium text-[#3d2462] mb-4">
-              Job Applied
-            </h2>
-          </div>
-          {data?.map((items) => {
-            const jobTitle = items?.post?.job_title;
+      <div className="bg-[#f9f9f9] min-h-screen py-6 px-4 md:px-8 lg:px-12">
+        <h2 className="text-2xl md:text-3xl font-semibold text-[#08142c] mb-6">
+          Job Applications Overview
+        </h2>
 
-            return (
-              <div className="col-span-12 mb-4" key={items.email}>
-                <div className="text-lg font-semibold text-[#3d2462] mb-2">
-                  Job Title: <span className="font-normal">{jobTitle}</span>
+        {data?.map((items) => {
+          const jobTitle = items?.post?.job_title;
+
+          return (
+            <div className="mb-10" key={items.email}>
+              <h3 className="text-xl font-semibold text-[#08142c] mb-3">
+                Job Title: <span className="font-normal">{jobTitle}</span>
+              </h3>
+
+              <AntdCards className="p-6 bg-white rounded-xl border border-gray-200 shadow-md">
+                <div className="font-semibold text-lg text-[#08142c] mb-4">
+                  Candidates Applied:
                 </div>
-                <AntdCards className="p-4 bg-white rounded-lg shadow-md">
-                  <div className="font-semibold text-md text-[#3d2462] mb-2">
-                    Candidates Applied:
-                  </div>
-                  <div className="grid grid-cols-12 gap-4">
-                    {items?.candidates?.map((candidate) => {
-                      const url = candidate?.upload_cv?.substring(
-                        candidate?.upload_cv?.lastIndexOf('/') + 1
-                      );
-                      const { jobSeekerProfile = [] } = candidate;
-                      const isShortListed = candidate.shortlisted;
 
-                      const isAccepted =
-                        candidate.status === HIRING_STATUS.ACCEPTED;
-                      const isRejected =
-                        candidate.status === HIRING_STATUS.REJECTED;
-                      const isRejectedOrAccepted = isRejected || isAccepted;
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {items?.candidates?.map((candidate) => {
+                    const url = candidate?.upload_cv?.substring(
+                      candidate?.upload_cv?.lastIndexOf('/') + 1
+                    );
+                    const { jobSeekerProfile = [] } = candidate;
+                    const isShortListed = candidate.shortlisted;
+                    const isAccepted =
+                      candidate.status === HIRING_STATUS.ACCEPTED;
+                    const isRejected =
+                      candidate.status === HIRING_STATUS.REJECTED;
+                    const isFinalStatus = isAccepted || isRejected;
 
-                      const hasProfile = jobSeekerProfile.length > 0;
+                    const hasProfile = jobSeekerProfile.length > 0;
 
-                      const name = hasProfile
-                        ? jobSeekerProfile[0]?.profile?.full_name
-                        : candidate.name;
-                      const phoneNo = hasProfile
-                        ? jobSeekerProfile[0]?.profile?.phone_no
-                        : candidate.email;
+                    const name = hasProfile
+                      ? jobSeekerProfile[0]?.profile?.full_name
+                      : candidate.name;
+                    const phoneNo = hasProfile
+                      ? jobSeekerProfile[0]?.profile?.phone_no
+                      : candidate.email;
 
-                      const { className, text } = filterHiringStatus(
-                        candidate.status
-                      );
-                      return (
-                        <AntdCards
-                          className="col-span-12 sm:col-span-6 lg:col-span-4 p-4 bg-white rounded-lg shadow-md hover:bg-gray-300 cursor-pointer transition-colors"
-                          key={candidate._id}
-                        >
+                    const { className, text } = filterHiringStatus(
+                      candidate.status
+                    );
+
+                    return (
+                      <AntdCards
+                        key={candidate._id}
+                        className="
+                          p-4
+                          bg-white
+                          rounded-xl
+                          border border-gray-200
+                          shadow
+                          hover:shadow-lg
+                          transition-all
+                          cursor-pointer
+                          hover:bg-[#fdf6e3]
+                        "
+                      >
+                        {!isShortListed && (
                           <AntdButton
-                            classNames={`${isShortListed ? 'hidden' : 'block'} bg-[#08142c] text-white font-semibold px-4 rounded hover:!bg-[#0a223f] transition-colors`}
-                            onClick={(e) => {
+                            classNames="
+                              bg-[#f1c40f]
+                              text-black
+                              font-semibold
+                              px-4
+                              py-1
+                              rounded
+                              mb-3
+                              hover:brightness-110
+                              transition-all
+                            "
+                            onClick={(e) =>
                               handleOnClick(
                                 e,
                                 candidate.userId,
                                 candidate.postId,
                                 candidate.type,
                                 HIRING_STATUS.PENDING
-                              );
-                            }}
+                              )
+                            }
                           >
-                            ShortList
+                            Shortlist
                           </AntdButton>
-                          <div
-                            className={`${isShortListed ? 'block' : 'hidden'} flex items-center justify-between`}
-                          >
+                        )}
+
+                        {isShortListed && (
+                          <div className="flex gap-3 mb-3">
                             <AntdButton
-                              disabled={isRejectedOrAccepted}
-                              classNames={`bg-[#08142c] text-white font-semibold px-4 rounded ${isRejectedOrAccepted ? '' : 'hover:!bg-[#0a223f]'} transition-colors`}
-                              onClick={(e) => {
+                              disabled={isFinalStatus}
+                              classNames={`
+                                bg-[#08142c]
+                                text-white
+                                font-semibold
+                                px-4
+                                py-1
+                                rounded
+                                ${!isFinalStatus ? 'hover:bg-[#0a223f]' : 'opacity-50 cursor-not-allowed'}
+                              `}
+                              onClick={(e) =>
                                 handleOnClick(
                                   e,
                                   candidate.userId,
                                   candidate.postId,
                                   candidate.type,
                                   HIRING_STATUS.ACCEPTED
-                                );
-                              }}
+                                )
+                              }
                             >
                               Accept
                             </AntdButton>
+
                             <AntdButton
-                              disabled={isRejectedOrAccepted}
-                              classNames={`bg-[#08142c] text-white font-semibold px-4 rounded ${isRejectedOrAccepted ? '' : 'hover:!bg-[#0a223f]'} transition-colors`}
-                              onClick={(e) => {
+                              disabled={isFinalStatus}
+                              classNames={`
+                                bg-[#08142c]
+                                text-white
+                                font-semibold
+                                px-4
+                                py-1
+                                rounded
+                                ${!isFinalStatus ? 'hover:bg-[#0a223f]' : 'opacity-50 cursor-not-allowed'}
+                              `}
+                              onClick={(e) =>
                                 handleOnClick(
                                   e,
                                   candidate.userId,
                                   candidate.postId,
                                   candidate.type,
                                   HIRING_STATUS.REJECTED
-                                );
-                              }}
+                                )
+                              }
                             >
                               Reject
                             </AntdButton>
                           </div>
+                        )}
 
-                          <div className="text-md font-medium text-[#3d2462] mt-2">
-                            Name: {name}
-                          </div>
-                          <div className="text-md font-medium text-gray-800 mt-1">
-                            Cover Letter: {candidate.cover_letter}
-                          </div>
-                          <div className="text-md font-medium text-gray-800 mt-1">
-                            Email / Phone: {phoneNo}
-                          </div>
-                          <div className="text-md font-medium text-gray-800 mt-1">
-                            Resume:{' '}
-                            <a
-                              href={candidate.upload_cv}
-                              download={url}
-                              target="_blank"
-                            >
-                              {url}
-                            </a>
-                          </div>
-                          <div className="mt-2">
-                            <span
-                              className={`inline-block px-3 py-1 rounded-full text-sm ${className}`}
-                            >
-                              {text}
-                            </span>
-                          </div>
-                        </AntdCards>
-                      );
-                    })}
-                  </div>
-                </AntdCards>
-              </div>
-            );
-          })}
-        </div>
+                        <div className="text-md font-medium text-[#08142c]">
+                          Name: {name}
+                        </div>
+                        <div className="text-md text-gray-700">
+                          Cover Letter: {candidate.cover_letter}
+                        </div>
+                        <div className="text-md text-gray-700">
+                          Email / Phone: {phoneNo}
+                        </div>
+                        <div className="text-md text-gray-700">
+                          Resume:{' '}
+                          <a
+                            href={candidate.upload_cv}
+                            download={url}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="underline text-[#f1c40f] hover:text-[#d4b80e]"
+                          >
+                            {url}
+                          </a>
+                        </div>
+
+                        <div className="mt-2">
+                          <span
+                            className={`
+                              inline-block
+                              px-3
+                              py-1
+                              rounded-full
+                              text-sm
+                              font-semibold
+                              ${className}
+                              ${text === 'Accepted' && 'bg-[#f1c40f]/20 text-[#f1c40f]'}
+                              ${text === 'Rejected' && 'bg-red-100 text-red-600'}
+                              ${text === 'Pending' && 'bg-gray-100 text-gray-800'}
+                            `}
+                          >
+                            {text}
+                          </span>
+                        </div>
+                      </AntdCards>
+                    );
+                  })}
+                </div>
+              </AntdCards>
+            </div>
+          );
+        })}
       </div>
     </Fragment>
   );
